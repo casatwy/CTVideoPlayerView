@@ -13,6 +13,7 @@
 		4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944031CF2251800BC21AA /* VideoTableViewController.m */; };
 		4A0944071CF2262600BC21AA /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944061CF2262600BC21AA /* VideoCell.m */; };
 		4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944091CF2287F00BC21AA /* ViewController.m */; };
+		4A09440C1CF233EC00BC21AA /* a.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4A09440B1CF2317200BC21AA /* a.mp4 */; };
 		4AAE2A871CF21FB900139C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A861CF21FB900139C9C /* main.m */; };
 		4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A891CF21FB900139C9C /* AppDelegate.m */; };
 		4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8E1CF21FB900139C9C /* Main.storyboard */; };
@@ -226,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AAE2A951CF21FB900139C9C /* LaunchScreen.storyboard in Resources */,
+				4A09440C1CF233EC00BC21AA /* a.mp4 in Resources */,
 				4AAE2A921CF21FB900139C9C /* Assets.xcassets in Resources */,
 				4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */,
 			);
