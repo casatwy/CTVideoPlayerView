@@ -11,6 +11,9 @@
 
 #import "CTVideoView.h"
 
+NSString * const kCTVideoViewShouldDownloadWhenNotWifi = @"kCTVideoViewShouldDownloadWhenNotWifi";
+NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewShouldPlayRemoteVideoWhenNotWifi";
+
 @interface CTVideoView ()
 
 @end
@@ -23,6 +26,8 @@
     self = [super init];
     if (self) {
         self.backgroundColor = [UIColor redColor];
+
+        _shouldPlayAfterPrepareFinished = YES;
     }
     return self;
 }

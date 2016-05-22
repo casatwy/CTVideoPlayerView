@@ -41,6 +41,8 @@
 		4AAE2A911CF21FB900139C9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AAE2A941CF21FB900139C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AAE2A961CF21FB900139C9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AD202F01CF24EAE004E3A97 /* CTVideoViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTVideoViewDefinitions.h; sourceTree = "<group>"; };
+		4AD202F11CF25241004E3A97 /* CTOtherObjectsDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTOtherObjectsDefinition.h; sourceTree = "<group>"; };
 		CDD750E53C8E15AE66512441 /* libPods-CTVideoView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CTVideoView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC3D762809CDA866E9091D8A /* Pods-CTVideoView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTVideoView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView.debug.xcconfig"; sourceTree = "<group>"; };
 		F7B564C59E114BF34AB7C922 /* Pods-CTVideoView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTVideoView.release.xcconfig"; path = "Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +147,8 @@
 			children = (
 				4A0943F81CF2219D00BC21AA /* CTVideoView.h */,
 				4A0943F91CF2219D00BC21AA /* CTVideoView.m */,
+				4AD202F01CF24EAE004E3A97 /* CTVideoViewDefinitions.h */,
+				4AD202F11CF25241004E3A97 /* CTOtherObjectsDefinition.h */,
 			);
 			path = CTVideoView;
 			sourceTree = "<group>";
