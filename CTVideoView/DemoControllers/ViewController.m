@@ -43,10 +43,9 @@
     UIViewController *viewControllerToPush = nil;
 
     NSDictionary *info = self.dataSource[indexPath.row];
-    if (indexPath.row < 3) {
+    if (indexPath.row < self.dataSource.count-1) {
         viewControllerToPush = [[SingleVideoViewController alloc] initWithVideoUrlString:info[@"url"]];
-    }
-    if (indexPath.row == 3) {
+    } else {
         viewControllerToPush = [[VideoTableViewController alloc] initWithVideoUrlList:info[@"urlList"]];
     }
 
@@ -96,8 +95,12 @@
                             @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
                             },
                         @{
-                            @"title":@"single live stream video",
-                            @"url":@"http://www.droid-boy.de/Show%20and%20Play%20Minecraft_Droid%20Boy.m3u8"
+                            @"title":@"short single live stream video",
+                            @"url":@"https://devimages.apple.com.edgekey.net/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8"
+                            },
+                        @{
+                            @"title":@"long single live stream video",
+                            @"url":@"http://devstreaming.apple.com/videos/wwdc/2015/502sufwcpog/502/hls_vod_mvp.m3u8"
                             },
                         @{
                             @"title":@"videos in tableview",
