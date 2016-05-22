@@ -9,5 +9,10 @@
 #ifndef CTOtherObjectsHeader_h
 #define CTOtherObjectsHeader_h
 
+#import "CTVideoView.h"
+#import "CTVideoView+Time.h"
+#import "CTVideoView+Download.h"
+#import "CTVideoView+VideoCoverView.h"
+#import "CTVideoView+OperationButtons.h"
 
 #endif /* CTOtherObjectsHeader_h */

@@ -9,6 +9,15 @@
 #ifndef CTVideoViewDefinitions_h
 #define CTVideoViewDefinitions_h
 
+#define WeakSelf __weak typeof(self) weakSelf = self;
+#define StrongSelf __strong typeof(weakSelf) strongSelf = weakSelf;
+
+#ifdef DEBUG
+#define DLog(...) NSLog(__VA_ARGS__)
+#else
+#define DLog(...)
+#endif
+
 /**
  *  keys used in NSUserDefaults
  */
@@ -46,26 +55,16 @@ extern NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi;
 
 @end
 
-/**
- *  CTVideoViewDownloadStrategy
- */
 typedef NS_ENUM(NSUInteger, CTVideoViewDownloadStrategy) {
-    /**
-     *  NOT download any video any time
-     */
     CTVideoViewDownloadStrategyDefault,
-    /**
-     *  download now and in background
-     */
-    CTVideoViewDownloadStrategyDownloadNowAndInBackground,
-    /**
-     *  download only during playing
-     */
-    CTVideoViewDownloadStrategyDownloadOnlyDuringPlaying,
-    /**
-     *  download before playing
-     */
-    CTVideoViewDownloadStrategyDownloadBeforePlaying,
+    CTVideoViewDownloadStrategyDownloadOnlyForeground,
+    CTVideoViewDownloadStrategyDownloadForegroundAndBackground,
+};
+
+typedef NS_ENUM(NSUInteger, CTVideoViewVideoUrlType) {
+    CTVideoViewVideoUrlTypeRemote,
+    CTVideoViewVideoUrlTypeNative,
+    CTVideoViewVideoUrlTypeLiveStream
 };
 
 /**

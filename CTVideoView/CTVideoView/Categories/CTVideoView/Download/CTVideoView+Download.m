@@ -8,6 +8,8 @@
 
 #import "CTVideoView+Download.h"
 
+NSString * const kCTVideoViewShouldDownloadWhenNotWifi = @"kCTVideoViewShouldDownloadWhenNotWifi";
+
 @implementation CTVideoView (Download)
 
 @end

@@ -13,6 +13,9 @@
 @interface SingleVideoViewController ()
 
 @property (nonatomic, strong) CTVideoView *videoView;
+
+@property (nonatomic, strong) UIButton *playOrPauseButton;
+@property (nonatomic, strong) UIButton *stopButton;
 @property (nonatomic, strong) UIButton *cleanCacheButton;
 
 @end
@@ -35,6 +38,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self.view addSubview:self.videoView];
+    [self.view addSubview:self.playOrPauseButton];
+    [self.view addSubview:self.stopButton];
     [self.view addSubview:self.cleanCacheButton];
 }
 
@@ -46,18 +51,60 @@
     [self.videoView centerXEqualToView:self.view];
     [self.videoView centerYEqualToView:self.view];
 
-    self.cleanCacheButton.size = CGSizeMake(100, 50);
-    [self.cleanCacheButton rightInContainer:10 shouldResize:NO];
-    [self.cleanCacheButton bottomInContainer:10 shouldResize:NO];
+    self.playOrPauseButton.size = CGSizeMake(SCREEN_WIDTH/3.0f, 50);
+    [self.playOrPauseButton bottomInContainer:50 shouldResize:NO];
+    [self.playOrPauseButton leftInContainer:0 shouldResize:NO];
+
+    [self.stopButton sizeEqualToView:self.playOrPauseButton];
+    [self.stopButton topEqualToView:self.playOrPauseButton];
+    [self.stopButton right:0 FromView:self.playOrPauseButton];
+
+    [self.cleanCacheButton sizeEqualToView:self.stopButton];
+    [self.cleanCacheButton topEqualToView:self.stopButton];
+    [self.cleanCacheButton right:0 FromView:self.stopButton];
 }
 
 #pragma mark - event response
 - (void)didTappedCleanCacheButton:(UIButton *)button
 {
+    
+}
 
+- (void)didTappedPlayOrPauseButton:(UIButton *)button
+{
+    if (self.videoView.isPlaying) {
+        [self.videoView pause];
+    } else {
+        [self.videoView play];
+    }
+}
+
+- (void)didTappedStopButton:(UIButton *)button
+{
+    [self.videoView stop:YES];
 }
 
 #pragma mark - getters and setters
+- (UIButton *)playOrPauseButton
+{
+    if (_playOrPauseButton == nil) {
+        _playOrPauseButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_playOrPauseButton setTitle:@"Play/Pause" forState:UIControlStateNormal];
+        [_playOrPauseButton addTarget:self action:@selector(didTappedPlayOrPauseButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _playOrPauseButton;
+}
+
+- (UIButton *)stopButton
+{
+    if (_stopButton == nil) {
+        _stopButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_stopButton setTitle:@"Stop" forState:UIControlStateNormal];
+        [_stopButton addTarget:self action:@selector(didTappedStopButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _stopButton;
+}
+
 - (UIButton *)cleanCacheButton
 {
     if (_cleanCacheButton == nil) {
@@ -72,6 +119,8 @@
 {
     if (_videoView == nil) {
         _videoView = [[CTVideoView alloc] init];
+        _videoView.shouldReplayWhenFinish = YES;
+        _videoView.shouldPlayAfterPrepareFinished = YES;
     }
     return _videoView;
 }
