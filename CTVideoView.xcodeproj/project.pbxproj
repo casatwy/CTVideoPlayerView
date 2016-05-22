@@ -19,6 +19,10 @@
 		4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8E1CF21FB900139C9C /* Main.storyboard */; };
 		4AAE2A921CF21FB900139C9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A911CF21FB900139C9C /* Assets.xcassets */; };
 		4AAE2A951CF21FB900139C9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A931CF21FB900139C9C /* LaunchScreen.storyboard */; };
+		4AD2031D1CF260C9004E3A97 /* CTVideoView+Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203101CF260C9004E3A97 /* CTVideoView+Download.m */; };
+		4AD2031E1CF260C9004E3A97 /* CTVideoView+OperationButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203131CF260C9004E3A97 /* CTVideoView+OperationButtons.m */; };
+		4AD2031F1CF260C9004E3A97 /* CTVideoView+Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203161CF260C9004E3A97 /* CTVideoView+Time.m */; };
+		4AD203201CF260C9004E3A97 /* CTVideoView+VideoCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203191CF260C9004E3A97 /* CTVideoView+VideoCoverView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +45,16 @@
 		4AAE2A911CF21FB900139C9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AAE2A941CF21FB900139C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AAE2A961CF21FB900139C9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4AD202F01CF24EAE004E3A97 /* CTVideoViewDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTVideoViewDefinitions.h; sourceTree = "<group>"; };
-		4AD202F11CF25241004E3A97 /* CTOtherObjectsDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTOtherObjectsDefinition.h; sourceTree = "<group>"; };
+		4AD202F41CF25E5E004E3A97 /* CTOtherObjectsDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTOtherObjectsDefinition.h; sourceTree = "<group>"; };
+		4AD202F51CF25E5E004E3A97 /* CTVideoViewDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoViewDefinitions.h; sourceTree = "<group>"; };
+		4AD2030F1CF260C9004E3A97 /* CTVideoView+Download.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+Download.h"; sourceTree = "<group>"; };
+		4AD203101CF260C9004E3A97 /* CTVideoView+Download.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+Download.m"; sourceTree = "<group>"; };
+		4AD203121CF260C9004E3A97 /* CTVideoView+OperationButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+OperationButtons.h"; sourceTree = "<group>"; };
+		4AD203131CF260C9004E3A97 /* CTVideoView+OperationButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+OperationButtons.m"; sourceTree = "<group>"; };
+		4AD203151CF260C9004E3A97 /* CTVideoView+Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+Time.h"; sourceTree = "<group>"; };
+		4AD203161CF260C9004E3A97 /* CTVideoView+Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+Time.m"; sourceTree = "<group>"; };
+		4AD203181CF260C9004E3A97 /* CTVideoView+VideoCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+VideoCoverView.h"; sourceTree = "<group>"; };
+		4AD203191CF260C9004E3A97 /* CTVideoView+VideoCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+VideoCoverView.m"; sourceTree = "<group>"; };
 		CDD750E53C8E15AE66512441 /* libPods-CTVideoView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CTVideoView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC3D762809CDA866E9091D8A /* Pods-CTVideoView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTVideoView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView.debug.xcconfig"; sourceTree = "<group>"; };
 		F7B564C59E114BF34AB7C922 /* Pods-CTVideoView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTVideoView.release.xcconfig"; path = "Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,10 +159,74 @@
 			children = (
 				4A0943F81CF2219D00BC21AA /* CTVideoView.h */,
 				4A0943F91CF2219D00BC21AA /* CTVideoView.m */,
-				4AD202F01CF24EAE004E3A97 /* CTVideoViewDefinitions.h */,
-				4AD202F11CF25241004E3A97 /* CTOtherObjectsDefinition.h */,
+				4AD202F31CF25E5E004E3A97 /* Headers */,
+				4AD202F21CF25E48004E3A97 /* Categories */,
 			);
 			path = CTVideoView;
+			sourceTree = "<group>";
+		};
+		4AD202F21CF25E48004E3A97 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4AD2030D1CF260C9004E3A97 /* CTVideoView */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		4AD202F31CF25E5E004E3A97 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				4AD202F41CF25E5E004E3A97 /* CTOtherObjectsDefinition.h */,
+				4AD202F51CF25E5E004E3A97 /* CTVideoViewDefinitions.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		4AD2030D1CF260C9004E3A97 /* CTVideoView */ = {
+			isa = PBXGroup;
+			children = (
+				4AD2030E1CF260C9004E3A97 /* Download */,
+				4AD203111CF260C9004E3A97 /* OperationButtons */,
+				4AD203141CF260C9004E3A97 /* Time */,
+				4AD203171CF260C9004E3A97 /* VideoCoverView */,
+			);
+			path = CTVideoView;
+			sourceTree = "<group>";
+		};
+		4AD2030E1CF260C9004E3A97 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				4AD2030F1CF260C9004E3A97 /* CTVideoView+Download.h */,
+				4AD203101CF260C9004E3A97 /* CTVideoView+Download.m */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
+		4AD203111CF260C9004E3A97 /* OperationButtons */ = {
+			isa = PBXGroup;
+			children = (
+				4AD203121CF260C9004E3A97 /* CTVideoView+OperationButtons.h */,
+				4AD203131CF260C9004E3A97 /* CTVideoView+OperationButtons.m */,
+			);
+			path = OperationButtons;
+			sourceTree = "<group>";
+		};
+		4AD203141CF260C9004E3A97 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				4AD203151CF260C9004E3A97 /* CTVideoView+Time.h */,
+				4AD203161CF260C9004E3A97 /* CTVideoView+Time.m */,
+			);
+			path = Time;
+			sourceTree = "<group>";
+		};
+		4AD203171CF260C9004E3A97 /* VideoCoverView */ = {
+			isa = PBXGroup;
+			children = (
+				4AD203181CF260C9004E3A97 /* CTVideoView+VideoCoverView.h */,
+				4AD203191CF260C9004E3A97 /* CTVideoView+VideoCoverView.m */,
+			);
+			path = VideoCoverView;
 			sourceTree = "<group>";
 		};
 		9D8DAD8174AA4666938AEB0B /* Frameworks */ = {
@@ -294,9 +370,13 @@
 			files = (
 				4A0944071CF2262600BC21AA /* VideoCell.m in Sources */,
 				4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */,
+				4AD203201CF260C9004E3A97 /* CTVideoView+VideoCoverView.m in Sources */,
 				4A0944011CF2250A00BC21AA /* SingleVideoViewController.m in Sources */,
 				4A0943FA1CF2219D00BC21AA /* CTVideoView.m in Sources */,
+				4AD2031E1CF260C9004E3A97 /* CTVideoView+OperationButtons.m in Sources */,
 				4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */,
+				4AD2031F1CF260C9004E3A97 /* CTVideoView+Time.m in Sources */,
+				4AD2031D1CF260C9004E3A97 /* CTVideoView+Download.m in Sources */,
 				4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */,
 				4AAE2A871CF21FB900139C9C /* main.m in Sources */,
 			);
