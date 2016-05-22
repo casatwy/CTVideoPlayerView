@@ -58,6 +58,7 @@
 		4AAE2A841CF21FB900139C9C /* CTVideoView */ = {
 			isa = PBXGroup;
 			children = (
+				4AAE2A9C1CF21FF800139C9C /* CTVideoView */,
 				4AAE2A881CF21FB900139C9C /* AppDelegate.h */,
 				4AAE2A891CF21FB900139C9C /* AppDelegate.m */,
 				4AAE2A8B1CF21FB900139C9C /* ViewController.h */,
@@ -77,6 +78,13 @@
 				4AAE2A861CF21FB900139C9C /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4AAE2A9C1CF21FF800139C9C /* CTVideoView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CTVideoView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
