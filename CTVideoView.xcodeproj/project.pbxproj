@@ -7,25 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45FA8DE096536B43B254A27B /* libPods-CTVideoView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD750E53C8E15AE66512441 /* libPods-CTVideoView.a */; };
+		4A0943FA1CF2219D00BC21AA /* CTVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0943F91CF2219D00BC21AA /* CTVideoView.m */; };
+		4A0944011CF2250A00BC21AA /* SingleVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944001CF2250A00BC21AA /* SingleVideoViewController.m */; };
+		4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944031CF2251800BC21AA /* VideoTableViewController.m */; };
+		4A0944071CF2262600BC21AA /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944061CF2262600BC21AA /* VideoCell.m */; };
+		4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944091CF2287F00BC21AA /* ViewController.m */; };
 		4AAE2A871CF21FB900139C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A861CF21FB900139C9C /* main.m */; };
 		4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A891CF21FB900139C9C /* AppDelegate.m */; };
-		4AAE2A8D1CF21FB900139C9C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8C1CF21FB900139C9C /* ViewController.m */; };
 		4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8E1CF21FB900139C9C /* Main.storyboard */; };
 		4AAE2A921CF21FB900139C9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A911CF21FB900139C9C /* Assets.xcassets */; };
 		4AAE2A951CF21FB900139C9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A931CF21FB900139C9C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A0943F81CF2219D00BC21AA /* CTVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoView.h; sourceTree = "<group>"; };
+		4A0943F91CF2219D00BC21AA /* CTVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoView.m; sourceTree = "<group>"; };
+		4A0943FF1CF2250A00BC21AA /* SingleVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleVideoViewController.h; sourceTree = "<group>"; };
+		4A0944001CF2250A00BC21AA /* SingleVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleVideoViewController.m; sourceTree = "<group>"; };
+		4A0944021CF2251800BC21AA /* VideoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewController.h; sourceTree = "<group>"; };
+		4A0944031CF2251800BC21AA /* VideoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTableViewController.m; sourceTree = "<group>"; };
+		4A0944051CF2262600BC21AA /* VideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
+		4A0944061CF2262600BC21AA /* VideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
+		4A0944081CF2287F00BC21AA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4A0944091CF2287F00BC21AA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		4AAE2A821CF21FB900139C9C /* CTVideoView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTVideoView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AAE2A861CF21FB900139C9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AAE2A881CF21FB900139C9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4AAE2A891CF21FB900139C9C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4AAE2A8B1CF21FB900139C9C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4AAE2A8C1CF21FB900139C9C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		4AAE2A8F1CF21FB900139C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4AAE2A911CF21FB900139C9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AAE2A941CF21FB900139C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AAE2A961CF21FB900139C9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDD750E53C8E15AE66512441 /* libPods-CTVideoView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CTVideoView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC3D762809CDA866E9091D8A /* Pods-CTVideoView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTVideoView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView.debug.xcconfig"; sourceTree = "<group>"; };
+		F7B564C59E114BF34AB7C922 /* Pods-CTVideoView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTVideoView.release.xcconfig"; path = "Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +49,59 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45FA8DE096536B43B254A27B /* libPods-CTVideoView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A0943FB1CF223A700BC21AA /* DemoControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A0944081CF2287F00BC21AA /* ViewController.h */,
+				4A0944091CF2287F00BC21AA /* ViewController.m */,
+				4A0943FC1CF223A700BC21AA /* SingleVideoViewController */,
+				4A0943FD1CF223A700BC21AA /* VideoTableViewController */,
+			);
+			path = DemoControllers;
+			sourceTree = "<group>";
+		};
+		4A0943FC1CF223A700BC21AA /* SingleVideoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A0943FF1CF2250A00BC21AA /* SingleVideoViewController.h */,
+				4A0944001CF2250A00BC21AA /* SingleVideoViewController.m */,
+			);
+			path = SingleVideoViewController;
+			sourceTree = "<group>";
+		};
+		4A0943FD1CF223A700BC21AA /* VideoTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A0943FE1CF223A700BC21AA /* VideoCell */,
+				4A0944021CF2251800BC21AA /* VideoTableViewController.h */,
+				4A0944031CF2251800BC21AA /* VideoTableViewController.m */,
+			);
+			path = VideoTableViewController;
+			sourceTree = "<group>";
+		};
+		4A0943FE1CF223A700BC21AA /* VideoCell */ = {
+			isa = PBXGroup;
+			children = (
+				4A0944051CF2262600BC21AA /* VideoCell.h */,
+				4A0944061CF2262600BC21AA /* VideoCell.m */,
+			);
+			path = VideoCell;
+			sourceTree = "<group>";
+		};
 		4AAE2A791CF21FB900139C9C = {
 			isa = PBXGroup;
 			children = (
 				4AAE2A841CF21FB900139C9C /* CTVideoView */,
 				4AAE2A831CF21FB900139C9C /* Products */,
+				FD0A3C8C6442C54DE248DB88 /* Pods */,
+				9D8DAD8174AA4666938AEB0B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,10 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				4AAE2A9C1CF21FF800139C9C /* CTVideoView */,
+				4A0943FB1CF223A700BC21AA /* DemoControllers */,
 				4AAE2A881CF21FB900139C9C /* AppDelegate.h */,
 				4AAE2A891CF21FB900139C9C /* AppDelegate.m */,
-				4AAE2A8B1CF21FB900139C9C /* ViewController.h */,
-				4AAE2A8C1CF21FB900139C9C /* ViewController.m */,
 				4AAE2A8E1CF21FB900139C9C /* Main.storyboard */,
 				4AAE2A911CF21FB900139C9C /* Assets.xcassets */,
 				4AAE2A931CF21FB900139C9C /* LaunchScreen.storyboard */,
@@ -83,8 +140,27 @@
 		4AAE2A9C1CF21FF800139C9C /* CTVideoView */ = {
 			isa = PBXGroup;
 			children = (
+				4A0943F81CF2219D00BC21AA /* CTVideoView.h */,
+				4A0943F91CF2219D00BC21AA /* CTVideoView.m */,
 			);
 			path = CTVideoView;
+			sourceTree = "<group>";
+		};
+		9D8DAD8174AA4666938AEB0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDD750E53C8E15AE66512441 /* libPods-CTVideoView.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FD0A3C8C6442C54DE248DB88 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EC3D762809CDA866E9091D8A /* Pods-CTVideoView.debug.xcconfig */,
+				F7B564C59E114BF34AB7C922 /* Pods-CTVideoView.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,9 +170,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AAE2A991CF21FB900139C9C /* Build configuration list for PBXNativeTarget "CTVideoView" */;
 			buildPhases = (
+				C7F799C8385037A3FAE95CAE /* 📦 Check Pods Manifest.lock */,
 				4AAE2A7E1CF21FB900139C9C /* Sources */,
 				4AAE2A7F1CF21FB900139C9C /* Frameworks */,
 				4AAE2A801CF21FB900139C9C /* Resources */,
+				6544C1C4F1BFAB1841B50E48 /* 📦 Embed Pods Frameworks */,
+				AA84B22A7E94F55B05FE3EA3 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,12 +231,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6544C1C4F1BFAB1841B50E48 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA84B22A7E94F55B05FE3EA3 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C7F799C8385037A3FAE95CAE /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4AAE2A7E1CF21FB900139C9C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AAE2A8D1CF21FB900139C9C /* ViewController.m in Sources */,
+				4A0944071CF2262600BC21AA /* VideoCell.m in Sources */,
+				4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */,
+				4A0944011CF2250A00BC21AA /* SingleVideoViewController.m in Sources */,
+				4A0943FA1CF2219D00BC21AA /* CTVideoView.m in Sources */,
+				4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */,
 				4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */,
 				4AAE2A871CF21FB900139C9C /* main.m in Sources */,
 			);
@@ -269,6 +400,7 @@
 		};
 		4AAE2A9A1CF21FB900139C9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC3D762809CDA866E9091D8A /* Pods-CTVideoView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CTVideoView/Info.plist;
@@ -280,6 +412,7 @@
 		};
 		4AAE2A9B1CF21FB900139C9C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7B564C59E114BF34AB7C922 /* Pods-CTVideoView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CTVideoView/Info.plist;
@@ -308,6 +441,7 @@
 				4AAE2A9B1CF21FB900139C9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
