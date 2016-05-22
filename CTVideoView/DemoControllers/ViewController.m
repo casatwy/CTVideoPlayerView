@@ -89,15 +89,15 @@
         _dataSource = @[
                         @{
                             @"title":@"single remote video",
-                            @"url":@""
+                            @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74"
                             },
                         @{
                             @"title":@"single native video",
-                            @"url":@""
+                            @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
                             },
                         @{
                             @"title":@"single live stream video",
-                            @"url":@""
+                            @"url":@"http://www.droid-boy.de/Show%20and%20Play%20Minecraft_Droid%20Boy.m3u8"
                             },
                         @{
                             @"title":@"videos in tableview",
@@ -111,7 +111,6 @@
                                     @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_34dd3f3f36974092876efbcac1d1160d",
                                     @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_42b791e5aed7463b865518378a78de6a",
                                     @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_03e0b80cc69b4f069af9b5ba88be6752",
-                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74",
                                     ]
                             },
                         ];

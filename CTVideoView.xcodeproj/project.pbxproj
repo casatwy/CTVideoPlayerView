@@ -31,6 +31,7 @@
 		4A0944061CF2262600BC21AA /* VideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
 		4A0944081CF2287F00BC21AA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4A0944091CF2287F00BC21AA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4A09440B1CF2317200BC21AA /* a.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = a.mp4; sourceTree = "<group>"; };
 		4AAE2A821CF21FB900139C9C /* CTVideoView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTVideoView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AAE2A861CF21FB900139C9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AAE2A881CF21FB900139C9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -120,10 +121,6 @@
 				4A0943FB1CF223A700BC21AA /* DemoControllers */,
 				4AAE2A881CF21FB900139C9C /* AppDelegate.h */,
 				4AAE2A891CF21FB900139C9C /* AppDelegate.m */,
-				4AAE2A8E1CF21FB900139C9C /* Main.storyboard */,
-				4AAE2A911CF21FB900139C9C /* Assets.xcassets */,
-				4AAE2A931CF21FB900139C9C /* LaunchScreen.storyboard */,
-				4AAE2A961CF21FB900139C9C /* Info.plist */,
 				4AAE2A851CF21FB900139C9C /* Supporting Files */,
 			);
 			path = CTVideoView;
@@ -132,6 +129,11 @@
 		4AAE2A851CF21FB900139C9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4A09440B1CF2317200BC21AA /* a.mp4 */,
+				4AAE2A8E1CF21FB900139C9C /* Main.storyboard */,
+				4AAE2A911CF21FB900139C9C /* Assets.xcassets */,
+				4AAE2A931CF21FB900139C9C /* LaunchScreen.storyboard */,
+				4AAE2A961CF21FB900139C9C /* Info.plist */,
 				4AAE2A861CF21FB900139C9C /* main.m */,
 			);
 			name = "Supporting Files";
