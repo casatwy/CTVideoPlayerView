@@ -76,8 +76,10 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 200;
+        _tableView.rowHeight = SCREEN_WIDTH;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.showsHorizontalScrollIndicator = NO;
 
         [_tableView registerClass:[VideoCell class] forCellReuseIdentifier:@"cell"];
     }

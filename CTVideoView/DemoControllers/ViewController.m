@@ -102,12 +102,16 @@
                         @{
                             @"title":@"videos in tableview",
                             @"urlList":@[
-                                    @"",
-                                    @"",
-                                    @"",
-                                    @"",
-                                    @"",
-                                    @"",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_856a6738eefc495bbd7b0ed59beaa9fe",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_e05f72400bae4e0b8ae6825c5891af64",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_f905cb3d6a1847afb071b3aeea42eb51",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_57dad11ccfd3422cbe6f0b2674fa0ab1",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_b5b00d7e77854a2ea478cd5dd648191d",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_d7c0843949284cb79a8f4bed20111577",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_34dd3f3f36974092876efbcac1d1160d",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_42b791e5aed7463b865518378a78de6a",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_03e0b80cc69b4f069af9b5ba88be6752",
+                                    @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74",
                                     ]
                             },
                         ];
