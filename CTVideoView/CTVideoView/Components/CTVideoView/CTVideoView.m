@@ -18,6 +18,8 @@
 
 NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewShouldPlayRemoteVideoWhenNotWifi";
 
+static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
+
 @interface CTVideoView ()
 
 @property (nonatomic, assign) BOOL isVideoUrlChanged;
@@ -39,21 +41,28 @@ NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewSh
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor redColor];
+        // KVO
+        [self addObserver:self
+               forKeyPath:@"player.currentItem.status"
+                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                  context:&kCTVideoViewKVOContext];
 
         _isMuted = NO;
         _shouldPlayAfterPrepareFinished = YES;
         _shouldReplayWhenFinish = NO;
         _shouldChangeOrientationToFitVideo = NO;
 
-        [self player];
+        AVPlayerLayer *playerLayer = (AVPlayerLayer *)self.layer;
+        if ([playerLayer isKindOfClass:[AVPlayerLayer class]]) {
+            playerLayer.player = self.player;
+        }
     }
     return self;
 }
 
 - (void)dealloc
 {
-
+    [self removeObserver:self forKeyPath:@"player.currentItem.status" context:kCTVideoViewKVOContext];
 }
 
 #pragma mark - methods override
@@ -115,6 +124,24 @@ NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewSh
             strongSelf.playerItem = [AVPlayerItem playerItemWithAsset:strongSelf.asset];
         });
     }];
+}
+
+#pragma mark - KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if (context != &kCTVideoViewKVOContext) {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        return;
+    }
+
+    if ([keyPath isEqualToString:@"player.currentItem.status"]) {
+        NSNumber *newStatusAsNumber = change[NSKeyValueChangeNewKey];
+        AVPlayerItemStatus newStatus = [newStatusAsNumber isKindOfClass:[NSNumber class]] ? newStatusAsNumber.integerValue : AVPlayerItemStatusUnknown;
+
+        if (newStatus == AVPlayerItemStatusFailed) {
+            NSLog(@"%@", self.player.currentItem.error);
+        }
+    }
 }
 
 #pragma mark - getters and setters

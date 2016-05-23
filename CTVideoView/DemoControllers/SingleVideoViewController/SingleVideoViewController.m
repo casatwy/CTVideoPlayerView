@@ -32,6 +32,10 @@
     return self;
 }
 
+- (void)dealloc
+{
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
