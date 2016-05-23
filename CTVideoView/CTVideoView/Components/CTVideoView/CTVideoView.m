@@ -31,6 +31,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVURLAsset *asset;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, readonly) AVPlayerLayer *playerLayer;
 
 @end
 
@@ -47,14 +48,12 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                   context:&kCTVideoViewKVOContext];
 
-        _isMuted = NO;
         _shouldPlayAfterPrepareFinished = YES;
         _shouldReplayWhenFinish = NO;
         _shouldChangeOrientationToFitVideo = NO;
 
-        AVPlayerLayer *playerLayer = (AVPlayerLayer *)self.layer;
-        if ([playerLayer isKindOfClass:[AVPlayerLayer class]]) {
-            playerLayer.player = self.player;
+        if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
+            self.playerLayer.player = self.player;
         }
     }
     return self;
@@ -75,6 +74,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 - (void)prepare
 {
     if (self.isPlaying == YES && self.isVideoUrlChanged == NO) {
+        if ([self.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
+            [self.operationDelegate videoViewDidFinishPrepare:self];
+        }
         return;
     }
 
@@ -105,6 +107,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 #pragma mark - private methods
 - (void)asynchronouslyLoadURLAsset:(AVURLAsset *)asset
 {
+    if ([self.operationDelegate respondsToSelector:@selector(videoViewWillStartPrepare:)]) {
+        [self.operationDelegate videoViewWillStartPrepare:self];
+    }
     WeakSelf;
     [asset loadValuesAsynchronouslyForKeys:@[@"playable"] completionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -119,9 +124,17 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
             NSError *error = nil;
             if ([asset statusOfValueForKey:@"playable" error:&error] == AVKeyValueStatusFailed) {
+                if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFailPrepare:error:)]) {
+                    [strongSelf.operationDelegate videoViewDidFailPrepare:strongSelf error:error];
+                }
                 return;
             }
+            
             strongSelf.playerItem = [AVPlayerItem playerItemWithAsset:strongSelf.asset];
+
+            if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
+                [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
+            }
         });
     }];
 }
@@ -145,6 +158,21 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 }
 
 #pragma mark - getters and setters
+- (AVPlayerLayer *)playerLayer
+{
+    return (AVPlayerLayer *)self.layer;
+}
+
+- (void)setIsMuted:(BOOL)isMuted
+{
+    self.player.muted = isMuted;
+}
+
+- (BOOL)isMuted
+{
+    return self.player.muted;
+}
+
 - (BOOL)shouldPlayRemoteVideoWhenNotWifi
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:kCTVideoViewShouldPlayRemoteVideoWhenNotWifi];

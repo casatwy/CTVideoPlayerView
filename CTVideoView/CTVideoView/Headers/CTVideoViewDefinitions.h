@@ -29,19 +29,19 @@ extern NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi;
 @protocol CTVideoViewOperationDelegate <NSObject>
 
 @optional
-- (void)videoView:(CTVideoView *)videoView willStartPrepareWithUrl:(NSURL *)url;
-- (void)videoView:(CTVideoView *)videoView didFinishPrepareWithUrl:(NSURL *)url;
-- (void)videoView:(CTVideoView *)videoView didFailPrepareWithUrl:(NSURL *)url;
+- (void)videoViewWillStartPrepare:(CTVideoView *)videoView;
+- (void)videoViewDidFinishPrepare:(CTVideoView *)videoView;
+- (void)videoViewDidFailPrepare:(CTVideoView *)videoView error:(NSError *)error;
 
-- (void)videoView:(CTVideoView *)videoView willStartPlayWithUrl:(NSURL *)url atSecond:(CGFloat)second;
+- (void)videoView:(CTVideoView *)videoView willStartAtSecond:(CGFloat)second;
 - (void)videoView:(CTVideoView *)videoView didPlayToSecond:(CGFloat)second; //if you want this method to be called, you should set shouldObservePlayTime to YES.
-- (void)videoView:(CTVideoView *)videoView didFinishPlayWithUrl:(NSURL *)url;
+- (void)videoViewDidFinishPlaying:(CTVideoView *)videoView;
 
-- (void)videoView:(CTVideoView *)videoView willStartPauseWithUrl:(NSURL *)url;
-- (void)videoView:(CTVideoView *)videoView didFinishPauseWithUrl:(NSURL *)url;
+- (void)videoViewWillPause:(CTVideoView *)videoView;
+- (void)videoViewDidPause:(CTVideoView *)videoView;
 
-- (void)videoView:(CTVideoView *)videoView willStartStopWithUrl:(NSURL *)url;
-- (void)videoView:(CTVideoView *)videoView didFinishStopWithUrl:(NSURL *)url;
+- (BOOL)videoViewWillStop:(CTVideoView *)videoView; // return YES to release video after stop.
+- (void)videoViewDidStop:(CTVideoView *)videoView;
 
 @end
 
