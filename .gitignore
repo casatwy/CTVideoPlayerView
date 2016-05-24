@@ -1,3 +1,4 @@
 .DS_Store
 CTVideoView.xcworkspace/
 Pods/
+Podfile.lock

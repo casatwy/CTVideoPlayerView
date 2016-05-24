@@ -87,6 +87,10 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)play
 {
+    if (self.isPlaying) {
+        return;
+    }
+    
     if (self.isVideoUrlPrepared) {
         [self.player play];
     } else {
@@ -96,12 +100,17 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)pause
 {
-    
+    if (self.isPlaying) {
+        [self.player pause];
+    }
 }
 
 - (void)stop:(BOOL)shouldReleaseVideo
 {
-    
+    [self pause];
+    if (shouldReleaseVideo) {
+        [self.player replaceCurrentItemWithPlayerItem:nil];
+    }
 }
 
 #pragma mark - private methods
