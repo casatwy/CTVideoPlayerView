@@ -16,7 +16,7 @@
  *  if you want - (void)videoView:didPlayToSecond: to be called, you should set shouldObservePlayTime to YES.
  */
 @property (nonatomic, assign) BOOL shouldObservePlayTime;
-@property (nonatomic, assign) CGFloat currentPlaySpeed; // set 2.0 means speed of 2x
+@property (nonatomic, assign) CGFloat currentPlaySpeed; // set 2.0 means speed of 2x, must be called after prepare finished.
 @property (nonatomic, weak) id<CTVideoViewTimeDelegate> timeDelegate;
 
 - (void)moveToSecond:(CGFloat)second shouldPlay:(BOOL)shouldPlay;
