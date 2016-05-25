@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSURL *videoUrl;
 @property (nonatomic, assign, readonly) CTVideoViewVideoUrlType videoUrlType;
 
-@property (nonatomic, assign) BOOL isPlaying;
+@property (nonatomic, assign, readonly) BOOL isPlaying;
 @property (nonatomic, assign) BOOL isMuted; // set YES to mute the video playing
 @property (nonatomic, assign) BOOL shouldPlayAfterPrepareFinished; // default is YES
 @property (nonatomic, assign) BOOL shouldReplayWhenFinish; // default is NO
