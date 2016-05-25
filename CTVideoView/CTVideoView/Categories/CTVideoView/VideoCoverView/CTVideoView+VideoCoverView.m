@@ -10,4 +10,15 @@
 
 @implementation CTVideoView (VideoCoverView)
 
+#pragma mark - life cycle
+- (void)initVideoCoverView
+{
+    
+}
+
+- (void)deallocVideoCoverView
+{
+    
+}
+
 @end

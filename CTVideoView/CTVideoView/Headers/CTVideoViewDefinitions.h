@@ -28,6 +28,7 @@ extern NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi;
  *  keys used in KVO
  */
 extern NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus;
+extern NSString * const kCTVideoViewKVOKeyPathPlayerItemDuration;
 
 @class CTVideoView;
 
@@ -38,8 +39,7 @@ extern NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus;
 - (void)videoViewDidFinishPrepare:(CTVideoView *)videoView;
 - (void)videoViewDidFailPrepare:(CTVideoView *)videoView error:(NSError *)error;
 
-- (void)videoView:(CTVideoView *)videoView willStartAtSecond:(CGFloat)second;
-- (void)videoView:(CTVideoView *)videoView didPlayToSecond:(CGFloat)second; //if you want this method to be called, you should set shouldObservePlayTime to YES.
+- (void)videoViewWillStartPlaying:(CTVideoView *)videoView;
 - (void)videoViewDidFinishPlaying:(CTVideoView *)videoView;
 
 - (void)videoViewWillPause:(CTVideoView *)videoView;
@@ -47,6 +47,14 @@ extern NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus;
 
 - (void)videoViewWillStop:(CTVideoView *)videoView;
 - (void)videoViewDidStop:(CTVideoView *)videoView;
+
+@end
+
+@protocol CTVideoViewTimeDelegate <NSObject>
+
+- (void)videoViewDidLoadVideoDuration:(CTVideoView *)videoView;
+- (void)videoView:(CTVideoView *)videoView didFinishedMoveToTime:(CMTime)time;
+- (void)videoView:(CTVideoView *)videoView didPlayToSecond:(CGFloat)second; //if you want this method to be called, you should set shouldObservePlayTime to YES.
 
 @end
 

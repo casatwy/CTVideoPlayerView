@@ -12,4 +12,15 @@ NSString * const kCTVideoViewShouldDownloadWhenNotWifi = @"kCTVideoViewShouldDow
 
 @implementation CTVideoView (Download)
 
+#pragma mark - life cycle
+- (void)initDownload
+{
+    
+}
+
+- (void)deallocDownload
+{
+    
+}
+
 @end

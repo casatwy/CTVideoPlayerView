@@ -18,6 +18,7 @@
 NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewShouldPlayRemoteVideoWhenNotWifi";
 
 NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus = @"player.currentItem.status";
+NSString * const kCTVideoViewKVOKeyPathPlayerItemDuration = @"player.currentItem.duration";
 
 static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
@@ -50,6 +51,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                   context:&kCTVideoViewKVOContext];
         
+        [self addObserver:self
+               forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration
+                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                  context:&kCTVideoViewKVOContext];
+        
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemPlaybackStalledNotification:) name:AVPlayerItemPlaybackStalledNotification object:nil];
@@ -74,6 +80,8 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 - (void)dealloc
 {
     [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus context:kCTVideoViewKVOContext];
+    [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration context:kCTVideoViewKVOContext];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [self deallocTime];
@@ -107,6 +115,10 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 {
     if (self.isPlaying) {
         return;
+    }
+    
+    if ([self.operationDelegate respondsToSelector:@selector(videoViewWillStartPlaying:)]) {
+        [self.operationDelegate videoViewWillStartPlaying:self];
     }
     
     if (self.isVideoUrlPrepared) {
@@ -228,6 +240,10 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         if (newStatus == AVPlayerItemStatusFailed) {
             DLog(@"%@", self.player.currentItem.error);
         }
+    }
+    
+    if ([keyPath isEqualToString:kCTVideoViewKVOKeyPathPlayerItemDuration]) {
+        [self durationDidLoadedWithChange:change];
     }
 }
 

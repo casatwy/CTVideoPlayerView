@@ -10,4 +10,15 @@
 
 @implementation CTVideoView (OperationButtons)
 
+#pragma mark - life cycle
+- (void)initOperationButtons
+{
+    
+}
+
+- (void)deallocOperationButtons
+{
+    
+}
+
 @end
