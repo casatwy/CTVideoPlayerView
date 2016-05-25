@@ -180,11 +180,12 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                 [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
             }
             
-            if (strongSelf.shouldPlayAfterPrepareFinished || strongSelf.isPreparedForPlay) {
+            if (strongSelf.shouldPlayAfterPrepareFinished && self.shouldAutoPlayRemoteVideoWhenNotWifi) {
+                [strongSelf play];
+            } else if (strongSelf.isPreparedForPlay) {
                 strongSelf.isPreparedForPlay = NO;
                 [strongSelf play];
             }
-            
         });
     }];
 }
@@ -233,7 +234,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     return self.player.muted;
 }
 
-- (BOOL)shouldPlayRemoteVideoWhenNotWifi
+- (BOOL)shouldAutoPlayRemoteVideoWhenNotWifi
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:kCTVideoViewShouldPlayRemoteVideoWhenNotWifi];
 }

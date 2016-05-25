@@ -26,7 +26,7 @@
 @property (nonatomic, weak) id<CTVideoViewOperationDelegate> operationDelegate;
 
 @property (nonatomic, strong, readonly) NSURL *actualVideoPlayingUrl;
-@property (nonatomic, assign, readonly) BOOL shouldPlayRemoteVideoWhenNotWifi; // set bool value of kCTVideoViewShouldPlayRemoteVideoWhenNotWifi in NSUserDefaults to modify this property, default is NO
+@property (nonatomic, assign, readonly) BOOL shouldAutoPlayRemoteVideoWhenNotWifi; // set bool value of kCTVideoViewShouldPlayRemoteVideoWhenNotWifi in NSUserDefaults to modify this property, default is NO
 
 - (void)prepare;
 - (void)play;
