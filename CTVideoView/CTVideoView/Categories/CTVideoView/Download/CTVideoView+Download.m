@@ -52,17 +52,42 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 }
 
 #pragma mark - public methods
-- (void)startDownload
+- (void)startDownloadTask
 {
-    if (self.videoUrl) {
-        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl completion:nil];
+    if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
+        WeakSelf;
+        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl completion:^{
+            StrongSelf;
+            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewIsWaitingForDownload:)]) {
+                [strongSelf.downloadDelegate videoViewIsWaitingForDownload:strongSelf];
+            }
+        }];
     }
 }
 
-- (void)cancelDownload
+- (void)DeleteAndCanceDownloadTask
 {
-    if (self.videoUrl) {
-        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl completion:nil];
+    if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
+        WeakSelf;
+        [[CTVideoManager sharedInstance] deleteVideoWithUrl:self.videoUrl completion:^{
+            StrongSelf;
+            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewDidDeletedDownloadTask:)]) {
+                [strongSelf.downloadDelegate videoViewDidDeletedDownloadTask:strongSelf];
+            }
+        }];
+    }
+}
+
+- (void)pauseDownloadTask
+{
+    if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
+        WeakSelf;
+        [[CTVideoManager sharedInstance] pauseDownloadTaskWithUrl:self.videoUrl completion:^{
+            StrongSelf;
+            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewDidPausedDownload:)]) {
+                [strongSelf.downloadDelegate videoViewDidPausedDownload:strongSelf];
+            }
+        }];
     }
 }
 

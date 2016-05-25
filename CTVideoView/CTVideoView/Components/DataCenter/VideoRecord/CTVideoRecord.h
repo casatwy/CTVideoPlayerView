@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, CTVideoRecordStatus) {
     CTVideoRecordStatusDownloadFinished = 1,
     CTVideoRecordStatusDownloadFailed = 2,
     CTVideoRecordStatusWaitingForDownload = 3,
-    CTVideoRecordStatusNotFound = 4
+    CTVideoRecordStatusNotFound = 4,
 };
 
 @interface CTVideoRecord : CTPersistanceRecord

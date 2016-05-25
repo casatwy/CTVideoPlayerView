@@ -117,6 +117,9 @@ typedef NS_ENUM(NSUInteger, CTVideoViewOperationButtonType) {
 - (void)videoView:(CTVideoView *)videoView downloadProgress:(CGFloat)progress;
 - (void)videoViewDidFinishDownload:(CTVideoView *)videoView;
 - (void)videoViewDidFailDownload:(CTVideoView *)videoView;
+- (void)videoViewDidPausedDownload:(CTVideoView *)videoView;
+- (void)videoViewDidDeletedDownloadTask:(CTVideoView *)videoView;
+- (void)videoViewIsWaitingForDownload:(CTVideoView *)videoView;
 
 @end
 

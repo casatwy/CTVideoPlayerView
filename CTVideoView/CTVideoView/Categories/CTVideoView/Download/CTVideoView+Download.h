@@ -18,7 +18,8 @@
 
 @property (nonatomic, weak) id<CTVideoViewDownloadDelegate> downloadDelegate;
 
-- (void)startDownload;
-- (void)cancelDownload;
+- (void)startDownloadTask;
+- (void)DeleteAndCanceDownloadTask;
+- (void)pauseDownloadTask;
 
 @end
