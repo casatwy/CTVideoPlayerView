@@ -23,6 +23,7 @@
 		4AD2031F1CF260C9004E3A97 /* CTVideoView+Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203161CF260C9004E3A97 /* CTVideoView+Time.m */; };
 		4AD203201CF260C9004E3A97 /* CTVideoView+VideoCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203191CF260C9004E3A97 /* CTVideoView+VideoCoverView.m */; };
 		4AD203271CF264D9004E3A97 /* CTVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203261CF264D9004E3A97 /* CTVideoView.m */; };
+		4AF6EFA01CF5787600A1E1C9 /* AVAsset+CTVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF6EF9F1CF5787600A1E1C9 /* AVAsset+CTVideoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,8 @@
 		4AD203221CF264B1004E3A97 /* CTVideoViewCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTVideoViewCommonHeader.h; sourceTree = "<group>"; };
 		4AD203251CF264D9004E3A97 /* CTVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoView.h; sourceTree = "<group>"; };
 		4AD203261CF264D9004E3A97 /* CTVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoView.m; sourceTree = "<group>"; };
+		4AF6EF9E1CF5787600A1E1C9 /* AVAsset+CTVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAsset+CTVideoView.h"; sourceTree = "<group>"; };
+		4AF6EF9F1CF5787600A1E1C9 /* AVAsset+CTVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAsset+CTVideoView.m"; sourceTree = "<group>"; };
 		CDD750E53C8E15AE66512441 /* libPods-CTVideoView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CTVideoView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC3D762809CDA866E9091D8A /* Pods-CTVideoView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTVideoView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView.debug.xcconfig"; sourceTree = "<group>"; };
 		F7B564C59E114BF34AB7C922 /* Pods-CTVideoView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTVideoView.release.xcconfig"; path = "Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView.release.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 		4AD202F21CF25E48004E3A97 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4AF6EF9D1CF5785D00A1E1C9 /* AVAsset */,
 				4AD2030D1CF260C9004E3A97 /* CTVideoView */,
 			);
 			path = Categories;
@@ -243,6 +247,15 @@
 				4AD203261CF264D9004E3A97 /* CTVideoView.m */,
 			);
 			path = CTVideoView;
+			sourceTree = "<group>";
+		};
+		4AF6EF9D1CF5785D00A1E1C9 /* AVAsset */ = {
+			isa = PBXGroup;
+			children = (
+				4AF6EF9E1CF5787600A1E1C9 /* AVAsset+CTVideoView.h */,
+				4AF6EF9F1CF5787600A1E1C9 /* AVAsset+CTVideoView.m */,
+			);
+			path = AVAsset;
 			sourceTree = "<group>";
 		};
 		9D8DAD8174AA4666938AEB0B /* Frameworks */ = {
@@ -387,6 +400,7 @@
 				4A0944071CF2262600BC21AA /* VideoCell.m in Sources */,
 				4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */,
 				4AD203201CF260C9004E3A97 /* CTVideoView+VideoCoverView.m in Sources */,
+				4AF6EFA01CF5787600A1E1C9 /* AVAsset+CTVideoView.m in Sources */,
 				4A0944011CF2250A00BC21AA /* SingleVideoViewController.m in Sources */,
 				4AD2031E1CF260C9004E3A97 /* CTVideoView+OperationButtons.m in Sources */,
 				4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */,

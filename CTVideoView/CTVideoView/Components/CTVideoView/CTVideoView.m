@@ -16,6 +16,8 @@
 #import "CTVideoView+VideoCoverView.h"
 #import "CTVideoView+OperationButtons.h"
 
+#import "AVAsset+CTVideoView.h"
+
 NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewShouldPlayRemoteVideoWhenNotWifi";
 
 NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus = @"player.currentItem.status";
@@ -152,6 +154,24 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                     [strongSelf.operationDelegate videoViewDidFailPrepare:strongSelf error:error];
                 }
                 return;
+            }
+            
+            if (strongSelf.shouldChangeOrientationToFitVideo) {
+                AVAsset *asset = strongSelf.asset;
+                CGFloat videoWidth = [[[strongSelf.asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].width;
+                CGFloat videoHeight = [[[strongSelf.asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].height;
+                
+                if ([asset CTVideoView_isVideoPortraint]) {
+                    if (videoWidth < videoHeight) {
+                        strongSelf.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+                        strongSelf.playerLayer.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
+                    }
+                } else {
+                    if (videoWidth > videoHeight) {
+                        strongSelf.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+                        strongSelf.playerLayer.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
+                    }
+                }
             }
             
             strongSelf.playerItem = [AVPlayerItem playerItemWithAsset:strongSelf.asset];

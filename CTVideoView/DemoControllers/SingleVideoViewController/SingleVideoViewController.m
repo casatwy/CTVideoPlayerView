@@ -51,9 +51,7 @@
 {
     [super viewWillAppear:animated];
 
-    self.videoView.size = CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH);
-    [self.videoView centerXEqualToView:self.view];
-    [self.videoView centerYEqualToView:self.view];
+    [self.videoView fill];
 
     self.playOrPauseButton.size = CGSizeMake(SCREEN_WIDTH/3.0f, 50);
     [self.playOrPauseButton bottomInContainer:50 shouldResize:NO];
@@ -125,6 +123,7 @@
         _videoView = [[CTVideoView alloc] init];
         _videoView.shouldReplayWhenFinish = YES;
         _videoView.shouldPlayAfterPrepareFinished = YES;
+        _videoView.shouldChangeOrientationToFitVideo = YES;
     }
     return _videoView;
 }
