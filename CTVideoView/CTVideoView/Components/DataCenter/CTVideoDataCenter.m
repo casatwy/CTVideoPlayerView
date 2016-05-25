@@ -81,12 +81,26 @@
     NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
     NSString *remoteUrlString = [remoteUrl absoluteString];
     NSDictionary *params = NSDictionaryOfVariableBindings(remoteUrlString);
-    
-    CTVideoRecord *record = (CTVideoRecord *)[self.videoTable findFirstRowWithWhereCondition:whereCondition conditionParams:params isDistinct:NO error:NULL];
+
+    NSError *error;
+    CTVideoRecord *record = (CTVideoRecord *)[self.videoTable findFirstRowWithWhereCondition:whereCondition conditionParams:params isDistinct:NO error:&error];
+    if (error) {
+        return;
+    }
+
     if (record) {
+        [self.videoTable deleteRecord:record error:&error];
+        if (error) {
+            return;
+        }
+
         NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:record.nativeUrl];
-        [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:filePath] error:NULL];
-        [self.videoTable deleteRecord:record error:NULL];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:filePath] error:&error];
+            if (error) {
+                return;
+            }
+        }
     }
 }
 
@@ -97,26 +111,21 @@
     [self.videoTable deleteRecordList:recordList error:NULL];
 }
 
-- (BOOL)isDownloadingRemoteUrl:(NSURL *)remoteUrl
+- (CTVideoRecordStatus)statusOfRemoteUrl:(NSURL *)remoteUrl
 {
     NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
     NSString *remoteUrlString = [remoteUrl absoluteString];
     NSDictionary *params = NSDictionaryOfVariableBindings(remoteUrlString);
     CTVideoRecord *videoRecord = (CTVideoRecord *)[self.videoTable findFirstRowWithWhereCondition:whereCondition conditionParams:params isDistinct:NO error:NULL];
     if (videoRecord == nil) {
-        return NO;
-    } else {
-        if ([videoRecord.status unsignedIntegerValue] == CTVideoRecordStatusDownloadFinished) {
-            return NO;
-        } else {
-            return YES;
-        }
+        return CTVideoRecordStatusNotFound;
     }
+    return [videoRecord.status unsignedIntegerValue];
 }
 
 - (void)insertRecordWithRemoteUrl:(NSURL *)remoteUrl status:(CTVideoRecordStatus)status
 {
-    if (![self isDownloadingRemoteUrl:remoteUrl]) {
+    if ([self statusOfRemoteUrl:remoteUrl] == CTVideoRecordStatusNotFound) {
         CTVideoRecord *videoRecord = [[CTVideoRecord alloc] init];
         videoRecord.remoteUrl = [remoteUrl absoluteString];
         videoRecord.status = @(CTVideoRecordStatusDownloading);

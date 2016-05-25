@@ -22,13 +22,19 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 @interface CTVideoManager : NSObject
 
 @property (nonatomic, assign, readonly) BOOL isWifi;
+@property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
 
 + (instancetype)sharedInstance;
 
-- (void)downloadVideoWithUrl:(NSURL *)url;
-- (void)cancelDownloadWithUrl:(NSURL *)url;
+- (void)startDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion;
+- (void)startAllDownloadTask:(void (^)(void))completion;
+
+- (void)deleteVideoWithUrl:(NSURL *)url completion:(void (^)(void))completion;
+- (void)deleteAllRecordAndVideo:(void (^)(void))completion;
+
+- (void)pauseDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion;
+- (void)pauseAllDownloadTask:(void (^)(void))completion;
 
 - (NSURL *)nativeUrlForRemoteUrl:(NSURL *)remoteUrl;
-- (void)removeAllRecord:(void (^)(void))completion;
 
 @end

@@ -55,14 +55,14 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 - (void)startDownload
 {
     if (self.videoUrl) {
-        [[CTVideoManager sharedInstance] downloadVideoWithUrl:self.videoUrl];
+        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl completion:nil];
     }
 }
 
 - (void)cancelDownload
 {
     if (self.videoUrl) {
-        [[CTVideoManager sharedInstance] cancelDownloadWithUrl:self.videoUrl];
+        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl completion:nil];
     }
 }
 

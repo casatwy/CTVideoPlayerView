@@ -37,16 +37,37 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         videoManager = [[CTVideoManager alloc] init];
+        videoManager.maxConcurrentDownloadCount = 3;
     });
     return videoManager;
 }
 
 #pragma mark - public methods
-- (void)downloadVideoWithUrl:(NSURL *)url
+- (void)startDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion
+{
+
+}
+
+- (void)startAllDownloadTask:(void (^)(void))completion
+{
+
+}
+
+- (void)deleteVideoWithUrl:(NSURL *)url completion:(void (^)(void))completion
 {
 }
 
-- (void)cancelDownloadWithUrl:(NSURL *)url
+- (void)deleteAllRecordAndVideo:(void (^)(void))completion
+{
+
+}
+
+- (void)pauseAllDownloadTask:(void (^)(void))completion
+{
+
+}
+
+- (void)pauseDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion
 {
     
 }
@@ -54,11 +75,6 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
 - (NSURL *)nativeUrlForRemoteUrl:(NSURL *)remoteUrl
 {
     return [self.dataCenter nativeUrlWithRemoteUrl:remoteUrl];
-}
-
-- (void)removeAllRecord:(void (^)(void))completion
-{
-    [self.dataCenter deleteAllRecordWithCompletion:completion];
 }
 
 #pragma mark - getters and setters
@@ -82,6 +98,16 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
         _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     }
     return _sessionManager;
+}
+
+- (void)setMaxConcurrentDownloadCount:(NSInteger)maxConcurrentDownloadCount
+{
+    self.sessionManager.operationQueue.maxConcurrentOperationCount = maxConcurrentDownloadCount;
+}
+
+- (NSInteger)maxConcurrentDownloadCount
+{
+    return self.sessionManager.operationQueue.maxConcurrentOperationCount;
 }
 
 @end
