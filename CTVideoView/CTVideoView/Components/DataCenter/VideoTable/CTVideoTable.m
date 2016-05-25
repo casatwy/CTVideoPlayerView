@@ -28,7 +28,8 @@
              @"identifier":@"INTEGER PRIMARY KEY AUTOINCREMENT",
              @"remoteUrl":@"TEXT",
              @"nativeUrl":@"TEXT",
-             @"status":@"INTEGER"
+             @"status":@"INTEGER",
+             @"progress":@"FLOAT",
              };
 }
 

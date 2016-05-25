@@ -22,5 +22,6 @@ typedef NS_ENUM(NSUInteger, CTVideoRecordStatus) {
 @property (nonatomic, copy) NSString *remoteUrl;
 @property (nonatomic, copy) NSString *nativeUrl;
 @property (nonatomic, copy) NSNumber *status;
+@property (nonatomic, copy) NSNumber *progress;
 
 @end
