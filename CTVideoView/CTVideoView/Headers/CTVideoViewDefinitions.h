@@ -24,6 +24,11 @@
 extern NSString * const kCTVideoViewShouldDownloadWhenNotWifi;
 extern NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi;
 
+/**
+ *  keys used in KVO
+ */
+extern NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus;
+
 @class CTVideoView;
 
 @protocol CTVideoViewOperationDelegate <NSObject>
@@ -40,7 +45,7 @@ extern NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi;
 - (void)videoViewWillPause:(CTVideoView *)videoView;
 - (void)videoViewDidPause:(CTVideoView *)videoView;
 
-- (BOOL)videoViewWillStop:(CTVideoView *)videoView; // return YES to release video after stop.
+- (void)videoViewWillStop:(CTVideoView *)videoView;
 - (void)videoViewDidStop:(CTVideoView *)videoView;
 
 @end

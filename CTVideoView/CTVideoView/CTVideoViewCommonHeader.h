@@ -15,4 +15,6 @@
 #import "CTVideoView+VideoCoverView.h"
 #import "CTVideoView+OperationButtons.h"
 
+#import "CTVideoViewDefinitions.h"
+
 #endif /* CTOtherObjectsHeader_h */

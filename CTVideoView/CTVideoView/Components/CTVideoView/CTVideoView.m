@@ -113,21 +113,33 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 - (void)pause
 {
     if (self.isPlaying) {
+        if ([self.operationDelegate respondsToSelector:@selector(videoViewWillPause:)]) {
+            [self.operationDelegate videoViewWillPause:self];
+        }
         [self.player pause];
+        if ([self.operationDelegate respondsToSelector:@selector(videoViewDidPause:)]) {
+            [self.operationDelegate videoViewDidPause:self];
+        }
     }
 }
 
 - (void)replay
 {
     [self.playerLayer.player seekToTime:kCMTimeZero];
-    [self.playerLayer.player play];
+    [self play];
 }
 
 - (void)stopWithReleaseVideo:(BOOL)shouldReleaseVideo
 {
-    [self pause];
+    if ([self.operationDelegate respondsToSelector:@selector(videoViewWillStop:)]) {
+        [self.operationDelegate videoViewWillStop:self];
+    }
+    [self.player pause];
     if (shouldReleaseVideo) {
         [self.player replaceCurrentItemWithPlayerItem:nil];
+    }
+    if ([self.operationDelegate respondsToSelector:@selector(videoViewDidStop:)]) {
+        [self.operationDelegate videoViewDidStop:self];
     }
 }
 
@@ -218,6 +230,10 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     if (notification.object == self.player.currentItem) {
         if (self.shouldReplayWhenFinish) {
             [self replay];
+        }
+        
+        if ([self.operationDelegate respondsToSelector:@selector(videoViewDidFinishPlaying:)]) {
+            [self.operationDelegate videoViewDidFinishPlaying:self];
         }
     }
 }
