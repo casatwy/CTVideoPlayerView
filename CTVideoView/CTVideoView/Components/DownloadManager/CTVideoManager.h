@@ -24,8 +24,11 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 @property (nonatomic, assign, readonly) BOOL isWifi;
 
 + (instancetype)sharedInstance;
+
 - (void)downloadVideoWithUrl:(NSURL *)url;
-- (NSURL *)naticeUrlForRemoteUrl:(NSURL *)remoteUrl;
+- (void)cancelDownloadWithUrl:(NSURL *)url;
+
+- (NSURL *)nativeUrlForRemoteUrl:(NSURL *)remoteUrl;
 - (void)removeAllRecord:(void (^)(void))completion;
 
 @end

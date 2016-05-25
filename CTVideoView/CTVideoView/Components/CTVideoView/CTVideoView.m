@@ -15,6 +15,8 @@
 
 #import "AVAsset+CTVideoView.h"
 
+#import "CTVideoManager.h"
+
 NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewShouldPlayRemoteVideoWhenNotWifi";
 
 NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus = @"player.currentItem.status";
@@ -28,8 +30,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @property (nonatomic, assign) BOOL isVideoUrlPrepared;
 @property (nonatomic, assign) BOOL isPreparedForPlay;
 
-@property (nonatomic, strong, readwrite) NSURL *actualVideoPlayingUrl;
 @property (nonatomic, assign, readwrite) CTVideoViewVideoUrlType videoUrlType;
+@property (nonatomic, strong, readwrite) NSURL *actualVideoPlayingUrl;
+@property (nonatomic, assign, readwrite) CTVideoViewVideoUrlType actualVideoUrlType;
 
 @property (nonatomic, strong, readwrite) AVPlayer *player;
 @property (nonatomic, strong, readwrite) AVURLAsset *asset;
@@ -213,12 +216,27 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                 [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
             }
             
-            if (strongSelf.shouldPlayAfterPrepareFinished && self.shouldAutoPlayRemoteVideoWhenNotWifi) {
-                if (self.shouldAutoPlayRemoteVideoWhenNotWifi) {
-#warning todo detect whether is in wifi
+            if (strongSelf.shouldPlayAfterPrepareFinished) {
+
+                // always play native video
+                if (strongSelf.actualVideoUrlType == CTVideoViewVideoUrlTypeNative) {
+                    [strongSelf play];
+                    return;
                 }
-                [strongSelf play];
+
+                // always play video under wifi
+                if ([CTVideoManager sharedInstance].isWifi) {
+                    [strongSelf play];
+                    return;
+                }
+
+                // even user is not in wifi, we still play video if user allows us to play remote video when not wifi
+                if (self.shouldAutoPlayRemoteVideoWhenNotWifi == YES) {
+                    [strongSelf play];
+                    return;
+                }
             } else if (strongSelf.isPreparedForPlay) {
+                // because user tapped play button, video plays anyway, no matter whether user is in wifi.
                 strongSelf.isPreparedForPlay = NO;
                 [strongSelf play];
             }
@@ -300,18 +318,26 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     }
 
     _videoUrl = videoUrl;
-    self.actualVideoPlayingUrl = videoUrl;
-    
+
     if ([[videoUrl pathExtension] isEqualToString:@"m3u8"]) {
-#warning todo check whether has downloaded this url, and set to actual video url
         self.videoUrlType = CTVideoViewVideoUrlTypeLiveStream;
+        self.actualVideoUrlType = CTVideoViewVideoUrlTypeLiveStream;
     } else if ([[NSFileManager defaultManager] fileExistsAtPath:[videoUrl path]]) {
         self.videoUrlType = CTVideoViewVideoUrlTypeNative;
+        self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;
     } else {
-#warning todo check whether has downloaded this url, and set to actual video url
         self.videoUrlType = CTVideoViewVideoUrlTypeRemote;
+        self.actualVideoUrlType = CTVideoViewVideoUrlTypeRemote;
     }
 
+    self.actualVideoPlayingUrl = videoUrl;
+    if (self.actualVideoUrlType != CTVideoViewVideoUrlTypeNative) {
+        NSURL *nativeUrl = [[CTVideoManager sharedInstance] nativeUrlForRemoteUrl:videoUrl];
+        if (nativeUrl) {
+            self.actualVideoPlayingUrl = nativeUrl;
+            self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;
+        }
+    }
     self.asset = [AVURLAsset assetWithURL:self.actualVideoPlayingUrl];
 }
 

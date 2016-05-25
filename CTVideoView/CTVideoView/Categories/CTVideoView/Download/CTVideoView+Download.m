@@ -8,6 +8,7 @@
 
 #import "CTVideoView+Download.h"
 #import <objc/runtime.h>
+#import "CTVideoManager.h"
 
 /* ----------------- Private methods ----------------- */
 
@@ -30,6 +31,21 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadStrategy;
 - (void)deallocDownload
 {
     
+}
+
+#pragma mark - public methods
+- (void)startDownload
+{
+    if (self.videoUrl) {
+        [[CTVideoManager sharedInstance] downloadVideoWithUrl:self.videoUrl];
+    }
+}
+
+- (void)cancelDownload
+{
+    if (self.videoUrl) {
+        [[CTVideoManager sharedInstance] cancelDownloadWithUrl:self.videoUrl];
+    }
 }
 
 #pragma mark - getters and setters
