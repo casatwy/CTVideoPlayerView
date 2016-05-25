@@ -50,6 +50,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                   context:&kCTVideoViewKVOContext];
+        
+        // Notifications
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 
         _shouldPlayAfterPrepareFinished = YES;
         _shouldReplayWhenFinish = NO;
@@ -66,6 +69,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 - (void)dealloc
 {
     [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus context:kCTVideoViewKVOContext];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - methods override
@@ -108,6 +112,12 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     if (self.isPlaying) {
         [self.player pause];
     }
+}
+
+- (void)replay
+{
+    [self.playerLayer.player seekToTime:kCMTimeZero];
+    [self.playerLayer.player play];
 }
 
 - (void)stop:(BOOL)shouldReleaseVideo
@@ -173,6 +183,16 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
         if (newStatus == AVPlayerItemStatusFailed) {
             DLog(@"%@", self.player.currentItem.error);
+        }
+    }
+}
+
+#pragma mark - Notification
+- (void)didReceiveAVPlayerItemDidPlayToEndTimeNotification:(NSNotification *)notification
+{
+    if (notification.object == self.player.currentItem) {
+        if (self.shouldReplayWhenFinish) {
+            [self replay];
         }
     }
 }
