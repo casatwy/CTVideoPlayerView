@@ -6,6 +6,9 @@
 //  Copyright © 2016年 casa. All rights reserved.
 //
 
+@import AVFoundation;
+@import CoreMedia;
+
 #import <UIKit/UIKit.h>
 #import "CTVideoViewDefinitions.h"
 
@@ -27,6 +30,11 @@
 
 @property (nonatomic, strong, readonly) NSURL *actualVideoPlayingUrl;
 @property (nonatomic, assign, readonly) BOOL shouldAutoPlayRemoteVideoWhenNotWifi; // set bool value of kCTVideoViewShouldPlayRemoteVideoWhenNotWifi in NSUserDefaults to modify this property, default is NO
+
+@property (nonatomic, readonly) AVPlayerLayer *playerLayer;
+@property (nonatomic, strong, readonly) AVPlayer *player;
+@property (nonatomic, strong, readonly) AVURLAsset *asset;
+@property (nonatomic, strong, readonly) AVPlayerItem *playerItem;
 
 - (void)prepare;
 - (void)play;

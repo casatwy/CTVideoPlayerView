@@ -10,6 +10,9 @@
 
 @interface CTVideoView (Time)
 
+- (void)initTime;
+- (void)deallocTime;
+
 @property (nonatomic, assign, readonly) CGFloat totalDurationSeconds;
 @property (nonatomic, assign, readonly) CGFloat currentPlaySpeed;
 

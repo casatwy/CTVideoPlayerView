@@ -10,6 +10,9 @@
 
 @interface CTVideoView (Download)
 
+- (void)initDownload;
+- (void)deallocDownload;
+
 @property (nonatomic, assign) CTVideoViewDownloadStrategy downloadStrategy;
 @property (nonatomic, assign, readonly) BOOL shouldDownloadWhenNotWifi; // set bool value of kCTVideoViewShouldDownloadWhenNotWifi in NSUserDefaults to modify this property, default is NO
 

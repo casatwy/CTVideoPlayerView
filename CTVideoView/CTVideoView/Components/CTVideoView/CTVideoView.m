@@ -6,9 +6,6 @@
 //  Copyright © 2016年 casa. All rights reserved.
 //
 
-@import AVFoundation;
-@import CoreMedia;
-
 #import "CTVideoView.h"
 
 #import "CTVideoView+Time.h"
@@ -33,10 +30,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @property (nonatomic, strong, readwrite) NSURL *actualVideoPlayingUrl;
 @property (nonatomic, assign, readwrite) CTVideoViewVideoUrlType videoUrlType;
 
-@property (nonatomic, strong) AVPlayer *player;
-@property (nonatomic, strong) AVURLAsset *asset;
-@property (nonatomic, strong) AVPlayerItem *playerItem;
-@property (nonatomic, readonly) AVPlayerLayer *playerLayer;
+@property (nonatomic, strong, readwrite) AVPlayer *player;
+@property (nonatomic, strong, readwrite) AVURLAsset *asset;
+@property (nonatomic, strong, readwrite) AVPlayerItem *playerItem;
 
 @end
 
@@ -47,6 +43,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 {
     self = [super init];
     if (self) {
+        
         // KVO
         [self addObserver:self
                forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus
@@ -65,6 +62,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
             self.playerLayer.player = self.player;
         }
+        
+        [self initTime];
+        [self initDownload];
+        [self initVideoCoverView];
+        [self initOperationButtons];
     }
     return self;
 }
@@ -73,6 +75,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 {
     [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus context:kCTVideoViewKVOContext];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self deallocTime];
+    [self deallocDownload];
+    [self deallocVideoCoverView];
+    [self deallocOperationButtons];
 }
 
 #pragma mark - methods override

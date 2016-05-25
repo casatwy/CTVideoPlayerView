@@ -10,6 +10,9 @@
 
 @interface CTVideoView (OperationButtons)
 
+- (void)initOperationButtons;
+- (void)deallocOperationButtons;
+
 /**
  *  set YES, will show play button, pause button, retry button at a properly time.
  *  set NO, will hide all button any time, even you have button views set.
