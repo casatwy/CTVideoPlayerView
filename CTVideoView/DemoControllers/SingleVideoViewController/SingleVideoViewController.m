@@ -7,7 +7,7 @@
 //
 
 #import "SingleVideoViewController.h"
-#import "CTVideoView.h"
+#import "CTVideoViewCommonHeader.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
 @interface SingleVideoViewController ()
@@ -124,6 +124,7 @@
         _videoView.shouldReplayWhenFinish = YES;
         _videoView.shouldPlayAfterPrepareFinished = YES;
         _videoView.shouldChangeOrientationToFitVideo = YES;
+        _videoView.shouldObservePlayTime = YES;
     }
     return _videoView;
 }

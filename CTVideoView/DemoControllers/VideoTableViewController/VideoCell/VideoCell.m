@@ -7,7 +7,7 @@
 //
 
 #import "VideoCell.h"
-#import "CTVideoView.h"
+#import "CTVideoViewCommonHeader.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
 @interface VideoCell ()
