@@ -31,6 +31,10 @@
     if (remoteUrl == nil) {
         return nil;
     }
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[remoteUrl path]]) {
+        return remoteUrl;
+    }
     
     NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
     NSString *remoteUrlString = [remoteUrl absoluteString];
@@ -42,8 +46,14 @@
     }
     
     NSString *filepath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:videoRecord.nativeUrl];
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filepath]) {
+        return [NSURL fileURLWithPath:filepath];
+    } else {
+        [self deleteWithRemoteUrl:remoteUrl];
+        return nil;
+    }
     
-    return [NSURL fileURLWithPath:filepath];
 }
 
 - (void)saveWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl

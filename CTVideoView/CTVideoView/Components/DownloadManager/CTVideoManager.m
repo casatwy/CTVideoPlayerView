@@ -10,6 +10,17 @@
 #import "CTVideoDataCenter.h"
 #import <AFNetworking/AFNetworking.h>
 
+// notifications
+NSString * const kCTVideoManagerWillDownloadVideoNotification = @"kCTVideoManagerWillDownloadVideoNotification";
+NSString * const kCTVideoManagerDidFinishDownloadVideoNotification = @"kCTVideoManagerDidFinishDownloadVideoNotification";
+NSString * const kCTVideoManagerDownloadVideoProgressNotification = @"kCTVideoManagerDownloadVideoProgressNotification";
+NSString * const kCTVideoManagerDidFailedDownloadVideoNotification = @"kCTVideoManagerDidFailedDownloadVideoNotification";
+
+// notification userinfo keys
+NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl = @"kCTVideoManagerNotificationUserInfoKeyRemoteUrl";
+NSString * const kCTVideoManagerNotificationUserInfoKeyNativeUrl = @"kCTVideoManagerNotificationUserInfoKeyNativeUrl";
+NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoManagerNotificationUserInfoKeyProgress";
+
 @interface CTVideoManager ()
 
 @property (nonatomic, strong) CTVideoDataCenter *dataCenter;
@@ -31,6 +42,24 @@
 }
 
 #pragma mark - public methods
+- (void)downloadVideoWithUrl:(NSURL *)url
+{
+}
+
+- (void)cancelDownloadWithUrl:(NSURL *)url
+{
+    
+}
+
+- (NSURL *)nativeUrlForRemoteUrl:(NSURL *)remoteUrl
+{
+    return [self.dataCenter nativeUrlWithRemoteUrl:remoteUrl];
+}
+
+- (void)removeAllRecord:(void (^)(void))completion
+{
+    [self.dataCenter deleteAllRecordWithCompletion:completion];
+}
 
 #pragma mark - getters and setters
 - (BOOL)isWifi

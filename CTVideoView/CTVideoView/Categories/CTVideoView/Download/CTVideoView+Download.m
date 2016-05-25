@@ -10,8 +10,6 @@
 #import <objc/runtime.h>
 #import "CTVideoManager.h"
 
-/* ----------------- Private methods ----------------- */
-
 /* ----------------- Public methods ----------------- */
 
 NSString * const kCTVideoViewShouldDownloadWhenNotWifi = @"kCTVideoViewShouldDownloadWhenNotWifi";
@@ -27,12 +25,30 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 #pragma mark - life cycle
 - (void)initDownload
 {
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceivekCTVideoManagerWillDownloadVideoNotification:)
+                                                 name:kCTVideoManagerWillDownloadVideoNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceivekCTVideoManagerDownloadVideoProgressNotification:)
+                                                 name:kCTVideoManagerDownloadVideoProgressNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceivekCTVideoManagerDidFailedDownloadVideoNotification:)
+                                                 name:kCTVideoManagerDidFailedDownloadVideoNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceivekCTVideoManagerDidFinishDownloadVideoNotification:)
+                                                 name:kCTVideoManagerDidFinishDownloadVideoNotification
+                                               object:nil];
 }
 
 - (void)deallocDownload
 {
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - public methods
@@ -47,6 +63,44 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 {
     if (self.videoUrl) {
         [[CTVideoManager sharedInstance] cancelDownloadWithUrl:self.videoUrl];
+    }
+}
+
+#pragma mark - notifications
+- (void)didReceivekCTVideoManagerWillDownloadVideoNotification:(NSNotification *)notification
+{
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqualToString:self.videoUrl.absoluteString]) {
+        if ([self.downloadDelegate respondsToSelector:@selector(videoViewWillStartDownload:)]) {
+            [self.downloadDelegate videoViewWillStartDownload:self];
+        }
+    }
+}
+
+- (void)didReceivekCTVideoManagerDidFinishDownloadVideoNotification:(NSNotification *)notification
+{
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqualToString:self.videoUrl.absoluteString]) {
+        if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidFinishDownload:)]) {
+            [self.downloadDelegate videoViewDidFinishDownload:self];
+        }
+    }
+}
+
+- (void)didReceivekCTVideoManagerDownloadVideoProgressNotification:(NSNotification *)notification
+{
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqualToString:self.videoUrl.absoluteString]) {
+        if ([self.downloadDelegate respondsToSelector:@selector(videoView:downloadProgress:)]) {
+            [self.downloadDelegate videoView:self
+                            downloadProgress:[notification.userInfo[kCTVideoManagerNotificationUserInfoKeyProgress] floatValue]];
+        }
+    }
+}
+
+- (void)didReceivekCTVideoManagerDidFailedDownloadVideoNotification:(NSNotification *)notification
+{
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqualToString:self.videoUrl.absoluteString]) {
+        if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidFailDownload:)]) {
+            [self.downloadDelegate videoViewDidFailDownload:self];
+        }
     }
 }
 
