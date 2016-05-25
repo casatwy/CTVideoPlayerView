@@ -18,6 +18,8 @@
 
 NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewShouldPlayRemoteVideoWhenNotWifi";
 
+NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus = @"player.currentItem.status";
+
 static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 @interface CTVideoView ()
@@ -45,7 +47,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     if (self) {
         // KVO
         [self addObserver:self
-               forKeyPath:@"player.currentItem.status"
+               forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                   context:&kCTVideoViewKVOContext];
 
@@ -63,7 +65,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)dealloc
 {
-    [self removeObserver:self forKeyPath:@"player.currentItem.status" context:kCTVideoViewKVOContext];
+    [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus context:kCTVideoViewKVOContext];
 }
 
 #pragma mark - methods override
@@ -165,7 +167,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         return;
     }
 
-    if ([keyPath isEqualToString:@"player.currentItem.status"]) {
+    if ([keyPath isEqualToString:kCTVideoViewKVOKeyPathPlayerItemStatus]) {
         NSNumber *newStatusAsNumber = change[NSKeyValueChangeNewKey];
         AVPlayerItemStatus newStatus = [newStatusAsNumber isKindOfClass:[NSNumber class]] ? newStatusAsNumber.integerValue : AVPlayerItemStatusUnknown;
 
