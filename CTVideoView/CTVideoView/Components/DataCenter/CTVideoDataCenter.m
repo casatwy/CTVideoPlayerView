@@ -20,6 +20,26 @@
 @implementation CTVideoDataCenter
 
 #pragma mark - public methods
+- (void)startDownloadAllRecordWithCompletion:(void (^)(NSArray *))completion
+{
+#warning todo
+}
+
+- (void)startDownloadRemoteUrlList:(NSArray *)remoteUrlList completion:(void (^)(NSArray *))completion
+{
+#warning todo
+}
+
+- (void)pauseRecordWithRemoteUrlList:(NSArray *)remoteUrlList completion:(void (^)(NSArray *))completion
+{
+#warning todo
+}
+
+- (void)pauseAllRecordWithCompletion:(void (^)(NSArray *))completion
+{
+#warning todo
+}
+
 - (NSArray<NSDictionary *> *)recordListWithStatus:(CTVideoRecordStatus)status
 {
 #warning todo
@@ -133,21 +153,23 @@
     }
 }
 
-- (void)deleteAllRecordWithCompletion:(void (^)(void))completion
+- (void)deleteAllRecordWithCompletion:(void (^)(NSArray *))completion
 {
     NSArray <NSObject <CTPersistanceRecordProtocol> *> *videoRecord = [self.videoTable findAllWithWhereCondition:@"identifier > 0" conditionParams:nil isDistinct:NO error:NULL];
     [self.videoTable deleteWithWhereCondition:@"identifier > 0" conditionParams:nil error:NULL];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSMutableArray *recordList = [[NSMutableArray alloc] init];
         [videoRecord enumerateObjectsUsingBlock:^(NSObject<CTPersistanceRecordProtocol> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[CTVideoRecord class]]) {
                 CTVideoRecord *videoItem = (CTVideoRecord *)obj;
                 NSString *videoPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:videoItem.nativeUrl];
                 [[NSFileManager defaultManager] removeItemAtPath:videoPath error:NULL];
+                [recordList addObject:[videoItem dictionaryRepresentationWithTable:self.videoTable]];
             }
         }];
         if (completion) {
-            completion();
+            completion(recordList);
         }
     });
 }
