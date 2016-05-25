@@ -9,6 +9,8 @@
 #ifndef CTVideoViewDefinitions_h
 #define CTVideoViewDefinitions_h
 
+/**********************************************************************/
+
 #define WeakSelf __weak typeof(self) weakSelf = self;
 #define StrongSelf __strong typeof(weakSelf) strongSelf = weakSelf;
 
@@ -17,6 +19,10 @@
 #else
 #define DLog(...)
 #endif
+
+/**********************************************************************/
+
+@class CTVideoView;
 
 /**
  *  keys used in NSUserDefaults
@@ -30,7 +36,49 @@ extern NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi;
 extern NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus;
 extern NSString * const kCTVideoViewKVOKeyPathPlayerItemDuration;
 
-@class CTVideoView;
+/**
+ *  notifications
+ */
+extern NSString * const kCTVideoManagerWillDownloadVideoNotification;
+extern NSString * const kCTVideoManagerDidFinishDownloadVideoNotification;
+extern NSString * const kCTVideoManagerDownloadVideoProgressNotification;
+extern NSString * const kCTVideoManagerDidFailedDownloadVideoNotification;
+
+/**
+ *  notification userinfo keys
+ */
+extern NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl;
+extern NSString * const kCTVideoManagerNotificationUserInfoKeyNativeUrl;
+extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
+
+
+/**********************************************************************/
+
+typedef NS_ENUM(NSUInteger, CTVideoViewDownloadStrategy) {
+    CTVideoViewDownloadStrategyDefault, // no download
+    CTVideoViewDownloadStrategyDownloadOnlyForeground,
+    CTVideoViewDownloadStrategyDownloadForegroundAndBackground,
+};
+
+typedef NS_ENUM(NSUInteger, CTVideoViewVideoUrlType) {
+    CTVideoViewVideoUrlTypeRemote,
+    CTVideoViewVideoUrlTypeNative,
+    CTVideoViewVideoUrlTypeLiveStream
+};
+
+typedef NS_ENUM(NSUInteger, CTVideoViewContentMode) {
+    CTVideoViewContentModeResizeAspect, // default, same as AVLayerVideoGravityResizeAspect
+    CTVideoViewContentModeResizeAspectFill, // same as AVLayerVideoGravityResizeAspectFill
+    CTVideoViewContentModeResize, // same as same as AVLayerVideoGravityResize
+};
+
+typedef NS_ENUM(NSUInteger, CTVideoViewOperationButtonType) {
+    CTVideoViewOperationButtonTypePlay,
+    CTVideoViewOperationButtonTypePause,
+    CTVideoViewOperationButtonTypeRetry
+};
+
+/**********************************************************************/
 
 @protocol CTVideoViewOperationDelegate <NSObject>
 
@@ -50,6 +98,8 @@ extern NSString * const kCTVideoViewKVOKeyPathPlayerItemDuration;
 
 @end
 
+/**********************************************************************/
+
 @protocol CTVideoViewTimeDelegate <NSObject>
 
 - (void)videoViewDidLoadVideoDuration:(CTVideoView *)videoView;
@@ -57,6 +107,8 @@ extern NSString * const kCTVideoViewKVOKeyPathPlayerItemDuration;
 - (void)videoView:(CTVideoView *)videoView didPlayToSecond:(CGFloat)second; //if you want this method to be called, you should set shouldObservePlayTime to YES.
 
 @end
+
+/**********************************************************************/
 
 @protocol CTVideoViewDownloadDelegate <NSObject>
 
@@ -67,45 +119,5 @@ extern NSString * const kCTVideoViewKVOKeyPathPlayerItemDuration;
 - (void)videoView:(CTVideoView *)videoView didFailDownloadUrl:(NSURL *)url fileIdentifier:(NSString *)fileIdentifier;
 
 @end
-
-typedef NS_ENUM(NSUInteger, CTVideoViewDownloadStrategy) {
-    CTVideoViewDownloadStrategyDefault,
-    CTVideoViewDownloadStrategyDownloadOnlyForeground,
-    CTVideoViewDownloadStrategyDownloadForegroundAndBackground,
-};
-
-typedef NS_ENUM(NSUInteger, CTVideoViewVideoUrlType) {
-    CTVideoViewVideoUrlTypeRemote,
-    CTVideoViewVideoUrlTypeNative,
-    CTVideoViewVideoUrlTypeLiveStream
-};
-
-/**
- *  CTVideoViewContentMode: Just a wrapper of AVPlayerLayer.videoGravity for convenient
- */
-typedef NS_ENUM(NSUInteger, CTVideoViewContentMode) {
-    /**
-     *  default, same as AVLayerVideoGravityResizeAspect
-     */
-    CTVideoViewContentModeResizeAspect,
-    /**
-     *  same as AVLayerVideoGravityResizeAspectFill
-     */
-    CTVideoViewContentModeResizeAspectFill,
-    /**
-     *  same as AVLayerVideoGravityResize
-     */
-    CTVideoViewContentModeResize,
-};
-
-/**
- *  CTVideoViewOperationButtonType
- */
-typedef NS_ENUM(NSUInteger, CTVideoViewOperationButtonType) {
-    CTVideoViewOperationButtonTypePlay,
-    CTVideoViewOperationButtonTypePause,
-    CTVideoViewOperationButtonTypeRetry
-};
-
 
 #endif /* CTVideoViewDefinitions_h */

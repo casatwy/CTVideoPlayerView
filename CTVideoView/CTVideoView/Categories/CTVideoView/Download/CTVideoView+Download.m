@@ -7,10 +7,19 @@
 //
 
 #import "CTVideoView+Download.h"
+#import <objc/runtime.h>
+
+/* ----------------- Private methods ----------------- */
+
+/* ----------------- Public methods ----------------- */
 
 NSString * const kCTVideoViewShouldDownloadWhenNotWifi = @"kCTVideoViewShouldDownloadWhenNotWifi";
 
+static void * CTVideoViewDownloadPrivatePropertyDownloadStrategy;
+
 @implementation CTVideoView (Download)
+
+@dynamic downloadStrategy;
 
 #pragma mark - life cycle
 - (void)initDownload
@@ -21,6 +30,22 @@ NSString * const kCTVideoViewShouldDownloadWhenNotWifi = @"kCTVideoViewShouldDow
 - (void)deallocDownload
 {
     
+}
+
+#pragma mark - getters and setters
+- (CTVideoViewDownloadStrategy)downloadStrategy
+{
+    return [objc_getAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadStrategy) unsignedIntegerValue];
+}
+
+- (void)setDownloadStrategy:(CTVideoViewDownloadStrategy)downloadStrategy
+{
+    objc_setAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadStrategy, @(downloadStrategy), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (BOOL)shouldDownloadWhenNotWifi
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kCTVideoViewShouldDownloadWhenNotWifi];
 }
 
 @end

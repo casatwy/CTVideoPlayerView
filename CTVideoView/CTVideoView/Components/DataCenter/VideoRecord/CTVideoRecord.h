@@ -1,0 +1,24 @@
+//
+//  CTVideoRecord.h
+//  yili
+//
+//  Created by casa on 15/10/21.
+//  Copyright © 2015年 Beauty Sight Network Technology Co.,Ltd. All rights reserved.
+//
+
+#import <CTPersistance/CTPersistance.h>
+
+typedef NS_ENUM(NSUInteger, CTVideoRecordStatus) {
+    CTVideoRecordStatusDownloading = 0,
+    CTVideoRecordStatusDownloadFinished = 1,
+    CTVideoRecordStatusDownloadFailed = 2
+};
+
+@interface CTVideoRecord : CTPersistanceRecord
+
+@property (nonatomic, copy) NSNumber *identifier;
+@property (nonatomic, copy) NSString *remoteUrl;
+@property (nonatomic, copy) NSString *nativeUrl;
+@property (nonatomic, copy) NSNumber *status;
+
+@end

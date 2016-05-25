@@ -17,4 +17,7 @@
 
 #import "CTVideoViewDefinitions.h"
 
+#import "CTVideoViewDataCenter.h"
+#import "CTVideoViewDownloadManager.h"
+
 #endif /* CTOtherObjectsHeader_h */

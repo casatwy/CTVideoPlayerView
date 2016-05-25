@@ -6,6 +6,10 @@ target 'CTVideoView' do
   # use_frameworks!
 
   # Pods for CTVideoView
+  pod "AFNetworking"
+  pod "CTPersistance"
+
+  # Pods for CTVideoView Demo
   pod "HandyFrame"
 
 end
