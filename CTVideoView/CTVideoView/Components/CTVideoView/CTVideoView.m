@@ -55,6 +55,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemPlaybackStalledNotification:) name:AVPlayerItemPlaybackStalledNotification object:nil];
 
         _shouldPlayAfterPrepareFinished = YES;
         _shouldReplayWhenFinish = NO;
@@ -218,6 +219,13 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         if (self.shouldReplayWhenFinish) {
             [self replay];
         }
+    }
+}
+
+- (void)didReceiveAVPlayerItemPlaybackStalledNotification:(NSNotification *)notification
+{
+    if (notification.object == self.player.currentItem) {
+        [self play];
     }
 }
 
