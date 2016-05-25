@@ -24,6 +24,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 @property (nonatomic, assign) BOOL isVideoUrlChanged;
 @property (nonatomic, assign) BOOL isVideoUrlPrepared;
+@property (nonatomic, assign) BOOL isPreparedForPlay;
 
 @property (nonatomic, strong, readwrite) NSURL *actualVideoPlayingUrl;
 @property (nonatomic, assign, readwrite) CTVideoViewVideoUrlType videoUrlType;
@@ -51,6 +52,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         _shouldPlayAfterPrepareFinished = YES;
         _shouldReplayWhenFinish = NO;
         _shouldChangeOrientationToFitVideo = NO;
+        _isPreparedForPlay = NO;
 
         if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
             self.playerLayer.player = self.player;
@@ -94,6 +96,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     if (self.isVideoUrlPrepared) {
         [self.player play];
     } else {
+        self.isPreparedForPlay = YES;
         [self prepare];
     }
 }
@@ -144,6 +147,12 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
                 [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
             }
+            
+            if (strongSelf.shouldPlayAfterPrepareFinished || strongSelf.isPreparedForPlay) {
+                strongSelf.isPreparedForPlay = NO;
+                [strongSelf play];
+            }
+            
         });
     }];
 }
