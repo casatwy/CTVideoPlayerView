@@ -32,6 +32,6 @@
 - (void)play;
 - (void)pause;
 - (void)replay;
-- (void)stop:(BOOL)shouldReleaseVideo;
+- (void)stopWithReleaseVideo:(BOOL)shouldReleaseVideo;
 
 @end

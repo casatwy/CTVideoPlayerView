@@ -83,7 +83,7 @@
 
 - (void)didTappedStopButton:(UIButton *)button
 {
-    [self.videoView stop:YES];
+    [self.videoView stopWithReleaseVideo:YES];
 }
 
 #pragma mark - getters and setters

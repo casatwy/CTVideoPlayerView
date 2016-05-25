@@ -122,7 +122,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self.playerLayer.player play];
 }
 
-- (void)stop:(BOOL)shouldReleaseVideo
+- (void)stopWithReleaseVideo:(BOOL)shouldReleaseVideo
 {
     [self pause];
     if (shouldReleaseVideo) {
