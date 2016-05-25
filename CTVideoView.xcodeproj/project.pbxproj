@@ -13,10 +13,11 @@
 		4A0944071CF2262600BC21AA /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944061CF2262600BC21AA /* VideoCell.m */; };
 		4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944091CF2287F00BC21AA /* ViewController.m */; };
 		4A09440C1CF233EC00BC21AA /* a.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4A09440B1CF2317200BC21AA /* a.mp4 */; };
-		4A19F8091CF5E49B0026B9BC /* CTVideoViewDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8081CF5E49B0026B9BC /* CTVideoViewDownloadManager.m */; };
-		4A19F8121CF5E4B80026B9BC /* CTVideoViewDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F80B1CF5E4B80026B9BC /* CTVideoViewDataCenter.m */; };
+		4A19F8091CF5E49B0026B9BC /* CTVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8081CF5E49B0026B9BC /* CTVideoManager.m */; };
+		4A19F8121CF5E4B80026B9BC /* CTVideoDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F80B1CF5E4B80026B9BC /* CTVideoDataCenter.m */; };
 		4A19F8131CF5E4B80026B9BC /* CTVideoRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F80E1CF5E4B80026B9BC /* CTVideoRecord.m */; };
 		4A19F8141CF5E4B80026B9BC /* CTVideoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8111CF5E4B80026B9BC /* CTVideoTable.m */; };
+		4A19F8181CF5EA7D0026B9BC /* DownloadThenPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */; };
 		4AAE2A871CF21FB900139C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A861CF21FB900139C9C /* main.m */; };
 		4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A891CF21FB900139C9C /* AppDelegate.m */; };
 		4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8E1CF21FB900139C9C /* Main.storyboard */; };
@@ -40,14 +41,16 @@
 		4A0944081CF2287F00BC21AA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4A0944091CF2287F00BC21AA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		4A09440B1CF2317200BC21AA /* a.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = a.mp4; sourceTree = "<group>"; };
-		4A19F8071CF5E49B0026B9BC /* CTVideoViewDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoViewDownloadManager.h; sourceTree = "<group>"; };
-		4A19F8081CF5E49B0026B9BC /* CTVideoViewDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoViewDownloadManager.m; sourceTree = "<group>"; };
-		4A19F80A1CF5E4B80026B9BC /* CTVideoViewDataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoViewDataCenter.h; sourceTree = "<group>"; };
-		4A19F80B1CF5E4B80026B9BC /* CTVideoViewDataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoViewDataCenter.m; sourceTree = "<group>"; };
+		4A19F8071CF5E49B0026B9BC /* CTVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoManager.h; sourceTree = "<group>"; };
+		4A19F8081CF5E49B0026B9BC /* CTVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoManager.m; sourceTree = "<group>"; };
+		4A19F80A1CF5E4B80026B9BC /* CTVideoDataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoDataCenter.h; sourceTree = "<group>"; };
+		4A19F80B1CF5E4B80026B9BC /* CTVideoDataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoDataCenter.m; sourceTree = "<group>"; };
 		4A19F80D1CF5E4B80026B9BC /* CTVideoRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoRecord.h; sourceTree = "<group>"; };
 		4A19F80E1CF5E4B80026B9BC /* CTVideoRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoRecord.m; sourceTree = "<group>"; };
 		4A19F8101CF5E4B80026B9BC /* CTVideoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoTable.h; sourceTree = "<group>"; };
 		4A19F8111CF5E4B80026B9BC /* CTVideoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoTable.m; sourceTree = "<group>"; };
+		4A19F8161CF5EA7D0026B9BC /* DownloadThenPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadThenPlayViewController.h; sourceTree = "<group>"; };
+		4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadThenPlayViewController.m; sourceTree = "<group>"; };
 		4AAE2A821CF21FB900139C9C /* CTVideoView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTVideoView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AAE2A861CF21FB900139C9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AAE2A881CF21FB900139C9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 			children = (
 				4A0944081CF2287F00BC21AA /* ViewController.h */,
 				4A0944091CF2287F00BC21AA /* ViewController.m */,
+				4A19F8151CF5EA670026B9BC /* DownloadThenPlay */,
 				4A0943FC1CF223A700BC21AA /* SingleVideoViewController */,
 				4A0943FD1CF223A700BC21AA /* VideoTableViewController */,
 			);
@@ -129,8 +133,8 @@
 		4A19F8051CF5E4800026B9BC /* DownloadManager */ = {
 			isa = PBXGroup;
 			children = (
-				4A19F8071CF5E49B0026B9BC /* CTVideoViewDownloadManager.h */,
-				4A19F8081CF5E49B0026B9BC /* CTVideoViewDownloadManager.m */,
+				4A19F8071CF5E49B0026B9BC /* CTVideoManager.h */,
+				4A19F8081CF5E49B0026B9BC /* CTVideoManager.m */,
 			);
 			path = DownloadManager;
 			sourceTree = "<group>";
@@ -138,8 +142,8 @@
 		4A19F8061CF5E4860026B9BC /* DataCenter */ = {
 			isa = PBXGroup;
 			children = (
-				4A19F80A1CF5E4B80026B9BC /* CTVideoViewDataCenter.h */,
-				4A19F80B1CF5E4B80026B9BC /* CTVideoViewDataCenter.m */,
+				4A19F80A1CF5E4B80026B9BC /* CTVideoDataCenter.h */,
+				4A19F80B1CF5E4B80026B9BC /* CTVideoDataCenter.m */,
 				4A19F80C1CF5E4B80026B9BC /* VideoRecord */,
 				4A19F80F1CF5E4B80026B9BC /* VideoTable */,
 			);
@@ -162,6 +166,15 @@
 				4A19F8111CF5E4B80026B9BC /* CTVideoTable.m */,
 			);
 			path = VideoTable;
+			sourceTree = "<group>";
+		};
+		4A19F8151CF5EA670026B9BC /* DownloadThenPlay */ = {
+			isa = PBXGroup;
+			children = (
+				4A19F8161CF5EA7D0026B9BC /* DownloadThenPlayViewController.h */,
+				4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */,
+			);
+			path = DownloadThenPlay;
 			sourceTree = "<group>";
 		};
 		4AAE2A791CF21FB900139C9C = {
@@ -285,9 +298,9 @@
 		4AD203231CF264D9004E3A97 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4AD203241CF264D9004E3A97 /* CTVideoView */,
 				4A19F8061CF5E4860026B9BC /* DataCenter */,
 				4A19F8051CF5E4800026B9BC /* DownloadManager */,
-				4AD203241CF264D9004E3A97 /* CTVideoView */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -450,12 +463,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A0944071CF2262600BC21AA /* VideoCell.m in Sources */,
-				4A19F8121CF5E4B80026B9BC /* CTVideoViewDataCenter.m in Sources */,
-				4A19F8091CF5E49B0026B9BC /* CTVideoViewDownloadManager.m in Sources */,
+				4A19F8121CF5E4B80026B9BC /* CTVideoDataCenter.m in Sources */,
+				4A19F8091CF5E49B0026B9BC /* CTVideoManager.m in Sources */,
 				4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */,
 				4AD203201CF260C9004E3A97 /* CTVideoView+VideoCoverView.m in Sources */,
 				4AF6EFA01CF5787600A1E1C9 /* AVAsset+CTVideoView.m in Sources */,
 				4A0944011CF2250A00BC21AA /* SingleVideoViewController.m in Sources */,
+				4A19F8181CF5EA7D0026B9BC /* DownloadThenPlayViewController.m in Sources */,
 				4AD2031E1CF260C9004E3A97 /* CTVideoView+OperationButtons.m in Sources */,
 				4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */,
 				4AD2031F1CF260C9004E3A97 /* CTVideoView+Time.m in Sources */,

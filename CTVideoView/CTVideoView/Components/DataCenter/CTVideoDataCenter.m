@@ -6,20 +6,26 @@
 //  Copyright © 2015年 Beauty Sight Network Technology Co.,Ltd. All rights reserved.
 //
 
-#import "CTVideoViewDataCenter.h"
+#import "CTVideoDataCenter.h"
 #import "CTVideoRecord.h"
 #import "CTVideoTable.h"
 #import <UIKit/UIKit.h>
 
-@interface CTVideoViewDataCenter ()
+@interface CTVideoDataCenter ()
 
 @property (nonatomic, strong) CTVideoTable *videoTable;
 
 @end
 
-@implementation CTVideoViewDataCenter
+@implementation CTVideoDataCenter
 
 #pragma mark - public methods
+- (NSArray<NSDictionary *> *)recordListWithStatus:(CTVideoRecordStatus)status
+{
+#warning todo
+    return @[];
+}
+
 - (NSURL *)nativeUrlWithRemoteUrl:(NSURL *)remoteUrl
 {
     if (remoteUrl == nil) {

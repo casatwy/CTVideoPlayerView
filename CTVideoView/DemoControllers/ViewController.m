@@ -10,6 +10,7 @@
 
 #import "SingleVideoViewController.h"
 #import "VideoTableViewController.h"
+#import "DownloadThenPlayViewController.h"
 
 #import <HandyFrame/UIView+LayoutMethods.h>
 
@@ -43,10 +44,14 @@
     UIViewController *viewControllerToPush = nil;
 
     NSDictionary *info = self.dataSource[indexPath.row];
-    if (indexPath.row < self.dataSource.count-1) {
+    if (indexPath.row < 4) {
         viewControllerToPush = [[SingleVideoViewController alloc] initWithVideoUrlString:info[@"url"]];
-    } else {
+    }
+    if (indexPath.row == 4) {
         viewControllerToPush = [[VideoTableViewController alloc] initWithVideoUrlList:info[@"urlList"]];
+    }
+    if (indexPath.row == 5) {
+        viewControllerToPush = [[DownloadThenPlayViewController alloc] initWithUrlString:info[@"url"]];
     }
 
     if (viewControllerToPush) {
@@ -115,6 +120,10 @@
                                     @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_42b791e5aed7463b865518378a78de6a",
                                     @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_03e0b80cc69b4f069af9b5ba88be6752",
                                     ]
+                            },
+                        @{
+                            @"title":@"mp4 download then play",
+                            @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_e05f72400bae4e0b8ae6825c5891af64"
                             },
                         ];
     }

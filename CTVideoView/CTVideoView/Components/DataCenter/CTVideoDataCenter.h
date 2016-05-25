@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CTVideoRecord.h"
 
-@interface CTVideoViewDataCenter : NSObject
+@interface CTVideoDataCenter : NSObject
 
 // create
 - (void)insertRecordWithRemoteUrl:(NSURL *)remoteUrl status:(CTVideoRecordStatus)status;
@@ -17,6 +17,7 @@
 // read
 - (NSURL *)nativeUrlWithRemoteUrl:(NSURL *)remoteUrl;
 - (BOOL)isDownloadingRemoteUrl:(NSURL *)remoteUrl;
+- (NSArray <NSDictionary *> *)recordListWithStatus:(CTVideoRecordStatus)status;
 
 // update
 - (void)saveWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl;

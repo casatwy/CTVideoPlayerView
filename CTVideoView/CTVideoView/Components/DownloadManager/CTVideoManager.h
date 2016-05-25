@@ -19,7 +19,9 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl;
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyNativeUrl;
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 
-@interface CTVideoViewDownloadManager : NSObject
+@interface CTVideoManager : NSObject
+
+@property (nonatomic, assign, readonly) BOOL isWifi;
 
 + (instancetype)sharedInstance;
 - (void)downloadVideoWithUrl:(NSURL *)url;
