@@ -181,6 +181,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             }
             
             if (strongSelf.shouldPlayAfterPrepareFinished && self.shouldAutoPlayRemoteVideoWhenNotWifi) {
+                if (self.shouldAutoPlayRemoteVideoWhenNotWifi) {
+#warning todo detect whether is in wifi
+                }
                 [strongSelf play];
             } else if (strongSelf.isPreparedForPlay) {
                 strongSelf.isPreparedForPlay = NO;
