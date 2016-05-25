@@ -13,6 +13,7 @@ extern NSString * const kCTVideoManagerWillDownloadVideoNotification;
 extern NSString * const kCTVideoManagerDidFinishDownloadVideoNotification;
 extern NSString * const kCTVideoManagerDownloadVideoProgressNotification;
 extern NSString * const kCTVideoManagerDidFailedDownloadVideoNotification;
+#warning todo add some notification to show pause status
 
 // notification userinfo keys
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl;
