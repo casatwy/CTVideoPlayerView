@@ -156,6 +156,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self.player pause];
     if (shouldReleaseVideo) {
         [self.player replaceCurrentItemWithPlayerItem:nil];
+        self.isVideoUrlPrepared = NO;
     }
     if ([self.operationDelegate respondsToSelector:@selector(videoViewDidStop:)]) {
         [self.operationDelegate videoViewDidStop:self];
