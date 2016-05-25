@@ -172,7 +172,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         AVPlayerItemStatus newStatus = [newStatusAsNumber isKindOfClass:[NSNumber class]] ? newStatusAsNumber.integerValue : AVPlayerItemStatusUnknown;
 
         if (newStatus == AVPlayerItemStatusFailed) {
-            NSLog(@"%@", self.player.currentItem.error);
+            DLog(@"%@", self.player.currentItem.error);
         }
     }
 }
