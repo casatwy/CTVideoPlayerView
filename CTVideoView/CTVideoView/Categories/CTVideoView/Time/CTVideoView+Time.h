@@ -24,6 +24,8 @@
 // methods for main object
 - (void)initTime;
 - (void)deallocTime;
+
+// KVO callback
 - (void)durationDidLoadedWithChange:(NSDictionary *)change;
 
 @end
