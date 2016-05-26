@@ -56,12 +56,14 @@
 
 - (void)videoView:(CTVideoView *)videoView downloadProgress:(CGFloat)progress
 {
-    DLog(@"progress %2f", progress);
+    DLog(@"progress %.2f", progress);
 }
 
 - (void)videoViewDidFinishDownload:(CTVideoView *)videoView
 {
-    [self.videoView refreshUrl];
+    if (self.videoView.actualVideoUrlType != CTVideoViewVideoUrlTypeNative) {
+        [self.videoView refreshUrl];
+    }
     [self.videoView play];
 }
 
@@ -77,6 +79,7 @@
         _videoView = [[CTVideoView alloc] init];
         _videoView.downloadStrategy = CTVideoViewDownloadStrategyDownloadForegroundAndBackground;
         _videoView.downloadDelegate = self;
+        _videoView.shouldReplayWhenFinish = YES;
     }
     return _videoView;
 }
