@@ -78,6 +78,11 @@ typedef NS_ENUM(NSUInteger, CTVideoViewOperationButtonType) {
     CTVideoViewOperationButtonTypeRetry
 };
 
+typedef NS_ENUM(NSUInteger, CTVideoViewStalledStrategy) {
+    CTVideoViewStalledStrategyPlay,
+    CTVideoViewStalledStrategyDelegateCallback,
+};
+
 /**********************************************************************/
 
 @protocol CTVideoViewOperationDelegate <NSObject>
@@ -88,6 +93,7 @@ typedef NS_ENUM(NSUInteger, CTVideoViewOperationButtonType) {
 - (void)videoViewDidFailPrepare:(CTVideoView *)videoView error:(NSError *)error;
 
 - (void)videoViewWillStartPlaying:(CTVideoView *)videoView;
+- (void)videoViewStalledWhilePlaying:(CTVideoView *)videoView;
 - (void)videoViewDidFinishPlaying:(CTVideoView *)videoView;
 
 - (void)videoViewWillPause:(CTVideoView *)videoView;

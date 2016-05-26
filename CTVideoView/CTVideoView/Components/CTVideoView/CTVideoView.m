@@ -283,7 +283,14 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 - (void)didReceiveAVPlayerItemPlaybackStalledNotification:(NSNotification *)notification
 {
     if (notification.object == self.player.currentItem) {
-        [self play];
+        if (self.stalledStrategy == CTVideoViewStalledStrategyPlay) {
+            [self play];
+        }
+        if (self.stalledStrategy == CTVideoViewStalledStrategyDelegateCallback) {
+            if ([self.operationDelegate respondsToSelector:@selector(videoViewStalledWhilePlaying:)]) {
+                [self.operationDelegate videoViewStalledWhilePlaying:self];
+            }
+        }
     }
 }
 

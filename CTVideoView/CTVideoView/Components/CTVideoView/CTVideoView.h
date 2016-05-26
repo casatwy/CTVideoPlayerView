@@ -24,10 +24,12 @@
 @property (nonatomic, assign, readonly) CTVideoViewVideoUrlType actualVideoUrlType;
 
 @property (nonatomic, assign, readonly) BOOL isPlaying;
+
 @property (nonatomic, assign) BOOL isMuted; // set YES to mute the video playing
 @property (nonatomic, assign) BOOL shouldPlayAfterPrepareFinished; // default is YES
 @property (nonatomic, assign) BOOL shouldReplayWhenFinish; // default is NO
 @property (nonatomic, assign) BOOL shouldChangeOrientationToFitVideo; // default is NO
+@property (nonatomic, assign) CTVideoViewStalledStrategy stalledStrategy;
 
 @property (nonatomic, weak) id<CTVideoViewOperationDelegate> operationDelegate;
 
