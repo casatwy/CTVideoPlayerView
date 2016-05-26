@@ -333,6 +333,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
 - (AFURLSessionManager *)sessionManager
 {
     if (_sessionManager == nil) {
+#warning todo allow download background
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     }
