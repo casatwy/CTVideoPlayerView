@@ -24,13 +24,27 @@
 {
     CTVideoRecord *record = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
     if (record) {
-        if (status != [record.status unsignedIntegerValue]) {
-            record.status = @(status);
-            [self.videoTable updateRecord:record error:NULL];
-        }
+        record.status = @(status);
+        [self.videoTable updateRecord:record error:NULL];
     } else {
         record = [[CTVideoRecord alloc] init];
         record.status = @(status);
+        record.remoteUrl = [remoteUrl absoluteString];
+        [self.videoTable insertRecord:record error:NULL];
+    }
+}
+
+- (void)updateStatus:(CTVideoRecordStatus)status progress:(CGFloat)progress toRemoteUrl:(NSURL *)remoteUrl
+{
+    CTVideoRecord *record = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
+    if (record) {
+        record.status = @(status);
+        record.progress = @(progress);
+        [self.videoTable updateRecord:record error:NULL];
+    } else {
+        record = [[CTVideoRecord alloc] init];
+        record.status = @(status);
+        record.progress = @(progress);
         record.remoteUrl = [remoteUrl absoluteString];
         [self.videoTable insertRecord:record error:NULL];
     }

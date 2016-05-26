@@ -13,6 +13,7 @@
 @interface DownloadThenPlayViewController () <CTVideoViewDownloadDelegate>
 
 @property (nonatomic, strong) CTVideoView *videoView;
+@property (nonatomic, assign) BOOL hasBeenPaused;
 
 @end
 
@@ -24,6 +25,7 @@
     self = [super init];
     if (self) {
         self.videoView.videoUrl = [NSURL URLWithString:urlString];
+        _hasBeenPaused = NO;
     }
     return self;
 }
@@ -45,7 +47,7 @@
 {
     [super viewDidAppear:animated];
     [self.videoView prepare];
-//    [self.videoView startDownloadTask];
+    [self.videoView startDownloadTask];
 }
 
 #pragma mark - CTVideoViewDownloadDelegate
@@ -58,7 +60,10 @@
 {
     DLog(@"progress %.2f", progress);
     if (progress > 0.5 && progress < 0.6) {
-        [[CTVideoManager sharedInstance] pauseAllDownloadTask];
+        if (self.hasBeenPaused == NO) {
+            self.hasBeenPaused = YES;
+            [[CTVideoManager sharedInstance] pauseAllDownloadTask];
+        }
     }
 }
 

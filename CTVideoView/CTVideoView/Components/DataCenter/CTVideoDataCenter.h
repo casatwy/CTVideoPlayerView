@@ -6,7 +6,7 @@
 //  Copyright © 2015年 Beauty Sight Network Technology Co.,Ltd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "CTVideoRecord.h"
 
 @interface CTVideoDataCenter : NSObject
@@ -25,6 +25,7 @@
 - (void)updateWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl status:(CTVideoRecordStatus)status;
 
 - (void)updateStatus:(CTVideoRecordStatus)status toRemoteUrl:(NSURL *)remoteUrl;
+- (void)updateStatus:(CTVideoRecordStatus)status progress:(CGFloat)progress toRemoteUrl:(NSURL *)remoteUrl;
 - (void)updateAllStatus:(CTVideoRecordStatus)status;
 
 - (void)pauseAllRecordWithCompletion:(void(^)(void))completion;
