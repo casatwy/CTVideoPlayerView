@@ -46,6 +46,7 @@
 - (void)replay;
 - (void)stopWithReleaseVideo:(BOOL)shouldReleaseVideo;
 
+// you will never use this method, it is for category only.
 - (void)refreshUrl;
 
 @end
