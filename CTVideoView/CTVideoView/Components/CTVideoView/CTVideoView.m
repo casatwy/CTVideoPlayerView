@@ -166,6 +166,30 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     }
 }
 
+- (void)refreshUrl
+{
+    if ([[self.videoUrl pathExtension] isEqualToString:@"m3u8"]) {
+        self.videoUrlType = CTVideoViewVideoUrlTypeLiveStream;
+        self.actualVideoUrlType = CTVideoViewVideoUrlTypeLiveStream;
+    } else if ([[NSFileManager defaultManager] fileExistsAtPath:[self.videoUrl path]]) {
+        self.videoUrlType = CTVideoViewVideoUrlTypeNative;
+        self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;
+    } else {
+        self.videoUrlType = CTVideoViewVideoUrlTypeRemote;
+        self.actualVideoUrlType = CTVideoViewVideoUrlTypeRemote;
+    }
+    
+    self.actualVideoPlayingUrl = self.videoUrl;
+    if (self.actualVideoUrlType != CTVideoViewVideoUrlTypeNative) {
+        NSURL *nativeUrl = [[CTVideoManager sharedInstance] nativeUrlForRemoteUrl:self.videoUrl];
+        if (nativeUrl) {
+            self.actualVideoPlayingUrl = nativeUrl;
+            self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;
+        }
+    }
+    self.asset = [AVURLAsset assetWithURL:self.actualVideoPlayingUrl];
+}
+
 #pragma mark - private methods
 - (void)asynchronouslyLoadURLAsset:(AVURLAsset *)asset
 {
@@ -326,26 +350,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
     _videoUrl = videoUrl;
 
-    if ([[videoUrl pathExtension] isEqualToString:@"m3u8"]) {
-        self.videoUrlType = CTVideoViewVideoUrlTypeLiveStream;
-        self.actualVideoUrlType = CTVideoViewVideoUrlTypeLiveStream;
-    } else if ([[NSFileManager defaultManager] fileExistsAtPath:[videoUrl path]]) {
-        self.videoUrlType = CTVideoViewVideoUrlTypeNative;
-        self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;
-    } else {
-        self.videoUrlType = CTVideoViewVideoUrlTypeRemote;
-        self.actualVideoUrlType = CTVideoViewVideoUrlTypeRemote;
-    }
-
-    self.actualVideoPlayingUrl = videoUrl;
-    if (self.actualVideoUrlType != CTVideoViewVideoUrlTypeNative) {
-        NSURL *nativeUrl = [[CTVideoManager sharedInstance] nativeUrlForRemoteUrl:videoUrl];
-        if (nativeUrl) {
-            self.actualVideoPlayingUrl = nativeUrl;
-            self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;
-        }
-    }
-    self.asset = [AVURLAsset assetWithURL:self.actualVideoPlayingUrl];
+    [self refreshUrl];
 }
 
 - (void)setPlayerItem:(AVPlayerItem *)playerItem

@@ -49,22 +49,23 @@
 }
 
 #pragma mark - CTVideoViewDownloadDelegate
-- (void)videoView:(CTVideoView *)videoView willStartDownloadWithUrl:(NSURL *)url fileIdentifier:(NSString *)fileIdentifier
+- (void)videoViewWillStartDownload:(CTVideoView *)videoView
 {
 
 }
 
-- (void)videoView:(CTVideoView *)videoView downloadProgress:(CGFloat *)progress url:(NSURL *)url fileIdentifier:(NSString *)fileIdentifier
+- (void)videoView:(CTVideoView *)videoView downloadProgress:(CGFloat)progress
 {
-
+    DLog(@"progress %2f", progress);
 }
 
-- (void)videoView:(CTVideoView *)videoView didFinishDownloadUrl:(NSURL *)url fileIdentifier:(NSString *)fileIdentifier
+- (void)videoViewDidFinishDownload:(CTVideoView *)videoView
 {
-
+    [self.videoView refreshUrl];
+    [self.videoView play];
 }
 
-- (void)videoView:(CTVideoView *)videoView didFailDownloadUrl:(NSURL *)url fileIdentifier:(NSString *)fileIdentifier
+- (void)videoViewDidFailDownload:(CTVideoView *)videoView
 {
 
 }

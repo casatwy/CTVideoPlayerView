@@ -46,4 +46,6 @@
 - (void)replay;
 - (void)stopWithReleaseVideo:(BOOL)shouldReleaseVideo;
 
+- (void)refreshUrl;
+
 @end

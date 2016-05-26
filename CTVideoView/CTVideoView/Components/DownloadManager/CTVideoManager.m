@@ -204,13 +204,14 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
                                                                                       notificationNameToPost = kCTVideoManagerDidFinishDownloadVideoNotification;
                                                                                       [strongSelf.dataCenter updateStatus:CTVideoRecordStatusDownloadFinished toRemoteUrl:url];
                                                                                   }
-                                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kCTVideoManagerDidFailedDownloadVideoNotification
+                                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:notificationNameToPost
                                                                                                                                       object:nil
                                                                                                                                     userInfo:@{
                                                                                                                                                kCTVideoManagerNotificationUserInfoKeyNativeUrl:filePath,
                                                                                                                                                kCTVideoManagerNotificationUserInfoKeyRemoteUrl:url
                                                                                                                                                }];
                                                                               }];
+    [downloadTask resume];
     self.downloadTaskPool[url] = downloadTask;
     [self.dataCenter updateStatus:CTVideoRecordStatusWaitingForDownload toRemoteUrl:url];
     [[NSNotificationCenter defaultCenter] postNotificationName:kCTVideoManagerWillDownloadVideoNotification
