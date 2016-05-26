@@ -55,7 +55,6 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     CTVideoRecordStatus videoStatus = [self.dataCenter statusOfRemoteUrl:url];
     
     if (videoStatus == CTVideoRecordStatusDownloading || videoStatus == CTVideoRecordStatusWaitingForDownload) {
-        // do nothing
         NSURLSessionDownloadTask *downloadTask = self.downloadTaskPool[url];
         if (downloadTask == nil) {
             videoStatus = CTVideoRecordStatusDownloadFailed;
@@ -107,9 +106,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
         NSURL *remoteUrl = [NSURL URLWithString:record.remoteUrl];
         if (remoteUrl) {
             NSURLSessionDownloadTask *task = self.downloadTaskPool[remoteUrl];
-            if (task) {
-                [self.downloadTaskPool removeObjectForKey:remoteUrl];
-            } else {
+            if (task == nil) {
                 [self resumeDownloadWithUrl:remoteUrl];
             }
         }
