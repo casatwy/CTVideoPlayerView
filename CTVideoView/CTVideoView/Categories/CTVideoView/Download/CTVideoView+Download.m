@@ -44,6 +44,11 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
                                              selector:@selector(didReceivekCTVideoManagerDidFinishDownloadVideoNotification:)
                                                  name:kCTVideoManagerDidFinishDownloadVideoNotification
                                                object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceivedkCTVideoManagerDidPausedDownloadVideoNotification:)
+                                                 name:kCTVideoManagerDidPausedDownloadVideoNotification
+                                               object:nil];
 }
 
 - (void)deallocDownload
@@ -125,6 +130,15 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
     if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqual:self.videoUrl]) {
         if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidFailDownload:)]) {
             [self.downloadDelegate videoViewDidFailDownload:self];
+        }
+    }
+}
+
+- (void)didReceivedkCTVideoManagerDidPausedDownloadVideoNotification:(NSNotification *)notification
+{
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqual:self.videoUrl]) {
+        if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidPausedDownload:)]) {
+            [self.downloadDelegate videoViewDidPausedDownload:self];
         }
     }
 }

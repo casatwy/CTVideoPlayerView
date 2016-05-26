@@ -24,8 +24,10 @@
 {
     CTVideoRecord *record = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
     if (record) {
-        record.status = @(status);
-        [self.videoTable updateRecord:record error:NULL];
+        if (status != [record.status unsignedIntegerValue]) {
+            record.status = @(status);
+            [self.videoTable updateRecord:record error:NULL];
+        }
     } else {
         record = [[CTVideoRecord alloc] init];
         record.status = @(status);
@@ -93,10 +95,14 @@
     
     NSString *filepath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:videoRecord.nativeUrl];
 
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filepath]) {
-        return [NSURL fileURLWithPath:filepath];
+    BOOL isDirectory = YES;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filepath isDirectory:&isDirectory]) {
+        if (isDirectory) {
+            return nil;
+        } else {
+            return [NSURL fileURLWithPath:filepath];
+        }
     } else {
-        [self deleteWithRemoteUrl:remoteUrl];
         return nil;
     }
     

@@ -57,6 +57,12 @@
 - (void)videoView:(CTVideoView *)videoView downloadProgress:(CGFloat)progress
 {
     DLog(@"progress %.2f", progress);
+    if (progress > 0.5 && progress < 0.6) {
+        [[CTVideoManager sharedInstance] pauseAllDownloadTask:^{
+            DLog(@"pause");
+            [[CTVideoManager sharedInstance] startAllDownloadTask:nil];
+        }];
+    }
 }
 
 - (void)videoViewDidFinishDownload:(CTVideoView *)videoView
