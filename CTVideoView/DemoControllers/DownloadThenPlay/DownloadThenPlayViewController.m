@@ -58,10 +58,7 @@
 {
     DLog(@"progress %.2f", progress);
     if (progress > 0.5 && progress < 0.6) {
-        [[CTVideoManager sharedInstance] pauseAllDownloadTask:^{
-            DLog(@"pause");
-            [[CTVideoManager sharedInstance] startAllDownloadTask:nil];
-        }];
+        [[CTVideoManager sharedInstance] pauseAllDownloadTask];
     }
 }
 
@@ -74,6 +71,12 @@
 - (void)videoViewDidFailDownload:(CTVideoView *)videoView
 {
 
+}
+
+- (void)videoViewDidPausedDownload:(CTVideoView *)videoView
+{
+    DLog(@"pause");
+    [[CTVideoManager sharedInstance] startAllDownloadTask:nil];
 }
 
 #pragma mark - getters and setter

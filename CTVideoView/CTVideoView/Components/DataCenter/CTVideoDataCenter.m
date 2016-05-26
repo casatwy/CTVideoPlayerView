@@ -94,18 +94,7 @@
     }
     
     NSString *filepath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:videoRecord.nativeUrl];
-
-    BOOL isDirectory = YES;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filepath isDirectory:&isDirectory]) {
-        if (isDirectory) {
-            return nil;
-        } else {
-            return [NSURL fileURLWithPath:filepath];
-        }
-    } else {
-        return nil;
-    }
-    
+    return [NSURL fileURLWithPath:filepath];
 }
 
 - (void)updateWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl

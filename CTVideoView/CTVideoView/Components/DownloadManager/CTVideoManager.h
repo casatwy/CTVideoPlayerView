@@ -34,7 +34,7 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 - (void)deleteAllRecordAndVideo:(void (^)(NSArray *deletedList))completion;
 
 - (void)pauseDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion;
-- (void)pauseAllDownloadTask:(void (^)(void))completion;
+- (void)pauseAllDownloadTask;
 
 - (NSURL *)nativeUrlForRemoteUrl:(NSURL *)remoteUrl;
 
