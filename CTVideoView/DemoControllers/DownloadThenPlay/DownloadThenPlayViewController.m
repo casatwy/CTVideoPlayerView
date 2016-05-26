@@ -61,9 +61,7 @@
 
 - (void)videoViewDidFinishDownload:(CTVideoView *)videoView
 {
-    if (self.videoView.actualVideoUrlType != CTVideoViewVideoUrlTypeNative) {
-        [self.videoView refreshUrl];
-    }
+    [self.videoView refreshUrl];
     [self.videoView play];
 }
 

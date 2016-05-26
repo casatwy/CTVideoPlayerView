@@ -187,7 +187,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;
         }
     }
-    self.asset = [AVURLAsset assetWithURL:self.actualVideoPlayingUrl];
+    if (![self.asset.URL isEqual:self.actualVideoPlayingUrl]) {
+        self.asset = [AVURLAsset assetWithURL:self.actualVideoPlayingUrl];
+        self.isVideoUrlPrepared = NO;
+        self.isVideoUrlChanged = YES;
+    }
 }
 
 #pragma mark - private methods
