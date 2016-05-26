@@ -36,6 +36,6 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 - (void)pauseDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion;
 - (void)pauseAllDownloadTask;
 
-- (NSURL *)nativeUrlForRemoteUrl:(NSURL *)remoteUrl;
+- (NSURL *)nativeUrlForRemoteUrl:(NSURL *)remoteUrl; // this native url is read from database, that means the file may not exists. The file exists physically only after video download finished, and this native url is designed to indicate where to save the downloaded video file. So, you should check whether it is exists in file system before you use the file.
 
 @end

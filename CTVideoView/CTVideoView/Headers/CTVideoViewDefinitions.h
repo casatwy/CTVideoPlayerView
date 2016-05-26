@@ -57,7 +57,7 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 /**********************************************************************/
 
 typedef NS_ENUM(NSUInteger, CTVideoViewDownloadStrategy) {
-    CTVideoViewDownloadStrategyDefault, // no download
+    CTVideoViewDownloadStrategyNoDownload, // no download
     CTVideoViewDownloadStrategyDownloadOnlyForeground,
     CTVideoViewDownloadStrategyDownloadForegroundAndBackground,
 };
