@@ -45,7 +45,7 @@
 {
     [super viewDidAppear:animated];
     [self.videoView prepare];
-    [self.videoView startDownloadTask];
+//    [self.videoView startDownloadTask];
 }
 
 #pragma mark - CTVideoViewDownloadDelegate

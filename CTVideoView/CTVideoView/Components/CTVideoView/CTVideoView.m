@@ -182,7 +182,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     self.actualVideoPlayingUrl = self.videoUrl;
     if (self.actualVideoUrlType != CTVideoViewVideoUrlTypeNative) {
         NSURL *nativeUrl = [[CTVideoManager sharedInstance] nativeUrlForRemoteUrl:self.videoUrl];
-        if (nativeUrl) {
+        if (nativeUrl && [[NSFileManager defaultManager] fileExistsAtPath:[nativeUrl path]]) {
             self.actualVideoPlayingUrl = nativeUrl;
             self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;
         }
