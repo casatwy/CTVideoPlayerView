@@ -94,7 +94,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 #pragma mark - notifications
 - (void)didReceivekCTVideoManagerWillDownloadVideoNotification:(NSNotification *)notification
 {
-    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqualToString:self.videoUrl.absoluteString]) {
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqual:self.videoUrl]) {
         if ([self.downloadDelegate respondsToSelector:@selector(videoViewWillStartDownload:)]) {
             [self.downloadDelegate videoViewWillStartDownload:self];
         }
@@ -103,7 +103,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 
 - (void)didReceivekCTVideoManagerDidFinishDownloadVideoNotification:(NSNotification *)notification
 {
-    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqualToString:self.videoUrl.absoluteString]) {
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqual:self.videoUrl]) {
         if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidFinishDownload:)]) {
             [self.downloadDelegate videoViewDidFinishDownload:self];
         }
@@ -112,7 +112,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 
 - (void)didReceivekCTVideoManagerDownloadVideoProgressNotification:(NSNotification *)notification
 {
-    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqualToString:self.videoUrl.absoluteString]) {
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqual:self.videoUrl]) {
         if ([self.downloadDelegate respondsToSelector:@selector(videoView:downloadProgress:)]) {
             [self.downloadDelegate videoView:self
                             downloadProgress:[notification.userInfo[kCTVideoManagerNotificationUserInfoKeyProgress] floatValue]];
@@ -122,7 +122,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 
 - (void)didReceivekCTVideoManagerDidFailedDownloadVideoNotification:(NSNotification *)notification
 {
-    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqualToString:self.videoUrl.absoluteString]) {
+    if ([notification.userInfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] isEqual:self.videoUrl]) {
         if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidFailDownload:)]) {
             [self.downloadDelegate videoViewDidFailDownload:self];
         }
