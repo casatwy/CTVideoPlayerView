@@ -60,26 +60,20 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 - (void)startDownloadTask
 {
     if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
-        WeakSelf;
-        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl completion:^{
-            StrongSelf;
-            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewIsWaitingForDownload:)]) {
-                [strongSelf.downloadDelegate videoViewIsWaitingForDownload:strongSelf];
-            }
-        }];
+        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl];
+        if ([self.downloadDelegate respondsToSelector:@selector(videoViewIsWaitingForDownload:)]) {
+            [self.downloadDelegate videoViewIsWaitingForDownload:self];
+        }
     }
 }
 
 - (void)DeleteAndCanceDownloadTask
 {
     if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
-        WeakSelf;
-        [[CTVideoManager sharedInstance] deleteVideoWithUrl:self.videoUrl completion:^{
-            StrongSelf;
-            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewDidDeletedDownloadTask:)]) {
-                [strongSelf.downloadDelegate videoViewDidDeletedDownloadTask:strongSelf];
-            }
-        }];
+        [[CTVideoManager sharedInstance] deleteVideoWithUrl:self.videoUrl];
+        if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidDeletedDownloadTask:)]) {
+            [self.downloadDelegate videoViewDidDeletedDownloadTask:self];
+        }
     }
 }
 

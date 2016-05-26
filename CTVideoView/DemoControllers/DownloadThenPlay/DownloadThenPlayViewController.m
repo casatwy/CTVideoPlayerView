@@ -59,7 +59,7 @@
 - (void)videoView:(CTVideoView *)videoView downloadProgress:(CGFloat)progress
 {
     DLog(@"progress %.2f", progress);
-    if (progress > 0.5 && progress < 0.6) {
+    if (progress > 0.5) {
         if (self.hasBeenPaused == NO) {
             self.hasBeenPaused = YES;
             [[CTVideoManager sharedInstance] pauseAllDownloadTask];
@@ -81,7 +81,7 @@
 - (void)videoViewDidPausedDownload:(CTVideoView *)videoView
 {
     DLog(@"pause");
-    [[CTVideoManager sharedInstance] startAllDownloadTask:nil];
+    [[CTVideoManager sharedInstance] startAllDownloadTask];
 }
 
 #pragma mark - getters and setter

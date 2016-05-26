@@ -46,7 +46,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
 }
 
 #pragma mark - public methods
-- (void)startDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion
+- (void)startDownloadTaskWithUrl:(NSURL *)url
 {
     if (url == nil) {
         return;
@@ -93,13 +93,9 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     if (videoStatus == CTVideoRecordStatusNotFound) {
         [self resumeDownloadWithUrl:url];
     }
-    
-    if (completion) {
-        completion();
-    }
 }
 
-- (void)startAllDownloadTask:(void (^)(void))completion
+- (void)startAllDownloadTask
 {
     [self.dataCenter updateAllStatus:CTVideoRecordStatusWaitingForDownload];
 
@@ -118,13 +114,9 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
             }
         }
     }];
-
-    if (completion) {
-        completion();
-    }
 }
 
-- (void)deleteVideoWithUrl:(NSURL *)url completion:(void (^)(void))completion
+- (void)deleteVideoWithUrl:(NSURL *)url
 {
     NSURLSessionDownloadTask *task = self.downloadTaskPool[url];
     if (task) {
@@ -133,10 +125,6 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     }
 
     [self.dataCenter deleteWithRemoteUrl:url];
-    
-    if (completion) {
-        completion();
-    }
 }
 
 - (void)deleteAllRecordAndVideo:(void (^)(NSArray *deletedList))completion

@@ -27,10 +27,10 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 
 + (instancetype)sharedInstance;
 
-- (void)startDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion; // this completion does not mean download task completed, just mean the **start download** completed
-- (void)startAllDownloadTask:(void (^)(void))completion; // this completion does not mean download task completed, just mean the **start download** completed
+- (void)startDownloadTaskWithUrl:(NSURL *)url;
+- (void)startAllDownloadTask;
 
-- (void)deleteVideoWithUrl:(NSURL *)url completion:(void (^)(void))completion;
+- (void)deleteVideoWithUrl:(NSURL *)url;
 - (void)deleteAllRecordAndVideo:(void (^)(NSArray *deletedList))completion;
 
 - (void)pauseDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion;
