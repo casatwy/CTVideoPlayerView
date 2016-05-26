@@ -21,6 +21,7 @@
 
 // update
 - (void)saveWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl;
+- (void)updateStatus:(CTVideoRecordStatus)status toRemoteUrl:(NSURL *)remoteUrl;
 
 - (void)pauseAllRecordWithCompletion:(void(^)(NSArray *pausedList))completion;
 - (void)pauseRecordWithRemoteUrlList:(NSArray *)remoteUrlList completion:(void(^)(NSArray *pausedList))completion;

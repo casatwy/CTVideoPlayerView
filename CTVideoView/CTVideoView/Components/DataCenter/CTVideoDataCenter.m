@@ -20,6 +20,11 @@
 @implementation CTVideoDataCenter
 
 #pragma mark - public methods
+- (void)updateStatus:(CTVideoRecordStatus)status toRemoteUrl:(NSURL *)remoteUrl
+{
+#warning todo
+}
+
 - (void)startDownloadAllRecordWithCompletion:(void (^)(NSArray *))completion
 {
 #warning todo
@@ -133,6 +138,10 @@
 
 - (CTVideoRecordStatus)statusOfRemoteUrl:(NSURL *)remoteUrl
 {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[remoteUrl path]]) {
+        return CTVideoRecordStatusNative;
+    }
+    
     NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
     NSString *remoteUrlString = [remoteUrl absoluteString];
     NSDictionary *params = NSDictionaryOfVariableBindings(remoteUrlString);
