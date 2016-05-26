@@ -100,16 +100,32 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
 
 - (void)deleteVideoWithUrl:(NSURL *)url completion:(void (^)(void))completion
 {
+    NSURLSessionDownloadTask *task = self.downloadTaskPool[url];
+    if (task) {
+        [task cancel];
+        [self.downloadTaskPool removeObjectForKey:url];
+    }
+
+    [self.dataCenter deleteWithRemoteUrl:url];
+    
+    if (completion) {
+        completion();
+    }
 }
 
-- (void)deleteAllRecordAndVideo:(void (^)(void))completion
+- (void)deleteAllRecordAndVideo:(void (^)(NSArray *deletedList))completion
 {
-
+    [self.downloadTaskPool enumerateKeysAndObjectsUsingBlock:^(NSURL * _Nonnull remoteUrl, NSURLSessionDownloadTask * _Nonnull downloadTask, BOOL * _Nonnull stop) {
+        [downloadTask cancel];
+    }];
+    [self.downloadTaskPool removeAllObjects];
+    [self.dataCenter deleteAllRecordWithCompletion:completion];
 }
 
 - (void)pauseAllDownloadTask:(void (^)(void))completion
 {
-
+    [self.downloadTaskPool enumerateKeysAndObjectsUsingBlock:^(NSURL * _Nonnull remoteUrl, NSURLSessionDownloadTask * _Nonnull downloadTask, BOOL * _Nonnull stop) {
+    }];
 }
 
 - (void)pauseDownloadTaskWithUrl:(NSURL *)url completion:(void (^)(void))completion
@@ -191,7 +207,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
                                                                                   StrongSelf;
                                                                                   NSURL *libraryUrl = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:NULL];
                                                                                   NSURL *nativeUrl = [libraryUrl URLByAppendingPathComponent:response.suggestedFilename];
-                                                                                  [strongSelf.dataCenter saveWithRemoteUrl:url nativeUrl:nativeUrl];
+                                                                                  [strongSelf.dataCenter updateWithRemoteUrl:url nativeUrl:nativeUrl];
                                                                                   return nativeUrl;
                                                                               } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
                                                                                   StrongSelf;

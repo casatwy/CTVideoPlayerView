@@ -16,18 +16,22 @@
 
 // read
 - (NSURL *)nativeUrlWithRemoteUrl:(NSURL *)remoteUrl;
-- (NSArray <NSDictionary *> *)recordListWithStatus:(CTVideoRecordStatus)status;
+- (NSArray <id<CTPersistanceRecordProtocol>> *)recordListWithStatus:(CTVideoRecordStatus)status;
 - (CTVideoRecordStatus)statusOfRemoteUrl:(NSURL *)remoteUrl;
+- (id<CTPersistanceRecordProtocol>)recordOfRemoteUrl:(NSURL *)url;
 
 // update
-- (void)saveWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl;
+- (void)updateWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl;
+- (void)updateWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl status:(CTVideoRecordStatus)status;
+
 - (void)updateStatus:(CTVideoRecordStatus)status toRemoteUrl:(NSURL *)remoteUrl;
+- (void)updateAllStatus:(CTVideoRecordStatus)status;
 
-- (void)pauseAllRecordWithCompletion:(void(^)(NSArray *pausedList))completion;
-- (void)pauseRecordWithRemoteUrlList:(NSArray *)remoteUrlList completion:(void(^)(NSArray *pausedList))completion;
+- (void)pauseAllRecordWithCompletion:(void(^)(void))completion;
+- (void)pauseRecordWithRemoteUrlList:(NSArray *)remoteUrlList completion:(void(^)(void))completion;
 
-- (void)startDownloadAllRecordWithCompletion:(void(^)(NSArray *startedList))completion;
-- (void)startDownloadRemoteUrlList:(NSArray *)remoteUrlList completion:(void(^)(NSArray *startedList))completion;
+- (void)startDownloadAllRecordWithCompletion:(void(^)(void))completion;
+- (void)startDownloadRemoteUrlList:(NSArray *)remoteUrlList completion:(void(^)(void))completion;
 
 // delete
 - (void)deleteWithRemoteUrl:(NSURL *)remoteUrl;

@@ -22,33 +22,58 @@
 #pragma mark - public methods
 - (void)updateStatus:(CTVideoRecordStatus)status toRemoteUrl:(NSURL *)remoteUrl
 {
-#warning todo
+    CTVideoRecord *record = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
+    if (record) {
+        record.status = @(status);
+        [self.videoTable updateRecord:record error:NULL];
+    } else {
+        record = [[CTVideoRecord alloc] init];
+        record.status = @(status);
+        record.remoteUrl = [remoteUrl absoluteString];
+        [self.videoTable insertRecord:record error:NULL];
+    }
 }
 
-- (void)startDownloadAllRecordWithCompletion:(void (^)(NSArray *))completion
+- (void)updateAllStatus:(CTVideoRecordStatus)status
 {
-#warning todo
+    [self.videoTable updateValue:@(status) forKey:@"status" whereCondition:nil whereConditionParams:nil error:NULL];
 }
 
-- (void)startDownloadRemoteUrlList:(NSArray *)remoteUrlList completion:(void (^)(NSArray *))completion
+- (void)startDownloadAllRecordWithCompletion:(void (^)(void))completion
 {
-#warning todo
+    [self updateAllStatus:CTVideoRecordStatusWaitingForDownload];
+    if (completion) {
+        completion();
+    }
 }
 
-- (void)pauseRecordWithRemoteUrlList:(NSArray *)remoteUrlList completion:(void (^)(NSArray *))completion
+- (void)startDownloadRemoteUrlList:(NSArray *)remoteUrlList completion:(void (^)(void))completion
 {
-#warning todo
+    [self.videoTable updateValue:@(CTVideoRecordStatusWaitingForDownload) forKey:@"status" whereKey:@"remoteUrl" inList:remoteUrlList error:NULL];
+    if (completion) {
+        completion();
+    }
 }
 
-- (void)pauseAllRecordWithCompletion:(void (^)(NSArray *))completion
+- (void)pauseRecordWithRemoteUrlList:(NSArray *)remoteUrlList completion:(void (^)(void))completion
 {
-#warning todo
+    [self.videoTable updateValue:@(CTVideoRecordStatusPaused) forKey:@"status" whereKey:@"remoteUrl" inList:remoteUrlList error:NULL];
+    if (completion) {
+        completion();
+    }
 }
 
-- (NSArray<NSDictionary *> *)recordListWithStatus:(CTVideoRecordStatus)status
+- (void)pauseAllRecordWithCompletion:(void (^)(void))completion
 {
-#warning todo
-    return @[];
+    [self updateAllStatus:CTVideoRecordStatusPaused];
+    if (completion) {
+        completion();
+    }
+}
+
+- (NSArray<id<CTPersistanceRecordProtocol>> *)recordListWithStatus:(CTVideoRecordStatus)status
+{
+    return [self.videoTable findAllWithKeyName:@"status" value:@(status) error:NULL];
 }
 
 - (NSURL *)nativeUrlWithRemoteUrl:(NSURL *)remoteUrl
@@ -61,11 +86,7 @@
         return remoteUrl;
     }
     
-    NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
-    NSString *remoteUrlString = [remoteUrl absoluteString];
-    NSDictionary *params = NSDictionaryOfVariableBindings(remoteUrlString);
-    
-    CTVideoRecord *videoRecord = (CTVideoRecord *)[self.videoTable findFirstRowWithWhereCondition:whereCondition conditionParams:params isDistinct:NO error:NULL];
+    CTVideoRecord *videoRecord = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
     if (videoRecord == nil) {
         return nil;
     }
@@ -81,39 +102,33 @@
     
 }
 
-- (void)saveWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl
+- (void)updateWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl
 {
-    NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
-    NSString *remoteUrlString = [remoteUrl absoluteString];
-    NSDictionary *params = NSDictionaryOfVariableBindings(remoteUrlString);
-    CTVideoRecord *videoRecord = (CTVideoRecord *)[self.videoTable findFirstRowWithWhereCondition:whereCondition conditionParams:params isDistinct:NO error:NULL];
+    [self updateWithRemoteUrl:remoteUrl nativeUrl:nativeUrl status:CTVideoRecordStatusDownloading];
+}
+
+- (void)updateWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl status:(CTVideoRecordStatus)status
+{
+    CTVideoRecord *videoRecord = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
     
     if (videoRecord) {
         videoRecord.nativeUrl = [[nativeUrl absoluteString] lastPathComponent];
-        videoRecord.status = @(CTVideoRecordStatusDownloadFinished);
+        videoRecord.status = @(status);
         [self.videoTable updateRecord:videoRecord error:NULL];
     } else {
         videoRecord = [[CTVideoRecord alloc] init];
         videoRecord.remoteUrl = [remoteUrl absoluteString];
         videoRecord.nativeUrl = [[nativeUrl path] lastPathComponent];
-        videoRecord.status = @(CTVideoRecordStatusDownloadFinished);
+        videoRecord.status = @(status);
         [self.videoTable insertRecord:videoRecord error:NULL];
     }
 }
 
 - (void)deleteWithRemoteUrl:(NSURL *)remoteUrl
 {
-    NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
-    NSString *remoteUrlString = [remoteUrl absoluteString];
-    NSDictionary *params = NSDictionaryOfVariableBindings(remoteUrlString);
-
-    NSError *error;
-    CTVideoRecord *record = (CTVideoRecord *)[self.videoTable findFirstRowWithWhereCondition:whereCondition conditionParams:params isDistinct:NO error:&error];
-    if (error) {
-        return;
-    }
-
+    CTVideoRecord *record = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
     if (record) {
+        NSError *error;
         [self.videoTable deleteRecord:record error:&error];
         if (error) {
             return;
@@ -134,6 +149,13 @@
     NSString *whereCondition = [NSString stringWithFormat:@"`status` = '%lu' OR `status` = '%lu'", (unsigned long)CTVideoRecordStatusDownloading, (unsigned long)CTVideoRecordStatusDownloadFailed];
     NSArray *recordList = [self.videoTable findAllWithWhereCondition:whereCondition conditionParams:nil isDistinct:NO error:NULL];
     [self.videoTable deleteRecordList:recordList error:NULL];
+    [recordList enumerateObjectsUsingBlock:^(CTVideoRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[CTVideoRecord class]]) {
+            if ([[NSFileManager defaultManager] fileExistsAtPath:obj.nativeUrl]) {
+                [[NSFileManager defaultManager] removeItemAtURL:[NSURL URLWithString:obj.nativeUrl] error:NULL];
+            }
+        }
+    }];
 }
 
 - (CTVideoRecordStatus)statusOfRemoteUrl:(NSURL *)remoteUrl
@@ -142,10 +164,7 @@
         return CTVideoRecordStatusNative;
     }
     
-    NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
-    NSString *remoteUrlString = [remoteUrl absoluteString];
-    NSDictionary *params = NSDictionaryOfVariableBindings(remoteUrlString);
-    CTVideoRecord *videoRecord = (CTVideoRecord *)[self.videoTable findFirstRowWithWhereCondition:whereCondition conditionParams:params isDistinct:NO error:NULL];
+    CTVideoRecord *videoRecord = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
     if (videoRecord == nil) {
         return CTVideoRecordStatusNotFound;
     }
@@ -181,6 +200,15 @@
             completion(recordList);
         }
     });
+}
+
+- (id<CTPersistanceRecordProtocol>)recordOfRemoteUrl:(NSURL *)url
+{
+    NSString *whereCondition = @"`remoteUrl` = ':remoteUrlString'";
+    NSString *remoteUrlString = [url absoluteString];
+    NSDictionary *params = NSDictionaryOfVariableBindings(remoteUrlString);
+    CTVideoRecord *videoRecord = (CTVideoRecord *)[self.videoTable findFirstRowWithWhereCondition:whereCondition conditionParams:params isDistinct:NO error:NULL];
+    return videoRecord;
 }
 
 #pragma mark - getters and setters
