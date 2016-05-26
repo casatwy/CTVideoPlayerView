@@ -24,7 +24,9 @@
 {
     self = [super init];
     if (self) {
-        self.videoView.videoUrl = [NSURL URLWithString:urlString];
+        NSURL *videoUrl = [NSURL URLWithString:urlString];
+        [[CTVideoManager sharedInstance] deleteVideoWithUrl:videoUrl];
+        self.videoView.videoUrl = videoUrl;
         _hasBeenPaused = NO;
     }
     return self;
@@ -58,7 +60,7 @@
 
 - (void)videoView:(CTVideoView *)videoView downloadProgress:(CGFloat)progress
 {
-    DLog(@"progress %.2f", progress);
+    DLog(@"Download Progress %.2f", progress);
     if (progress > 0.5) {
         if (self.hasBeenPaused == NO) {
             self.hasBeenPaused = YES;
