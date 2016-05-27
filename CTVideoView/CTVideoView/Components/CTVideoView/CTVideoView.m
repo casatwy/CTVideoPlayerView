@@ -292,6 +292,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                 // because user tapped play button, video plays anyway, no matter whether user is in wifi.
                 strongSelf.isPreparedForPlay = NO;
                 [strongSelf play];
+                return;
             }
         });
     }];
