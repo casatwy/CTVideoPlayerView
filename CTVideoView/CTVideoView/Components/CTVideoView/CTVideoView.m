@@ -123,6 +123,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)play
 {
+    [self hidePlayButton];
     if (self.isPlaying) {
         [self hideCoverView];
         return;
@@ -135,8 +136,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self hideRetryButton];
     if (self.isVideoUrlPrepared) {
         [self.player play];
-        [self hideCoverView];
-        [self hidePlayButton];
+        // hide cover view has moved to CTVideoView+Time
     } else {
         self.isPreparedForPlay = YES;
         [self prepare];

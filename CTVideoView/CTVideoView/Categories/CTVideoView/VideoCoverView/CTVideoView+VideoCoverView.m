@@ -37,14 +37,16 @@ static void * CTVideoViewCoverPropertyCoverView;
 
 - (void)hideCoverView
 {
-    [UIView animateWithDuration:0.2f animations:^{
-        self.coverView.alpha = 0.0f;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self.coverView removeFromSuperview];
-            self.coverView.alpha = 1.0f;
-        }
-    }];
+    if (self.coverView.superview) {
+        [UIView animateWithDuration:0.2f animations:^{
+            self.coverView.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [self.coverView removeFromSuperview];
+                self.coverView.alpha = 1.0f;
+            }
+        }];
+    }
 }
 
 - (void)layoutCoverView

@@ -111,6 +111,7 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
     if ([self.buttonDelegate respondsToSelector:@selector(videoView:didTappedPlayButton:)]) {
         [self.buttonDelegate videoView:self didTappedPlayButton:playButton];
     }
+    [self hidePlayButton];
     [self play];
 }
 

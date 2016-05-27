@@ -7,21 +7,26 @@
 //
 
 #import "CTVideoView+Time.h"
+#import "CTVideoView+OperationButtons.h"
+#import "CTVideoView+VideoCoverView.h"
 #import <objc/runtime.h>
 
 /* ----------------- Private methods ----------------- */
 
 static void * CTVideoViewTimePrivatePropertyTimeObserverToken;
+static void * CTVideoViewTimePrivatePropertyVideoStartTimeObserverToken;
 
 @interface CTVideoView (TimePrivate)
 
 @property (nonatomic, strong) id<NSObject> timeObserverToken;
+@property (nonatomic, strong) id<NSObject> videoStartTimeObserverToken;
 
 @end
 
 @implementation CTVideoView (TimePrivate)
 
 @dynamic timeObserverToken;
+@dynamic videoStartTimeObserverToken;
 
 #pragma mark - private methods
 - (void)addTimeObserver
@@ -36,6 +41,31 @@ static void * CTVideoViewTimePrivatePropertyTimeObserverToken;
             [strongSelf.timeDelegate videoView:strongSelf didPlayToSecond:CMTimeGetSeconds(time)];
         }
     }];
+}
+
+- (void)addVideoStartTimeObserver
+{
+    if (self.videoStartTimeObserverToken) {
+        [self removeVideoStartTimeObserver];
+    }
+    WeakSelf;
+    self.videoStartTimeObserverToken = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 60) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+        StrongSelf;
+        NSLog(@"%f", CMTimeGetSeconds(time));
+        if (strongSelf.isPlaying && CMTimeGetSeconds(time) > 0 && CMTimeGetSeconds(time) < 0.1) {
+            [strongSelf hidePlayButton];
+            [strongSelf hideCoverView];
+            [strongSelf removeVideoStartTimeObserver];
+        }
+    }];
+}
+
+- (void)removeVideoStartTimeObserver
+{
+    if (self.videoStartTimeObserverToken) {
+        [self.player removeTimeObserver:self.videoStartTimeObserverToken];
+        self.videoStartTimeObserverToken = nil;
+    }
 }
 
 - (void)removeTimeObserver
@@ -55,6 +85,16 @@ static void * CTVideoViewTimePrivatePropertyTimeObserverToken;
 - (void)setTimeObserverToken:(id<NSObject>)timeObserverToken
 {
     objc_setAssociatedObject(self, &CTVideoViewTimePrivatePropertyTimeObserverToken, timeObserverToken, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (id<NSObject>)videoStartTimeObserverToken
+{
+    return objc_getAssociatedObject(self, &CTVideoViewTimePrivatePropertyVideoStartTimeObserverToken);
+}
+
+- (void)setVideoStartTimeObserverToken:(id<NSObject>)videoStartTimeObserverToken
+{
+    objc_setAssociatedObject(self, &CTVideoViewTimePrivatePropertyVideoStartTimeObserverToken, videoStartTimeObserverToken, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
@@ -92,16 +132,20 @@ static void * CTVideoViewTimePropertyTimeDelegate;
 #pragma mark - method for main object
 - (void)initTime
 {
-    // do nothing
+    [self addVideoStartTimeObserver];
 }
 
 - (void)deallocTime
 {
     [self removeTimeObserver];
+    [self removeVideoStartTimeObserver];
 }
 
 - (void)durationDidLoadedWithChange:(NSDictionary *)change
 {
+    if ([change[@"new"] isEqual:[NSNull null]]) {
+        [self addVideoStartTimeObserver];
+    }
     NSValue *newDurationAsValue = change[NSKeyValueChangeNewKey];
     CMTime newDuration = [newDurationAsValue isKindOfClass:[NSValue class]] ? newDurationAsValue.CMTimeValue : kCMTimeZero;
     BOOL hasValidDuration = CMTIME_IS_NUMERIC(newDuration) && newDuration.value != 0;
@@ -132,11 +176,11 @@ static void * CTVideoViewTimePropertyTimeDelegate;
 - (void)setShouldObservePlayTime:(BOOL)shouldObservePlayTime
 {
     objc_setAssociatedObject(self, &CTVideoViewTimePropertyShouldObservePlayTime, @(shouldObservePlayTime), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
+
     if (shouldObservePlayTime == YES) {
         [self addTimeObserver];
     }
-    
+
     if (shouldObservePlayTime == NO) {
         [self removeTimeObserver];
     }
