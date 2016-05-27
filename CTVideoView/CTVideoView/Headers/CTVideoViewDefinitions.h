@@ -95,6 +95,7 @@ typedef NS_ENUM(NSUInteger, CTVideoViewStalledStrategy) {
 - (void)videoViewDidFailPrepare:(CTVideoView *)videoView error:(NSError *)error;
 
 - (void)videoViewWillStartPlaying:(CTVideoView *)videoView;
+- (void)videoViewDidStartPlaying:(CTVideoView *)videoView; // will call this method when the video is **really** playing.
 - (void)videoViewStalledWhilePlaying:(CTVideoView *)videoView;
 - (void)videoViewDidFinishPlaying:(CTVideoView *)videoView;
 
