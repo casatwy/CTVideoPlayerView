@@ -67,7 +67,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
     }
 }
 
-- (void)DeleteAndCanceDownloadTask
+- (void)DeleteAndCancelDownloadTask
 {
     if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
         [[CTVideoManager sharedInstance] deleteVideoWithUrl:self.videoUrl];
