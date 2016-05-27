@@ -121,7 +121,7 @@ static void * CTVideoViewTimePropertyTimeDelegate;
 
 - (void)setTotalDurationSeconds:(CGFloat)totalDurationSeconds
 {
-    objc_setAssociatedObject(self, &CTVideoViewTimePropertyTotalDurationSeconds, @(totalDurationSeconds), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &CTVideoViewTimePropertyTotalDurationSeconds, @(totalDurationSeconds), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)shouldObservePlayTime
@@ -131,7 +131,7 @@ static void * CTVideoViewTimePropertyTimeDelegate;
 
 - (void)setShouldObservePlayTime:(BOOL)shouldObservePlayTime
 {
-    objc_setAssociatedObject(self, &CTVideoViewTimePropertyShouldObservePlayTime, @(shouldObservePlayTime), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &CTVideoViewTimePropertyShouldObservePlayTime, @(shouldObservePlayTime), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     if (shouldObservePlayTime == YES) {
         [self addTimeObserver];
@@ -149,7 +149,7 @@ static void * CTVideoViewTimePropertyTimeDelegate;
 
 - (void)setTimeDelegate:(id<CTVideoViewTimeDelegate>)timeDelegate
 {
-    objc_setAssociatedObject(self, &CTVideoViewTimePropertyTimeDelegate, timeDelegate, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &CTVideoViewTimePropertyTimeDelegate, timeDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)setCurrentPlaySpeed:(CGFloat)currentPlaySpeed

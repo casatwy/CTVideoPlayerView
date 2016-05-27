@@ -145,7 +145,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 
 - (void)setDownloadStrategy:(CTVideoViewDownloadStrategy)downloadStrategy
 {
-    objc_setAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadStrategy, @(downloadStrategy), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadStrategy, @(downloadStrategy), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)shouldDownloadWhenNotWifi
@@ -160,7 +160,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 
 - (void)setDownloadDelegate:(id<CTVideoViewDownloadDelegate>)downloadDelegate
 {
-    objc_setAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadDelegate, downloadDelegate, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadDelegate, downloadDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
