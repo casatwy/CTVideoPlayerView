@@ -13,11 +13,12 @@
 - (void)initVideoCoverView;
 - (void)deallocVideoCoverView;
 
-@property (nonatomic, strong) NSURL *customizedVideoCoverImageUrl; // if nil, will show the first frame of video. if set, will show the image of this url as a cover before playing video. Default is nil.
-- (void)loadCoverImage;
-
+@property (nonatomic, assign) BOOL shouldShowCoverViewBeforePlay;
 @property (nonatomic, strong) UIView *coverView;
+
 - (void)showCoverView;
 - (void)hideCoverView;
+
+- (void)layoutCoverView;
 
 @end

@@ -97,6 +97,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 {
     [super layoutSubviews];
     [self layoutButtons];
+    [self layoutCoverView];
 }
 
 #pragma mark - methods override
@@ -108,7 +109,6 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 #pragma mark - public methods
 - (void)prepare
 {
-    [self showPlayButton];
     if (self.isPlaying == YES && self.isVideoUrlChanged == NO) {
         if ([self.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
             [self.operationDelegate videoViewDidFinishPrepare:self];
@@ -126,6 +126,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self hidePlayButton];
     [self hideRetryButton];
     if (self.isPlaying) {
+        [self hideCoverView];
         return;
     }
     
@@ -134,6 +135,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     }
     
     if (self.isVideoUrlPrepared) {
+        [self hideCoverView];
         [self.player play];
     } else {
         self.isPreparedForPlay = YES;
@@ -143,6 +145,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)pause
 {
+    [self hideCoverView];
     [self showPlayButton];
     if (self.isPlaying) {
         if ([self.operationDelegate respondsToSelector:@selector(videoViewWillPause:)]) {
@@ -226,6 +229,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
             NSError *error = nil;
             if ([asset statusOfValueForKey:@"playable" error:&error] == AVKeyValueStatusFailed) {
+                [self showCoverView];
                 [self showRetryButton];
                 if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFailPrepare:error:)]) {
                     [strongSelf.operationDelegate videoViewDidFailPrepare:strongSelf error:error];
@@ -242,11 +246,13 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                     if (videoWidth < videoHeight) {
                         strongSelf.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
                         strongSelf.playerLayer.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
+                        strongSelf.coverView.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
                     }
                 } else {
                     if (videoWidth > videoHeight) {
                         strongSelf.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
                         strongSelf.playerLayer.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
+                        strongSelf.coverView.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
                     }
                 }
             }

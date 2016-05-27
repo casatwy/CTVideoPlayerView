@@ -10,10 +10,10 @@
 #import <objc/runtime.h>
 #import <HandyFrame/UIView+LayoutMethods.h>
 
-static void * CTVideoViewOperationButtonsPrivatePropertyShouldShowOperationButton;
-static void * CTVideoViewOperationButtonsPrivatePropertyPlayButton;
-static void * CTVideoViewOperationButtonsPrivatePropertyRetryButton;
-static void * CTVideoViewOperationButtonsPrivatePropertyButtonDelegate;
+static void * CTVideoViewOperationButtonsPropertyShouldShowOperationButton;
+static void * CTVideoViewOperationButtonsPropertyPlayButton;
+static void * CTVideoViewOperationButtonsPropertyRetryButton;
+static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
 
 @implementation CTVideoView (OperationButtons)
 
@@ -25,7 +25,7 @@ static void * CTVideoViewOperationButtonsPrivatePropertyButtonDelegate;
 #pragma mark - life cycle
 - (void)initOperationButtons
 {
-    // do nothing
+    [self showPlayButton];
 }
 
 - (void)deallocOperationButtons
@@ -101,21 +101,25 @@ static void * CTVideoViewOperationButtonsPrivatePropertyButtonDelegate;
 #pragma mark - getters and setters
 - (BOOL)shouldShowOperationButton
 {
-    return [objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyShouldShowOperationButton) boolValue];
+    NSNumber *shouldShowOperationButton = objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPropertyShouldShowOperationButton);
+    if ([shouldShowOperationButton isKindOfClass:[NSNumber class]]) {
+        return [shouldShowOperationButton boolValue];
+    }
+    return NO;
 }
 
 - (void)setShouldShowOperationButton:(BOOL)shouldShowOperationButton
 {
-    objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyShouldShowOperationButton, @(shouldShowOperationButton), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyShouldShowOperationButton, @(shouldShowOperationButton), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIButton *)playButton
 {
-    UIButton *playButton = objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyPlayButton);
+    UIButton *playButton = objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPropertyPlayButton);
     if (playButton == nil) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:@"play" forState:UIControlStateNormal];
-        objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyPlayButton, button, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyPlayButton, button, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         playButton = button;
     }
     [playButton addTarget:self action:@selector(didTappedPlayButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -124,16 +128,16 @@ static void * CTVideoViewOperationButtonsPrivatePropertyButtonDelegate;
 
 - (void)setPlayButton:(UIButton *)playButton
 {
-    objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyPlayButton, playButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyPlayButton, playButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIButton *)retryButton
 {
-    UIButton *retryButton = objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyRetryButton);
+    UIButton *retryButton = objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPropertyRetryButton);
     if (retryButton == nil) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:@"retry" forState:UIControlStateNormal];
-        objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyRetryButton, button, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyRetryButton, button, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         retryButton = button;
     }
     [retryButton addTarget:self action:@selector(didTappedRetryButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -142,17 +146,17 @@ static void * CTVideoViewOperationButtonsPrivatePropertyButtonDelegate;
 
 - (void)setRetryButton:(UIButton *)retryButton
 {
-    objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyRetryButton, retryButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyRetryButton, retryButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)setButtonDelegate:(id<CTVideoViewButtonDelegate>)buttonDelegate
 {
-    objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyButtonDelegate, buttonDelegate, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyButtonDelegate, buttonDelegate, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (id<CTVideoViewButtonDelegate>)buttonDelegate
 {
-    return objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPrivatePropertyButtonDelegate);
+    return objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPropertyButtonDelegate);
 }
 
 @end

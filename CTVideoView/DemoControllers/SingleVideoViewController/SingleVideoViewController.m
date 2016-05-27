@@ -126,6 +126,9 @@
         _videoView.shouldChangeOrientationToFitVideo = YES;
         _videoView.shouldObservePlayTime = YES;
         _videoView.shouldShowOperationButton = YES;
+        _videoView.shouldShowCoverViewBeforePlay = YES;
+        _videoView.coverView = [[UIView alloc] init];
+        _videoView.coverView.backgroundColor = [UIColor blueColor];
     }
     return _videoView;
 }
