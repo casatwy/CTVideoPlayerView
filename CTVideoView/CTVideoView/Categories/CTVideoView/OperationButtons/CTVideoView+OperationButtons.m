@@ -36,27 +36,45 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
 #pragma mark - public methods
 - (void)layoutButtons
 {
+    CGAffineTransform transform = self.transform;
+
     if (self.playButton.superview) {
-        self.playButton.size = CGSizeMake(60, 60);
+        self.playButton.size = CGSizeMake(100, 60);
         [self.playButton centerEqualToView:self];
         if ([self.buttonDelegate respondsToSelector:@selector(videoView:layoutPlayButton:)]) {
             [self.buttonDelegate videoView:self layoutPlayButton:self.playButton];
         }
+        if (transform.b == 1 && transform.c == -1) {
+            CGFloat centerX = self.playButton.centerX;
+            CGFloat centerY = self.playButton.centerY;
+            self.playButton.frame = CGRectMake(self.playButton.x, self.playButton.y, self.playButton.height, self.playButton.width);
+            self.playButton.centerX = centerX;
+            self.playButton.centerY = centerY;
+        }
     }
-    
+
     if (self.retryButton.superview) {
-        self.retryButton.size = CGSizeMake(60, 60);
+        self.retryButton.size = CGSizeMake(100, 60);
         [self.retryButton centerEqualToView:self];
         if ([self.buttonDelegate respondsToSelector:@selector(videoView:layoutRetryButton:)]) {
             [self.buttonDelegate videoView:self layoutRetryButton:self.retryButton];
+        }
+        if (transform.b == 1 && transform.c == -1) {
+            CGFloat centerX = self.retryButton.centerX;
+            CGFloat centerY = self.retryButton.centerY;
+            self.retryButton.frame = CGRectMake(self.retryButton.x, self.retryButton.y, self.retryButton.height, self.retryButton.width);
+            self.retryButton.centerX = centerX;
+            self.retryButton.centerY = centerY;
         }
     }
 }
 
 - (void)showPlayButton
 {
-    [self.retryButton removeFromSuperview];
-    if (self.shouldShowOperationButton) {
+    if (self.retryButton.superview) {
+        [self.retryButton removeFromSuperview];
+    }
+    if (self.shouldShowOperationButton && self.playButton.superview == nil) {
         [self addSubview:self.playButton];
         [self layoutButtons];
     }
@@ -64,13 +82,17 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
 
 - (void)hidePlayButton
 {
-    [self.playButton removeFromSuperview];
+    if (self.playButton.superview) {
+        [self.playButton removeFromSuperview];
+    }
 }
 
 - (void)showRetryButton
 {
-    [self.playButton removeFromSuperview];
-    if (self.shouldShowOperationButton) {
+    if (self.playButton.superview) {
+        [self.playButton removeFromSuperview];
+    }
+    if (self.shouldShowOperationButton && self.retryButton.superview == nil) {
         [self addSubview:self.retryButton];
         [self layoutButtons];
     }
@@ -78,7 +100,9 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
 
 - (void)hideRetryButton
 {
-    [self.retryButton removeFromSuperview];
+    if (self.retryButton.superview) {
+        [self.retryButton removeFromSuperview];
+    }
 }
 
 #pragma mark - event response
@@ -101,16 +125,15 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
 #pragma mark - getters and setters
 - (BOOL)shouldShowOperationButton
 {
-    NSNumber *shouldShowOperationButton = objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPropertyShouldShowOperationButton);
-    if ([shouldShowOperationButton isKindOfClass:[NSNumber class]]) {
-        return [shouldShowOperationButton boolValue];
-    }
-    return NO;
+    return [objc_getAssociatedObject(self, &CTVideoViewOperationButtonsPropertyShouldShowOperationButton) boolValue];
 }
 
 - (void)setShouldShowOperationButton:(BOOL)shouldShowOperationButton
 {
     objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyShouldShowOperationButton, @(shouldShowOperationButton), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (shouldShowOperationButton) {
+        [self showPlayButton];
+    }
 }
 
 - (UIButton *)playButton
@@ -119,16 +142,21 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
     if (playButton == nil) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:@"play" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyPlayButton, button, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         playButton = button;
     }
     [playButton addTarget:self action:@selector(didTappedPlayButton:) forControlEvents:UIControlEventTouchUpInside];
+    playButton.layer.zPosition = 1;
     return playButton;
 }
 
 - (void)setPlayButton:(UIButton *)playButton
 {
     objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyPlayButton, playButton, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (self.shouldShowOperationButton) {
+        [self showPlayButton];
+    }
 }
 
 - (UIButton *)retryButton
@@ -137,10 +165,12 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
     if (retryButton == nil) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:@"retry" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         objc_setAssociatedObject(self, &CTVideoViewOperationButtonsPropertyRetryButton, button, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         retryButton = button;
     }
     [retryButton addTarget:self action:@selector(didTappedRetryButton:) forControlEvents:UIControlEventTouchUpInside];
+    retryButton.layer.zPosition = 1;
     return retryButton;
 }
 

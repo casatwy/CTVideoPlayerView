@@ -126,11 +126,7 @@ static void * CTVideoViewTimePropertyTimeDelegate;
 
 - (BOOL)shouldObservePlayTime
 {
-    NSNumber *shouldObservePlayTime = objc_getAssociatedObject(self, &CTVideoViewTimePropertyShouldObservePlayTime);
-    if ([shouldObservePlayTime isKindOfClass:[NSNumber class]]) {
-        return [shouldObservePlayTime boolValue];
-    }
-    return NO;
+    return [objc_getAssociatedObject(self, &CTVideoViewTimePropertyShouldObservePlayTime) boolValue];
 }
 
 - (void)setShouldObservePlayTime:(BOOL)shouldObservePlayTime

@@ -123,8 +123,6 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)play
 {
-    [self hidePlayButton];
-    [self hideRetryButton];
     if (self.isPlaying) {
         [self hideCoverView];
         return;
@@ -133,10 +131,12 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     if ([self.operationDelegate respondsToSelector:@selector(videoViewWillStartPlaying:)]) {
         [self.operationDelegate videoViewWillStartPlaying:self];
     }
-    
+
+    [self hideRetryButton];
     if (self.isVideoUrlPrepared) {
-        [self hideCoverView];
         [self.player play];
+        [self hideCoverView];
+        [self hidePlayButton];
     } else {
         self.isPreparedForPlay = YES;
         [self prepare];
@@ -172,6 +172,8 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         [self.operationDelegate videoViewWillStop:self];
     }
     [self.player pause];
+    [self showCoverView];
+    [self showPlayButton];
     if (shouldReleaseVideo) {
         [self.player replaceCurrentItemWithPlayerItem:nil];
         self.isVideoUrlPrepared = NO;
@@ -216,7 +218,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         [self.operationDelegate videoViewWillStartPrepare:self];
     }
     WeakSelf;
-    [asset loadValuesAsynchronouslyForKeys:@[@"playable"] completionHandler:^{
+    [asset loadValuesAsynchronouslyForKeys:@[@"tracks"] completionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             StrongSelf;
 
@@ -228,7 +230,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             }
 
             NSError *error = nil;
-            if ([asset statusOfValueForKey:@"playable" error:&error] == AVKeyValueStatusFailed) {
+            if ([asset statusOfValueForKey:@"tracks" error:&error] == AVKeyValueStatusFailed) {
                 [self showCoverView];
                 [self showRetryButton];
                 if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFailPrepare:error:)]) {
@@ -244,15 +246,17 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                 
                 if ([asset CTVideoView_isVideoPortraint]) {
                     if (videoWidth < videoHeight) {
-                        strongSelf.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
-                        strongSelf.playerLayer.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
-                        strongSelf.coverView.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
+                        if (strongSelf.transform.b != 1 || strongSelf.transform.c != -1) {
+                            strongSelf.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+                            strongSelf.playerLayer.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
+                        }
                     }
                 } else {
                     if (videoWidth > videoHeight) {
-                        strongSelf.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
-                        strongSelf.playerLayer.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
-                        strongSelf.coverView.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
+                        if (strongSelf.transform.b != 1 || strongSelf.transform.c != -1) {
+                            strongSelf.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+                            strongSelf.playerLayer.frame = CGRectMake(0, 0, strongSelf.frame.size.height, strongSelf.frame.size.width);
+                        }
                     }
                 }
             }
@@ -282,7 +286,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                     [strongSelf play];
                     return;
                 }
-            } else if (strongSelf.isPreparedForPlay) {
+            }
+            
+            if (strongSelf.isPreparedForPlay) {
                 // because user tapped play button, video plays anyway, no matter whether user is in wifi.
                 strongSelf.isPreparedForPlay = NO;
                 [strongSelf play];

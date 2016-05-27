@@ -28,6 +28,7 @@
     self = [super init];
     if (self) {
         self.videoView.videoUrl = [NSURL URLWithString:urlString];
+        [self.videoView prepare];
     }
     return self;
 }
@@ -122,12 +123,15 @@
     if (_videoView == nil) {
         _videoView = [[CTVideoView alloc] init];
         _videoView.shouldReplayWhenFinish = YES;
-        _videoView.shouldPlayAfterPrepareFinished = YES;
+        _videoView.shouldPlayAfterPrepareFinished = NO;
         _videoView.shouldChangeOrientationToFitVideo = YES;
         _videoView.shouldObservePlayTime = YES;
         _videoView.shouldShowOperationButton = YES;
         _videoView.shouldShowCoverViewBeforePlay = YES;
-        _videoView.coverView = [[UIView alloc] init];
+        UILabel *coverView = [[UILabel alloc] init];
+        coverView.text = @"Cover View";
+        coverView.textAlignment = NSTextAlignmentCenter;
+        _videoView.coverView = coverView;
         _videoView.coverView.backgroundColor = [UIColor blueColor];
     }
     return _videoView;

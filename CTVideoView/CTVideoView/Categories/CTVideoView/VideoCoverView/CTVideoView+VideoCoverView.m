@@ -29,7 +29,7 @@ static void * CTVideoViewCoverPropertyCoverView;
 #pragma mark - public methods
 - (void)showCoverView
 {
-    if (self.shouldShowCoverViewBeforePlay) {
+    if (self.shouldShowCoverViewBeforePlay && self.coverView.superview == nil) {
         [self addSubview:self.coverView];
         [self layoutCoverView];
     }
@@ -37,22 +37,30 @@ static void * CTVideoViewCoverPropertyCoverView;
 
 - (void)hideCoverView
 {
-    [self.coverView removeFromSuperview];
+    [UIView animateWithDuration:0.2f animations:^{
+        self.coverView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.coverView removeFromSuperview];
+            self.coverView.alpha = 1.0f;
+        }
+    }];
 }
 
 - (void)layoutCoverView
 {
-    [self.coverView fill];
+    CGAffineTransform transform = self.transform;
+    if (transform.b == 1 && transform.c == -1) {
+        self.coverView.frame = CGRectMake(0, 0, self.height, self.width);
+    } else {
+        [self.coverView fill];
+    }
 }
 
 #pragma mark - getters and setters
 - (BOOL)shouldShowCoverViewBeforePlay
 {
-    NSNumber *shouldShowCoverViewBeforePlay = objc_getAssociatedObject(self, &CTVideoViewCoverPropertyShouldShowCoverViewBeforePlay);
-    if ([shouldShowCoverViewBeforePlay isKindOfClass:[NSNumber class]]) {
-        return [shouldShowCoverViewBeforePlay boolValue];
-    }
-    return NO;
+    return [objc_getAssociatedObject(self, &CTVideoViewCoverPropertyShouldShowCoverViewBeforePlay) boolValue];
 }
 
 - (void)setShouldShowCoverViewBeforePlay:(BOOL)shouldShowCoverViewBeforePlay
