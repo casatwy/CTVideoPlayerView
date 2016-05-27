@@ -160,7 +160,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadDelegate;
 
 - (void)setDownloadDelegate:(id<CTVideoViewDownloadDelegate>)downloadDelegate
 {
-    objc_setAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadDelegate, downloadDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadDelegate, downloadDelegate, OBJC_ASSOCIATION_ASSIGN);
 }
 
 @end

@@ -108,6 +108,19 @@ typedef NS_ENUM(NSUInteger, CTVideoViewStalledStrategy) {
 
 /**********************************************************************/
 
+@protocol CTVideoViewButtonDelegate <NSObject>
+
+@optional
+- (void)videoView:(CTVideoView *)videoView didTappedPlayButton:(UIButton *)playButton;
+- (void)videoView:(CTVideoView *)videoView didTappedRetryButton:(UIButton *)retryButton;
+
+- (void)videoView:(CTVideoView *)videoView layoutPlayButton:(UIButton *)playButton;
+- (void)videoView:(CTVideoView *)videoView layoutRetryButton:(UIButton *)retryButton;
+
+@end
+
+/**********************************************************************/
+
 @protocol CTVideoViewTimeDelegate <NSObject>
 
 - (void)videoViewDidLoadVideoDuration:(CTVideoView *)videoView;

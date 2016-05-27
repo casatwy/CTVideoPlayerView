@@ -93,6 +93,12 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self deallocOperationButtons];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self layoutButtons];
+}
+
 #pragma mark - methods override
 + (Class)layerClass
 {
@@ -102,6 +108,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 #pragma mark - public methods
 - (void)prepare
 {
+    [self showPlayButton];
     if (self.isPlaying == YES && self.isVideoUrlChanged == NO) {
         if ([self.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
             [self.operationDelegate videoViewDidFinishPrepare:self];
@@ -116,6 +123,8 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)play
 {
+    [self hidePlayButton];
+    [self hideRetryButton];
     if (self.isPlaying) {
         return;
     }
@@ -134,6 +143,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)pause
 {
+    [self showPlayButton];
     if (self.isPlaying) {
         if ([self.operationDelegate respondsToSelector:@selector(videoViewWillPause:)]) {
             [self.operationDelegate videoViewWillPause:self];
@@ -147,6 +157,8 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)replay
 {
+    [self hidePlayButton];
+    [self hideRetryButton];
     [self.playerLayer.player seekToTime:kCMTimeZero];
     [self play];
 }
@@ -214,6 +226,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
             NSError *error = nil;
             if ([asset statusOfValueForKey:@"playable" error:&error] == AVKeyValueStatusFailed) {
+                [self showRetryButton];
                 if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFailPrepare:error:)]) {
                     [strongSelf.operationDelegate videoViewDidFailPrepare:strongSelf error:error];
                 }

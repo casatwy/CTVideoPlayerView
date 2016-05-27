@@ -149,7 +149,7 @@ static void * CTVideoViewTimePropertyTimeDelegate;
 
 - (void)setTimeDelegate:(id<CTVideoViewTimeDelegate>)timeDelegate
 {
-    objc_setAssociatedObject(self, &CTVideoViewTimePropertyTimeDelegate, timeDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &CTVideoViewTimePropertyTimeDelegate, timeDelegate, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (void)setCurrentPlaySpeed:(CGFloat)currentPlaySpeed

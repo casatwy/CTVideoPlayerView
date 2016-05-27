@@ -125,6 +125,7 @@
         _videoView.shouldPlayAfterPrepareFinished = YES;
         _videoView.shouldChangeOrientationToFitVideo = YES;
         _videoView.shouldObservePlayTime = YES;
+        _videoView.shouldShowOperationButton = YES;
     }
     return _videoView;
 }
