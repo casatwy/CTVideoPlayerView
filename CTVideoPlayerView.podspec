@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "CTVideoView"
-  s.version      = "1.0.2"
+  s.name         = "CTVideoPlayerView"
+  s.version      = "1.0.3"
   s.summary      = "A video view for iOS which can play multy video at the same time, and can download and manage video file."
 
   # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
                     3. can search the file you just downloaded with datacenter
                    DESC
 
-  s.homepage     = "https://github.com/casatwy/CTVideoView"
+  s.homepage     = "https://github.com/casatwy/CTVideoPlayerView"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -82,7 +82,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/casatwy/CTVideoView.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/casatwy/CTVideoPlayerView.git", :tag => s.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
