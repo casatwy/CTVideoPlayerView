@@ -93,6 +93,15 @@
     }
 }
 
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
+{
+    [[self.tableView visibleCells] enumerateObjectsUsingBlock:^(VideoCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([cell isKindOfClass:[VideoCell class]]) {
+            [cell.videoView play];
+        }
+    }];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
