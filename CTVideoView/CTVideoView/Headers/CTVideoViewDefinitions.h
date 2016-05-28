@@ -87,6 +87,13 @@ typedef NS_ENUM(NSUInteger, CTVideoViewStalledStrategy) {
     CTVideoViewStalledStrategyDelegateCallback,
 };
 
+typedef NS_ENUM(NSUInteger, CTVideoViewPrepareStatus) {
+    CTVideoViewPrepareStatusNotPrepared,
+    CTVideoViewPrepareStatusPreparing,
+    CTVideoViewPrepareStatusPrepareFinished,
+    CTVideoViewPrepareStatusPrepareFailed,
+};
+
 /**********************************************************************/
 
 @protocol CTVideoViewOperationDelegate <NSObject>

@@ -27,8 +27,8 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @interface CTVideoView ()
 
 @property (nonatomic, assign) BOOL isVideoUrlChanged;
-@property (nonatomic, assign) BOOL isVideoUrlPrepared;
 @property (nonatomic, assign) BOOL isPreparedForPlay;
+@property (nonatomic, assign) CTVideoViewPrepareStatus prepareStatus;
 
 @property (nonatomic, assign, readwrite) CTVideoViewVideoUrlType videoUrlType;
 @property (nonatomic, strong, readwrite) NSURL *actualVideoPlayingUrl;
@@ -110,13 +110,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 - (void)prepare
 {
     if (self.isPlaying == YES && self.isVideoUrlChanged == NO) {
-        if ([self.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
-            [self.operationDelegate videoViewDidFinishPrepare:self];
-        }
         return;
     }
 
-    if (self.asset) {
+    if (self.asset && self.prepareStatus == CTVideoViewPrepareStatusNotPrepared) {
+        self.prepareStatus = CTVideoViewPrepareStatusPreparing;
         [self asynchronouslyLoadURLAsset:self.asset];
     }
 }
@@ -134,7 +132,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     }
 
     [self hideRetryButton];
-    if (self.isVideoUrlPrepared) {
+    if (self.prepareStatus == CTVideoViewPrepareStatusPrepareFinished) {
         // hide cover view has moved to CTVideoView+Time
         [self willStartPlay];
         [self.player play];
@@ -177,7 +175,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self showPlayButton];
     if (shouldReleaseVideo) {
         [self.player replaceCurrentItemWithPlayerItem:nil];
-        self.isVideoUrlPrepared = NO;
+        self.prepareStatus = CTVideoViewPrepareStatusNotPrepared;
     }
     if ([self.operationDelegate respondsToSelector:@selector(videoViewDidStop:)]) {
         [self.operationDelegate videoViewDidStop:self];
@@ -207,7 +205,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     }
     if (![self.asset.URL isEqual:self.actualVideoPlayingUrl]) {
         self.asset = [AVURLAsset assetWithURL:self.actualVideoPlayingUrl];
-        self.isVideoUrlPrepared = NO;
+        self.prepareStatus = CTVideoViewPrepareStatusNotPrepared;
         self.isVideoUrlChanged = YES;
     }
 }
@@ -224,14 +222,13 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             StrongSelf;
 
             strongSelf.isVideoUrlChanged = NO;
-            strongSelf.isVideoUrlPrepared = YES;
-            
             if (asset != strongSelf.asset) {
                 return;
             }
 
             NSError *error = nil;
             if ([asset statusOfValueForKey:@"tracks" error:&error] == AVKeyValueStatusFailed) {
+                strongSelf.prepareStatus = CTVideoViewPrepareStatusPrepareFailed;
                 [self showCoverView];
                 [self showRetryButton];
                 if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFailPrepare:error:)]) {
@@ -263,6 +260,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             }
             
             strongSelf.playerItem = [AVPlayerItem playerItemWithAsset:strongSelf.asset];
+            strongSelf.prepareStatus = CTVideoViewPrepareStatusPrepareFinished;
 
             if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
                 [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
@@ -376,7 +374,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         self.isVideoUrlChanged = NO;
     } else {
         self.isVideoUrlChanged = YES;
-        self.isVideoUrlPrepared = NO;
+        self.prepareStatus = CTVideoViewPrepareStatusNotPrepared;
     }
 
     _videoUrl = videoUrl;
