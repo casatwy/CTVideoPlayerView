@@ -6,6 +6,8 @@
 //  Copyright © 2016年 casa. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 #ifndef CTVideoViewDefinitions_h
 #define CTVideoViewDefinitions_h
 

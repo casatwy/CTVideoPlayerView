@@ -91,7 +91,6 @@
 {
     if (_videoView == nil) {
         _videoView = [[CTVideoView alloc] init];
-        _videoView.downloadStrategy = CTVideoViewDownloadStrategyDownloadForegroundAndBackground;
         _videoView.downloadDelegate = self;
         _videoView.shouldReplayWhenFinish = YES;
     }

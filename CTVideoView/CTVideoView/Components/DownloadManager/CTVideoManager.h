@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CTVideoViewDefinitions.h"
 
 // notifications
 extern NSString * const kCTVideoManagerWillDownloadVideoNotification;
@@ -24,6 +25,7 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 
 @property (nonatomic, assign, readonly) BOOL isWifi;
 @property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;
+@property (nonatomic, assign) CTVideoViewDownloadStrategy downloadStrategy;
 
 + (instancetype)sharedInstance;
 

@@ -327,12 +327,28 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     return _dataCenter;
 }
 
+- (void)setDownloadStrategy:(CTVideoViewDownloadStrategy)downloadStrategy
+{
+    _downloadStrategy = downloadStrategy;
+    self.sessionManager = nil;
+}
+
 - (AFURLSessionManager *)sessionManager
 {
     if (_sessionManager == nil) {
-#warning todo allow download background
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        if (self.downloadStrategy == CTVideoViewDownloadStrategyNoDownload) {
+            return nil;
+        }
+        if (self.downloadStrategy == CTVideoViewDownloadStrategyDownloadOnlyForeground) {
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        }
+        if (self.downloadStrategy == CTVideoViewDownloadStrategyDownloadForegroundAndBackground) {
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"CTVideoDownloadTask"];
+            configuration.sessionSendsLaunchEvents = YES;
+            configuration.discretionary = YES;
+            _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        }
     }
     return _sessionManager;
 }
