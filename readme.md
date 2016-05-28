@@ -49,6 +49,7 @@
     if (_videoView == nil) {
         _videoView = [[CTVideoView alloc] init];
 	}
+    return _videoView;
 }
 
 @end
