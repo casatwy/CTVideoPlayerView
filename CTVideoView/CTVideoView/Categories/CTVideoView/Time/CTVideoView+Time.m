@@ -51,12 +51,16 @@ static void * CTVideoViewTimePrivatePropertyVideoStartTimeObserverToken;
     WeakSelf;
     self.videoStartTimeObserverToken = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 60) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         StrongSelf;
-        if (strongSelf.isPlaying && CMTimeGetSeconds(time) > 0 && CMTimeGetSeconds(time) < 0.1) {
+        CGFloat seconds = CMTimeGetSeconds(time);
+        if (strongSelf.isPlaying && seconds > 0 && seconds < 0.1) {
             if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidStartPlaying:)]) {
                 [strongSelf.operationDelegate videoViewDidStartPlaying:strongSelf];
             }
             [strongSelf hidePlayButton];
             [strongSelf hideCoverView];
+            [strongSelf removeVideoStartTimeObserver];
+        }
+        if (seconds > 0.1) {
             [strongSelf removeVideoStartTimeObserver];
         }
     }];
@@ -141,6 +145,11 @@ static void * CTVideoViewTimePropertyTimeDelegate;
 {
     [self removeTimeObserver];
     [self removeVideoStartTimeObserver];
+}
+
+- (void)willStartPlay
+{
+    [self addVideoStartTimeObserver];
 }
 
 - (void)durationDidLoadedWithChange:(NSDictionary *)change

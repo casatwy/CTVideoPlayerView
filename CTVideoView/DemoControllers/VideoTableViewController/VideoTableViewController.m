@@ -68,15 +68,7 @@
 {
     VideoCell *videoCell = (VideoCell *)cell;
     if ([videoCell isKindOfClass:[videoCell class]]) {
-        [videoCell.videoView stopWithReleaseVideo:YES];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    VideoCell *videoCell = (VideoCell *)cell;
-    if ([videoCell isKindOfClass:[videoCell class]]) {
-        [videoCell.videoView prepare];
+        [videoCell.videoView stopWithReleaseVideo:NO];
     }
 }
 

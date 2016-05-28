@@ -47,8 +47,14 @@
         _videoView.shouldPlayAfterPrepareFinished = NO;
         _videoView.videoContentMode = CTVideoViewContentModeResizeAspectFill;
         _videoView.shouldShowOperationButton = NO;
-        _videoView.shouldShowCoverViewBeforePlay = NO;
         _videoView.stalledStrategy = CTVideoViewStalledStrategyPlay;
+
+        UILabel *coverView = [[UILabel alloc] init];
+        coverView.text = @"VIDEO";
+        coverView.textAlignment = NSTextAlignmentCenter;
+        coverView.backgroundColor = [UIColor redColor];
+        _videoView.coverView = coverView;
+        _videoView.shouldShowCoverViewBeforePlay = YES;
     }
     return _videoView;
 }

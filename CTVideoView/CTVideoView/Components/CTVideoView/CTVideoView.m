@@ -135,8 +135,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
     [self hideRetryButton];
     if (self.isVideoUrlPrepared) {
-        [self.player play];
         // hide cover view has moved to CTVideoView+Time
+        [self willStartPlay];
+        [self.player play];
     } else {
         self.isPreparedForPlay = YES;
         [self prepare];
