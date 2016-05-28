@@ -24,6 +24,7 @@
 {
     self = [super init];
     if (self) {
+        [CTVideoManager sharedInstance].downloadStrategy = CTVideoViewDownloadStrategyDownloadForegroundAndBackground;
         NSURL *videoUrl = [NSURL URLWithString:urlString];
         [[CTVideoManager sharedInstance] deleteVideoWithUrl:videoUrl];
         self.videoView.videoUrl = videoUrl;
