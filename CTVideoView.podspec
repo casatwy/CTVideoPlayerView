@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CTVideoView"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "A video view for iOS which can play multy video at the same time, and can download and manage video file."
 
   # This description is used to generate tags and improve search results.
@@ -82,7 +82,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/casatwy/CTVideoView.git", :tag => s.verision.to_s }
+  s.source       = { :git => "https://github.com/casatwy/CTVideoView.git", :tag => s.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
