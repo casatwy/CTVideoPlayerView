@@ -374,13 +374,15 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     if (_videoUrl && [_videoUrl isEqual:videoUrl]) {
         self.isVideoUrlChanged = NO;
     } else {
-        self.isVideoUrlPrepared = NO;
         self.isVideoUrlChanged = YES;
+        self.isVideoUrlPrepared = NO;
     }
 
     _videoUrl = videoUrl;
 
-    [self refreshUrl];
+    if (self.isVideoUrlChanged) {
+        [self refreshUrl];
+    }
 }
 
 - (void)setPlayerItem:(AVPlayerItem *)playerItem
@@ -402,6 +404,20 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         _player = [[AVPlayer alloc] init];
     }
     return _player;
+}
+
+- (void)setVideoContentMode:(CTVideoViewContentMode)videoContentMode
+{
+    _videoContentMode = videoContentMode;
+    if (videoContentMode == CTVideoViewContentModeResize) {
+        self.playerLayer.videoGravity = AVLayerVideoGravityResize;
+    }
+    if (videoContentMode == CTVideoViewContentModeResizeAspect) {
+        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    }
+    if (videoContentMode == CTVideoViewContentModeResizeAspectFill) {
+        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    }
 }
 
 @end

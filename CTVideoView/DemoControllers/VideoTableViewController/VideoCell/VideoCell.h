@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CTVideoViewCommonHeader.h"
 
 @interface VideoCell : UITableViewCell
+
+@property (nonatomic, strong, readonly) CTVideoView *videoView;
 
 @end

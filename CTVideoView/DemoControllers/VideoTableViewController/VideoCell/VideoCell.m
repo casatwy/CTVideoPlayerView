@@ -7,7 +7,6 @@
 //
 
 #import "VideoCell.h"
-#import "CTVideoViewCommonHeader.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
 @interface VideoCell ()
@@ -43,6 +42,13 @@
 {
     if (_videoView == nil) {
         _videoView = [[CTVideoView alloc] init];
+        _videoView.shouldReplayWhenFinish = YES;
+        _videoView.isMuted = YES;
+        _videoView.shouldPlayAfterPrepareFinished = NO;
+        _videoView.videoContentMode = CTVideoViewContentModeResizeAspectFill;
+        _videoView.shouldShowOperationButton = NO;
+        _videoView.shouldShowCoverViewBeforePlay = NO;
+        _videoView.stalledStrategy = CTVideoViewStalledStrategyPlay;
     }
     return _videoView;
 }

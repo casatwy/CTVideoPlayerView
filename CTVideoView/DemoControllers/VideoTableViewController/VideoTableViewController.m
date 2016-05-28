@@ -10,7 +10,7 @@
 #import "VideoCell.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
-@interface VideoTableViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface VideoTableViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (nonatomic, copy) NSArray *dataSource;
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,7 +25,11 @@
 {
     self = [super init];
     if (self) {
-        self.dataSource = urlList;
+        NSMutableArray *dataSource = [[NSMutableArray alloc] init];
+        [urlList enumerateObjectsUsingBlock:^(NSString * _Nonnull url, NSUInteger idx, BOOL * _Nonnull stop) {
+            [dataSource addObject:[NSURL URLWithString:url]];
+        }];
+        self.dataSource = dataSource;
     }
     return self;
 }
@@ -49,7 +53,42 @@
     [self.cleanCacheButton bottomInContainer:10 shouldResize:NO];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[self.tableView visibleCells] enumerateObjectsUsingBlock:^(VideoCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([cell isKindOfClass:[VideoCell class]]) {
+            [cell.videoView play];
+        }
+    }];
+}
+
 #pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    VideoCell *videoCell = (VideoCell *)cell;
+    if ([videoCell isKindOfClass:[videoCell class]]) {
+        [videoCell.videoView stopWithReleaseVideo:YES];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    VideoCell *videoCell = (VideoCell *)cell;
+    if ([videoCell isKindOfClass:[videoCell class]]) {
+        [videoCell.videoView prepare];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [[self.tableView visibleCells] enumerateObjectsUsingBlock:^(VideoCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([cell isKindOfClass:[VideoCell class]]) {
+            [cell.videoView play];
+        }
+    }];
+}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -60,6 +99,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    cell.videoView.videoUrl = self.dataSource[indexPath.row];
     return cell;
 }
 
