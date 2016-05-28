@@ -32,9 +32,9 @@
 {
     [super layoutSubviews];
 
-    self.videoView.size = CGSizeMake(self.contentView.width-10, self.contentView.height-10);
+    self.videoView.size = CGSizeMake(self.contentView.width-10, self.contentView.height-5);
     [self.videoView centerXEqualToView:self.contentView];
-    [self.videoView centerYEqualToView:self.contentView];
+    [self.videoView topInContainer:5 shouldResize:NO];
 }
 
 #pragma mark - getters and setters
