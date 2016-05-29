@@ -81,6 +81,45 @@ if download strategy is `CTVideoViewDownloadStrategyNoDownload`, the download ta
 
 after the video is downloaded, CTVideoPlayerView will remember where the native file is, and which remote url is responds to. You can call `refreshUrl` to refresh current video view's url, and then play the native video file. If you create a brand new video player view, and set `videoUrl` to a remote url, video player view will search the native file and replace it automatically.
 
+### Download Events
+
+you can set `downloadDelegate` to video player view for more control. 
+
+```objective-C
+@protocol CTVideoViewDownloadDelegate <NSObject>
+
+@optional
+- (void)videoViewWillStartDownload:(CTVideoView *)videoView;
+- (void)videoView:(CTVideoView *)videoView downloadProgress:(CGFloat)progress;
+- (void)videoViewDidFinishDownload:(CTVideoView *)videoView;
+- (void)videoViewDidFailDownload:(CTVideoView *)videoView;
+- (void)videoViewDidPausedDownload:(CTVideoView *)videoView;
+- (void)videoViewDidDeletedDownloadTask:(CTVideoView *)videoView;
+- (void)videoViewIsWaitingForDownload:(CTVideoView *)videoView;
+
+@end
+```
+
+If you don't have a video player view instance, you can observe notifications in `CTVideoViewDefinitions.h` to get notice of the download events.
+
+```objective-C
+/**
+ *  notifications
+ */
+extern NSString * const kCTVideoManagerWillDownloadVideoNotification;
+extern NSString * const kCTVideoManagerDownloadVideoProgressNotification;
+extern NSString * const kCTVideoManagerDidFinishDownloadVideoNotification;
+extern NSString * const kCTVideoManagerDidFailedDownloadVideoNotification;
+extern NSString * const kCTVideoManagerDidPausedDownloadVideoNotification;
+
+/**
+ *  notification userinfo keys
+ */
+extern NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl;
+extern NSString * const kCTVideoManagerNotificationUserInfoKeyNativeUrl;
+extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
+```
+
 ### Manage Native Video Files
 
 just use `CTVideoDataCenter`.
@@ -120,6 +159,29 @@ just use `CTVideoDataCenter`.
 ```
 
 You may want more method in this data center, you can fire an issue to tell me what method you want, or give me a pull request directly.
+
+### Observe Time
+
+1. set `shouldObservePlayTime` to YES.
+
+```objective-C
+videoView.shouldObservePlayTime = YES;
+```
+
+2. set `timeDelegate`
+
+```objective-C
+videoView.timeDelegate = self;
+```
+
+3. implement `- (void)videoView:didPlayToSecond:` in timeDelegate
+
+```objective-C
+- (void)videoView:(CTVideoView *)videoView didPlayToSecond:(CGFloat)second
+{
+	NSLog(@"%f", second);
+}
+```
 
 ## Manual
 

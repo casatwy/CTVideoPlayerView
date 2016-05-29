@@ -15,6 +15,7 @@ extern NSString * const kCTVideoManagerDidFinishDownloadVideoNotification;
 extern NSString * const kCTVideoManagerDownloadVideoProgressNotification;
 extern NSString * const kCTVideoManagerDidFailedDownloadVideoNotification;
 extern NSString * const kCTVideoManagerDidPausedDownloadVideoNotification;
+extern NSString * const kCTVideoManagerDidDeletedDownloadVideoNotification;
 
 // notification userinfo keys
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl;
