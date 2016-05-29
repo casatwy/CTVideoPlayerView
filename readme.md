@@ -55,6 +55,32 @@
 @end
 ```
 
+## More Example
+
+### Download Video
+
+set download strategy to `CTVideoViewDownloadStrategyDownloadOnlyForeground` or `CTVideoViewDownloadStrategyDownloadOnlyForeground` to enable `Download`
+```objective-C
+[CTVideoManager sharedInstance].downloadStrategy = CTVideoViewDownloadStrategyDownloadForegroundAndBackground;
+
+// they works the same
+[videoView startDownloadTask];
+// [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:url];
+// [[CTVideoManager sharedInstance] startAllDownloadTask];
+```
+
+if download strategy is `CTVideoViewDownloadStrategyNoDownload`, the download task won't generate even you make a download call.
+
+```objective-C
+[CTVideoManager sharedInstance].downloadStrategy = CTVideoViewDownloadStrategyNoDownload;
+
+[videoView startDownloadTask]; // won't start download task
+[[CTVideoManager sharedInstance] startDownloadTaskWithUrl:url]; // won't start download task
+[[CTVideoManager sharedInstance] startAllDownloadTask]; // won't start download task
+```
+
+after the video is downloaded, CTVideoPlayerView will remember where the native file is, and which remote url is responds to. You can call `refreshUrl` to refresh current video view's url, and then play the native video file. If you create a brand new video player view, and set `videoUrl` to a remote url, video player view will search the native file and replace it automatically.
+
 ## Manual
 
 ### properties
