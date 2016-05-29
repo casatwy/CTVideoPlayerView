@@ -107,14 +107,16 @@ If you don't have a video player view instance, you can observe notifications in
  *  notifications
  */
 extern NSString * const kCTVideoManagerWillDownloadVideoNotification;
-extern NSString * const kCTVideoManagerDownloadVideoProgressNotification;
 extern NSString * const kCTVideoManagerDidFinishDownloadVideoNotification;
+extern NSString * const kCTVideoManagerDownloadVideoProgressNotification;
 extern NSString * const kCTVideoManagerDidFailedDownloadVideoNotification;
 extern NSString * const kCTVideoManagerDidPausedDownloadVideoNotification;
+extern NSString * const kCTVideoManagerDidDeletedDownloadVideoNotification;
 
 /**
  *  notification userinfo keys
  */
+extern NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrlList;
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl;
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyNativeUrl;
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
