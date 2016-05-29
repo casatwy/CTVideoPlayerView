@@ -81,6 +81,46 @@ if download strategy is `CTVideoViewDownloadStrategyNoDownload`, the download ta
 
 after the video is downloaded, CTVideoPlayerView will remember where the native file is, and which remote url is responds to. You can call `refreshUrl` to refresh current video view's url, and then play the native video file. If you create a brand new video player view, and set `videoUrl` to a remote url, video player view will search the native file and replace it automatically.
 
+### Manage Native Video Files
+
+just use `CTVideoDataCenter`.
+
+```objective-C
+@interface CTVideoDataCenter : NSObject
+
+// create
+- (void)insertRecordWithRemoteUrl:(NSURL *)remoteUrl status:(CTVideoRecordStatus)status;
+
+// read
+- (NSURL *)nativeUrlWithRemoteUrl:(NSURL *)remoteUrl;
+- (NSArray <id<CTPersistanceRecordProtocol>> *)recordListWithStatus:(CTVideoRecordStatus)status;
+- (CTVideoRecordStatus)statusOfRemoteUrl:(NSURL *)remoteUrl;
+- (id<CTPersistanceRecordProtocol>)recordOfRemoteUrl:(NSURL *)url;
+
+// update
+- (void)updateWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl;
+- (void)updateWithRemoteUrl:(NSURL *)remoteUrl nativeUrl:(NSURL *)nativeUrl status:(CTVideoRecordStatus)status;
+
+- (void)updateStatus:(CTVideoRecordStatus)status toRemoteUrl:(NSURL *)remoteUrl;
+- (void)updateStatus:(CTVideoRecordStatus)status progress:(CGFloat)progress toRemoteUrl:(NSURL *)remoteUrl;
+- (void)updateAllStatus:(CTVideoRecordStatus)status;
+
+- (void)pauseAllRecordWithCompletion:(void(^)(void))completion;
+- (void)pauseRecordWithRemoteUrlList:(NSArray *)remoteUrlList completion:(void(^)(void))completion;
+
+- (void)startDownloadAllRecordWithCompletion:(void(^)(void))completion;
+- (void)startDownloadRemoteUrlList:(NSArray *)remoteUrlList completion:(void(^)(void))completion;
+
+// delete
+- (void)deleteWithRemoteUrl:(NSURL *)remoteUrl;
+- (void)deleteAllRecordWithCompletion:(void(^)(NSArray *deletedList))completion;
+- (void)deleteAllNotFinishedVideo;
+
+@end
+```
+
+You may want more method in this data center, you can fire an issue to tell me what method you want, or give me a pull request directly.
+
 ## Manual
 
 ### properties

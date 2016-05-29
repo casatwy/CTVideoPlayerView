@@ -2,3 +2,4 @@
 CTVideoView.xcworkspace/
 Pods/
 Podfile.lock
+*.swp
