@@ -54,3 +54,34 @@
 
 @end
 ```
+
+## Manual
+
+### properties
+
+#### Regular
+
+##### isMuted
+
+set video muted
+
+##### shouldPlayAfterPrepareFinished
+
+if you want to play video immediatly after video is prepared, set this to YES.
+
+if you call `play` instead of `prepare`, video will play after prepare finished, even you set this property to NO.
+
+##### shouldReplayWhenFinish
+
+set to YES will replay the video when the video reaches to the end.
+
+##### shouldChangeOrientationToFitVideo
+
+set to YES will change video view's orientation automatically for video playing.
+
+#### Download
+
+##### shouldDownloadWhenNotWifi
+
+this is a readonly property, if you want to change the value, set bool value of `kCTVideoViewShouldDownloadWhenNotWifi` in `NSUserDefaults` to change this value, default is NO
+
