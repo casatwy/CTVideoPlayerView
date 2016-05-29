@@ -57,31 +57,68 @@
 
 ## Manual
 
-###     properties
+### properties
 
-####        Regular
+#### Regular
 
-#####           isMuted
+##### isMuted
 
 set video muted
 
-#####               shouldPlayAfterPrepareFinished
+##### shouldPlayAfterPrepareFinished
 
 if you want to play video immediatly after video is prepared, set this to YES.
 
 if you call `play` instead of `prepare`, video will play after prepare finished, even you set this property to NO.
 
-#####               shouldReplayWhenFinish
+##### shouldReplayWhenFinish
 
 set to YES will replay the video when the video reaches to the end.
 
-#####               shouldChangeOrientationToFitVideo
+##### shouldChangeOrientationToFitVideo
 
 set to YES will change video view's orientation automatically for video playing.
 
-####        Download
+#### Download
 
-#####               shouldDownloadWhenNotWifi
+##### shouldDownloadWhenNotWifi
 
 this is a readonly property, if you want to change the value, set bool value of `kCTVideoViewShouldDownloadWhenNotWifi` in `NSUserDefaults` to change this value, default is NO
 
+#### Operation Buttons
+
+##### shouldShowOperationButton
+
+set to YES to indicate video view should show operation button
+
+##### playButton
+
+the view of customized play button
+
+##### retryButton
+
+the view of customized retry button
+
+#### Time
+
+##### totalDurationSeconds
+
+to show how long the video is in seconds
+
+##### shouldObservePlayTime
+
+if you want `- (void)videoView:didPlayToSecond:` of `id<CTVideoViewTimeDelegate>` to be called, you should set this property to YES.
+
+##### currentPlaySpeed
+
+set 2.0 means speed of 2x.
+
+#### Video Cover View
+
+##### shouldShowOperationButton
+
+set to YES to indicate video view should show video cover view
+
+##### coverView
+
+the customized cover view
