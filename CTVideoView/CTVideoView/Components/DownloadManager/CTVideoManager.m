@@ -21,6 +21,7 @@ NSString * const kCTVideoManagerDidDeletedDownloadVideoNotification = @"kCTVideo
 
 // notification userinfo keys
 NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl = @"kCTVideoManagerNotificationUserInfoKeyRemoteUrl";
+NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrlList = @"kCTVideoManagerNotificationUserInfoKeyRemoteUrlList";
 NSString * const kCTVideoManagerNotificationUserInfoKeyNativeUrl = @"kCTVideoManagerNotificationUserInfoKeyNativeUrl";
 NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoManagerNotificationUserInfoKeyProgress";
 
@@ -116,6 +117,10 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
 
 - (void)deleteVideoWithUrl:(NSURL *)url
 {
+    if (url == nil) {
+        return;
+    }
+
     NSURLSessionDownloadTask *task = self.downloadTaskPool[url];
     if (task) {
         [task cancel];
@@ -123,7 +128,12 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     }
 
     [self.dataCenter deleteWithRemoteUrl:url];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kCTVideoManagerDidDeletedDownloadVideoNotification object:nil userInfo:@{}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCTVideoManagerDidDeletedDownloadVideoNotification
+                                                        object:nil
+                                                      userInfo:@{
+                                                                 kCTVideoManagerNotificationUserInfoKeyRemoteUrl:url
+                                                                 }];
+
 }
 
 - (void)deleteAllRecordAndVideo:(void (^)(NSArray *deletedList))completion

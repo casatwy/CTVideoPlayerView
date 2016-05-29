@@ -10,6 +10,7 @@
 #import "CTVideoRecord.h"
 #import "CTVideoTable.h"
 #import <UIKit/UIKit.h>
+#import "CTVideoViewDefinitions.h"
 
 @interface CTVideoDataCenter ()
 
@@ -205,6 +206,11 @@
                 [recordList addObject:[videoItem dictionaryRepresentationWithTable:self.videoTable]];
             }
         }];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCTVideoManagerDidDeletedDownloadVideoNotification
+                                                            object:nil
+                                                          userInfo:@{
+                                                                     kCTVideoManagerNotificationUserInfoKeyRemoteUrlList:recordList
+                                                                     }];
         if (completion) {
             completion(recordList);
         }
