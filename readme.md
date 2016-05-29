@@ -59,7 +59,7 @@
 
 ### Download Video
 
-set download strategy to `CTVideoViewDownloadStrategyDownloadOnlyForeground` or `CTVideoViewDownloadStrategyDownloadOnlyForeground` to enable `Download`
+set download strategy to `CTVideoViewDownloadStrategyDownloadOnlyForeground` or `CTVideoViewDownloadStrategyDownloadForegroundAndBackground` to enable `Download`
 ```objective-C
 [CTVideoManager sharedInstance].downloadStrategy = CTVideoViewDownloadStrategyDownloadForegroundAndBackground;
 
