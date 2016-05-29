@@ -271,7 +271,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     if (self.downloadStrategy == CTVideoViewDownloadStrategyNoDownload) {
         return;
     }
-    
+
     NSURL *nativeUrl = [self.dataCenter nativeUrlWithRemoteUrl:url];
     if (nativeUrl == nil) {
         NSString *fileName = [NSString stringWithFormat:@"%@.mp4", [NSUUID UUID].UUIDString];
