@@ -1,5 +1,16 @@
 # CTVideoPlayerView
 
+## Features
+
+- it's an UIView
+- plays local media or streams remote media over HTTP
+- customizable UI and user interaction
+- no size restrictions
+- orientation change support
+- simple API
+- playback time observe, video duration
+- download & native file management
+
 ## CocoaPods
 
 `pod "CTVideoPlayerView"`
