@@ -14,6 +14,7 @@
 todo:
 - cache played video which comes from a remote url
 - play youtube
+- play [RTSP](https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol)
 
 ## CocoaPods
 
