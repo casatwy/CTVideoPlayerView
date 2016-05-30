@@ -15,8 +15,8 @@
 in short:
 ```objective-c
 CTVideoView *videoView = [[CTVideoView alloc] init];
+videoView.frame = CGRectMake(0,0,100,100);
 [self.view addSubview:videoView];
-self.videoView.frame = CGRectMake(0,0,100,100);
 
 videoView.videoUrl = [NSURL URLWithString:@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74"]; // mp4 playable
 [videoView play];
