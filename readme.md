@@ -11,6 +11,10 @@
 - playback time observe, video duration
 - download & native file management
 
+todo:
+- cache played video which comes from a remote url
+- play youtube
+
 ## CocoaPods
 
 `pod "CTVideoPlayerView"`
