@@ -203,9 +203,13 @@ use `pod "HandyFrame"` will make your layout code easy and clean.
 #import <HandyFrame/UIView+LayoutMethods.h>
 ```
 
+set the button delegate
+
 ```objective-C
 videoView.buttonDelegate = self;
 ```
+
+layout with [HandyFrame](https://github.com/casatwy/HandyAutoLayout)
 
 ```objective-C
 - (void)videoView:(CTVideoView *)videoView layoutPlayButton:(UIButton *)playButton
