@@ -195,7 +195,9 @@ videoView.retryButton = customizedRetryButton;
 
 #### 2. set `id<CTVideoViewButtonDelegate>` and implement methods to layout your button
 
-If you don't do this, the buttons will be layouted as size of CGSizeMake(100, 60), and will be put in center of the video. `#import <HandyFrame/UIView+LayoutMethods.h>` will make your layout code easy and clean.
+If you don't do this, the buttons will be layouted as size of CGSizeMake(100, 60), and will be put in center of the video. 
+
+use `pod "HandyFrame"` will make your layout code easy and clean.
 
 ```objective-C
 #import <HandyFrame/UIView+LayoutMethods.h>
