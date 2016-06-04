@@ -122,13 +122,13 @@
     CTVideoRecord *videoRecord = (CTVideoRecord *)[self recordOfRemoteUrl:remoteUrl];
     
     if (videoRecord) {
-        videoRecord.nativeUrl = [[nativeUrl absoluteString] lastPathComponent];
+        videoRecord.nativeUrl = [nativeUrl lastPathComponent];
         videoRecord.status = @(status);
         [self.videoTable updateRecord:videoRecord error:NULL];
     } else {
         videoRecord = [[CTVideoRecord alloc] init];
         videoRecord.remoteUrl = [remoteUrl absoluteString];
-        videoRecord.nativeUrl = [[nativeUrl path] lastPathComponent];
+        videoRecord.nativeUrl = [nativeUrl lastPathComponent];
         videoRecord.status = @(status);
         [self.videoTable insertRecord:videoRecord error:NULL];
     }

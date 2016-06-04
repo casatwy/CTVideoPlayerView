@@ -275,7 +275,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     NSURL *nativeUrl = [self.dataCenter nativeUrlWithRemoteUrl:url];
     if (nativeUrl == nil) {
         NSString *fileName = [NSString stringWithFormat:@"%@.mp4", [NSUUID UUID].UUIDString];
-        nativeUrl = [NSURL URLWithString:[[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:fileName]];
+        nativeUrl = [NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:fileName]];
     }
     [self.dataCenter updateWithRemoteUrl:url nativeUrl:nativeUrl status:CTVideoRecordStatusWaitingForDownload];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
