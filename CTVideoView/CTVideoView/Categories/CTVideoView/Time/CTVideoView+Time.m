@@ -123,7 +123,7 @@ static void * CTVideoViewTimePropertyTimeGapToObserve;
 {
     CMTime time = CMTimeMake(second, 1.0f);
     WeakSelf;
-    [self.player seekToTime:CMTimeMake(second, 1.0f) completionHandler:^(BOOL finished) {
+    [self.player seekToTime:CMTimeMakeWithSeconds(second, 600) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:^(BOOL finished) {
         StrongSelf;
         if (finished) {
             if ([strongSelf.timeDelegate respondsToSelector:@selector(videoView:didFinishedMoveToTime:)]) {
@@ -135,7 +135,6 @@ static void * CTVideoViewTimePropertyTimeGapToObserve;
         }
     }];
 }
-
 
 - (void)setShouldObservePlayTime:(BOOL)shouldObservePlayTime withTimeGapToObserve:(CGFloat)timeGapToObserve
 {
@@ -177,6 +176,11 @@ static void * CTVideoViewTimePropertyTimeGapToObserve;
 }
 
 #pragma mark - getters and setters
+- (CGFloat)currentPlaySecond
+{
+    return CMTimeGetSeconds(self.playerItem.currentTime);
+}
+
 - (CGFloat)timeGapToObserve
 {
     CGFloat timeGapToObserve = [objc_getAssociatedObject(self, &CTVideoViewTimePropertyTimeGapToObserve) floatValue];

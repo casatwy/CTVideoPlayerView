@@ -10,6 +10,7 @@
 
 @interface CTVideoView (Time)
 
+@property (nonatomic, assign, readonly) CGFloat currentPlaySecond;
 @property (nonatomic, assign, readonly) CGFloat totalDurationSeconds;
 @property (nonatomic, assign, readonly) BOOL shouldObservePlayTime; // if you want - (void)videoView:didPlayToSecond: to be called, you should call - (void)setShouldObservePlayTime:withTimeGapToObserve: first.
 @property (nonatomic, assign, readonly) CGFloat timeGapToObserve; // default is 100.0f for 1 second.
