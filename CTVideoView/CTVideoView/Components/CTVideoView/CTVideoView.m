@@ -364,9 +364,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 - (void)setAssetToPlay:(AVAsset *)assetToPlay
 {
     _assetToPlay = assetToPlay;
-    self.isVideoUrlChanged = YES;
-    self.videoUrlType = CTVideoViewVideoUrlTypeAsset;
-    self.actualVideoUrlType = CTVideoViewVideoUrlTypeAsset;
+    if (assetToPlay) {
+        self.isVideoUrlChanged = YES;
+        self.videoUrlType = CTVideoViewVideoUrlTypeAsset;
+        self.actualVideoUrlType = CTVideoViewVideoUrlTypeAsset;
+    }
 }
 
 - (AVPlayerLayer *)playerLayer
