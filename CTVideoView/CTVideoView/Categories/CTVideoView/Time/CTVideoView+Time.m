@@ -35,7 +35,7 @@ static void * CTVideoViewTimePrivatePropertyVideoStartTimeObserverToken;
         [self removeTimeObserver];
     }
     WeakSelf;
-    self.timeObserverToken = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(self.timeGapToObserve, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+    self.timeObserverToken = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(self.timeGapToObserve, 100) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         StrongSelf;
         if ([strongSelf.timeDelegate respondsToSelector:@selector(videoView:didPlayToSecond:)]) {
             [strongSelf.timeDelegate videoView:strongSelf didPlayToSecond:CMTimeGetSeconds(time)];
@@ -136,6 +136,13 @@ static void * CTVideoViewTimePropertyTimeGapToObserve;
     }];
 }
 
+
+- (void)setShouldObservePlayTime:(BOOL)shouldObservePlayTime withTimeGapToObserve:(CGFloat)timeGapToObserve
+{
+    self.timeGapToObserve = timeGapToObserve;
+    self.shouldObservePlayTime = shouldObservePlayTime;
+}
+
 #pragma mark - method for main object
 - (void)initTime
 {
@@ -174,7 +181,7 @@ static void * CTVideoViewTimePropertyTimeGapToObserve;
 {
     CGFloat timeGapToObserve = [objc_getAssociatedObject(self, &CTVideoViewTimePropertyTimeGapToObserve) floatValue];
     if (timeGapToObserve == 0) {
-        timeGapToObserve = 1.0f;
+        timeGapToObserve = 100.0f;
         [self setTimeGapToObserve:timeGapToObserve];
     }
     return timeGapToObserve;
