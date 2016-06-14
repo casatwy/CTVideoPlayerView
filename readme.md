@@ -26,7 +26,23 @@ todo:
 
 `import <CTVideoPlayerView/CTVideoViewCommonHeader.h>`
 
-### 2. play
+### 2. Play
+
+#### 2.1 play with asset
+
+```objective-c
+CTVideoView *videoView = [[CTVideoView alloc] init];
+videoView.assetToPlay = [AVURLAsset assetWithURL:assetUrl];
+[videoView play];
+```
+
+CTVideoView can play any AVAsset directly, but the `videoUrlType` and `actualVideoUrlType` will be set to `CTVideoViewVideoUrlTypeAsset`.
+
+If you do care about the url type of what you are playing, you should see `play with URL` below.
+
+#### 2.2 play with URL
+
+Set `videoUrl` to make `CTVideoView` play with URL, the `videoUrlType` and `actualVideoUrlType` will be valued properly, if you don't care about them, just use `play with asset` above.
 
 in short:
 ```objective-c
