@@ -142,11 +142,15 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     if (self.prepareStatus == CTVideoViewPrepareStatusPrepareFinished) {
         // hide cover view has moved to CTVideoView+Time
         [self willStartPlay];
-        if ((NSInteger)(self.currentPlaySecond * 100) == (NSInteger)(self.totalDurationSeconds * 100)) {
+
+        NSInteger currentPlaySecond = (NSInteger)(self.currentPlaySecond * 100);
+        NSInteger totalDurationSeconds = (NSInteger)(self.totalDurationSeconds * 100);
+        if (currentPlaySecond == totalDurationSeconds && totalDurationSeconds > 0) {
             [self replay];
         } else {
             [self.player play];
         }
+
     } else {
         self.isPreparedForPlay = YES;
         [self prepare];
