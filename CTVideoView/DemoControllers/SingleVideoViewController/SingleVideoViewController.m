@@ -125,7 +125,7 @@
         _videoView.shouldReplayWhenFinish = YES;
         _videoView.shouldPlayAfterPrepareFinished = NO;
         _videoView.shouldChangeOrientationToFitVideo = YES;
-        _videoView.shouldObservePlayTime = YES;
+        [_videoView setShouldObservePlayTime:YES withTimeGapToObserve:100];
         _videoView.shouldShowOperationButton = YES;
         _videoView.shouldShowCoverViewBeforePlay = YES;
         UILabel *coverView = [[UILabel alloc] init];

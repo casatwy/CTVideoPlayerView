@@ -69,7 +69,8 @@ typedef NS_ENUM(NSUInteger, CTVideoViewDownloadStrategy) {
 typedef NS_ENUM(NSUInteger, CTVideoViewVideoUrlType) {
     CTVideoViewVideoUrlTypeRemote,
     CTVideoViewVideoUrlTypeNative,
-    CTVideoViewVideoUrlTypeLiveStream
+    CTVideoViewVideoUrlTypeLiveStream,
+    CTVideoViewVideoUrlTypeAsset,
 };
 
 typedef NS_ENUM(NSUInteger, CTVideoViewContentMode) {

@@ -14,6 +14,8 @@
 
 @interface CTVideoView : UIView
 
+@property (nonatomic, strong) AVAsset *assetToPlay; // if this is not nil, video view will play this asset instead of playing the `videoUrl`
+
 /**
  *  for performance concern, set videoUrl will not call `-(void)prepare`, you should call `-(void)prepare` at a good time, say `- (void)tableView:willDisplayCell:forRowAtIndexPath:` or `-(void)viewDidAppear:`.
  */

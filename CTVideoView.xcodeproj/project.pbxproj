@@ -23,6 +23,7 @@
 		4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8E1CF21FB900139C9C /* Main.storyboard */; };
 		4AAE2A921CF21FB900139C9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A911CF21FB900139C9C /* Assets.xcassets */; };
 		4AAE2A951CF21FB900139C9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A931CF21FB900139C9C /* LaunchScreen.storyboard */; };
+		4AC4DAF81D10865D009BE1C2 /* PlayAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4DAF71D10865D009BE1C2 /* PlayAssetViewController.m */; };
 		4AD2031D1CF260C9004E3A97 /* CTVideoView+Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203101CF260C9004E3A97 /* CTVideoView+Download.m */; };
 		4AD2031E1CF260C9004E3A97 /* CTVideoView+OperationButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203131CF260C9004E3A97 /* CTVideoView+OperationButtons.m */; };
 		4AD2031F1CF260C9004E3A97 /* CTVideoView+Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD203161CF260C9004E3A97 /* CTVideoView+Time.m */; };
@@ -59,6 +60,8 @@
 		4AAE2A911CF21FB900139C9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AAE2A941CF21FB900139C9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AAE2A961CF21FB900139C9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AC4DAF61D10865D009BE1C2 /* PlayAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayAssetViewController.h; sourceTree = "<group>"; };
+		4AC4DAF71D10865D009BE1C2 /* PlayAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayAssetViewController.m; sourceTree = "<group>"; };
 		4AD202F51CF25E5E004E3A97 /* CTVideoViewDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTVideoViewDefinitions.h; sourceTree = "<group>"; };
 		4AD2030F1CF260C9004E3A97 /* CTVideoView+Download.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+Download.h"; sourceTree = "<group>"; };
 		4AD203101CF260C9004E3A97 /* CTVideoView+Download.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+Download.m"; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 			children = (
 				4A0944081CF2287F00BC21AA /* ViewController.h */,
 				4A0944091CF2287F00BC21AA /* ViewController.m */,
+				4AC4DAF51D10864B009BE1C2 /* PlayAsset */,
 				4A19F8151CF5EA670026B9BC /* DownloadThenPlay */,
 				4A0943FC1CF223A700BC21AA /* SingleVideoViewController */,
 				4A0943FD1CF223A700BC21AA /* VideoTableViewController */,
@@ -229,6 +233,15 @@
 				4AD202F21CF25E48004E3A97 /* Categories */,
 			);
 			path = CTVideoView;
+			sourceTree = "<group>";
+		};
+		4AC4DAF51D10864B009BE1C2 /* PlayAsset */ = {
+			isa = PBXGroup;
+			children = (
+				4AC4DAF61D10865D009BE1C2 /* PlayAssetViewController.h */,
+				4AC4DAF71D10865D009BE1C2 /* PlayAssetViewController.m */,
+			);
+			path = PlayAsset;
 			sourceTree = "<group>";
 		};
 		4AD202F21CF25E48004E3A97 /* Categories */ = {
@@ -463,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A0944071CF2262600BC21AA /* VideoCell.m in Sources */,
+				4AC4DAF81D10865D009BE1C2 /* PlayAssetViewController.m in Sources */,
 				4A19F8121CF5E4B80026B9BC /* CTVideoDataCenter.m in Sources */,
 				4A19F8091CF5E49B0026B9BC /* CTVideoManager.m in Sources */,
 				4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */,
