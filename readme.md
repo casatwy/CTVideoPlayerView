@@ -192,10 +192,12 @@ You may want more method in this data center, you can fire an issue to tell me w
 
 ### Observe Time
 
-#### 1. set `shouldObservePlayTime` to YES.
+#### 1. set `shouldObservePlayTime` to YES, and set timeGapToObserve.
+
+if timeGapToObserve is 1, means 1/100 second.
 
 ```objective-C
-videoView.shouldObservePlayTime = YES;
+[videoView setShouldObservePlayTime:YES withTimeGapToObserve:10.0f]; // calls the delegate method `- (void)videoView:didPlayToSecond:` every 0.1s during playing.
 ```
 
 #### 2. set `timeDelegate`
