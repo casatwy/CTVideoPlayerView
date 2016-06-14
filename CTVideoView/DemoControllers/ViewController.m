@@ -131,7 +131,7 @@
                             @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_e05f72400bae4e0b8ae6825c5891af64"
                             },
                         @{
-                            @"title":@"play a asset",
+                            @"title":@"play asset",
                             @"asset":[AVURLAsset assetWithURL:[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"]]
                             },
                         ];
