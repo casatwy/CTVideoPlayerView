@@ -274,6 +274,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             }
             
             strongSelf.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+            if (strongSelf.player.currentItem != nil) {
+                [strongSelf.player replaceCurrentItemWithPlayerItem:strongSelf.playerItem];
+            }
             strongSelf.prepareStatus = CTVideoViewPrepareStatusPrepareFinished;
 
             if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
@@ -370,6 +373,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     _assetToPlay = assetToPlay;
     if (assetToPlay) {
         self.isVideoUrlChanged = YES;
+        self.isPreparedForPlay = NO;
         self.videoUrlType = CTVideoViewVideoUrlTypeAsset;
         self.actualVideoUrlType = CTVideoViewVideoUrlTypeAsset;
     }
