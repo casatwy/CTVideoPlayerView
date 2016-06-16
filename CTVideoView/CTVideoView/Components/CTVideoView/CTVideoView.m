@@ -274,9 +274,6 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             }
             
             strongSelf.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-            if (strongSelf.player.currentItem != nil) {
-                [strongSelf.player replaceCurrentItemWithPlayerItem:strongSelf.playerItem];
-            }
             strongSelf.prepareStatus = CTVideoViewPrepareStatusPrepareFinished;
 
             if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
