@@ -118,10 +118,15 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         [self asynchronouslyLoadURLAsset:self.assetToPlay];
         return;
     }
-
+    
     if (self.asset && self.prepareStatus == CTVideoViewPrepareStatusNotPrepared) {
         self.prepareStatus = CTVideoViewPrepareStatusPreparing;
         [self asynchronouslyLoadURLAsset:self.asset];
+        return;
+    }
+    
+    if (self.prepareStatus == CTVideoViewPrepareStatusPrepareFinished) {
+        [self checkAndPlayAfterPrepareFinished];
         return;
     }
 }
@@ -280,35 +285,40 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                 [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
             }
             
-            if (strongSelf.shouldPlayAfterPrepareFinished) {
-
-                // always play native video
-                if (strongSelf.actualVideoUrlType == CTVideoViewVideoUrlTypeNative) {
-                    [strongSelf play];
-                    return;
-                }
-
-                // always play video under wifi
-                if ([CTVideoManager sharedInstance].isWifi) {
-                    [strongSelf play];
-                    return;
-                }
-
-                // even user is not in wifi, we still play video if user allows us to play remote video when not wifi
-                if (self.shouldAutoPlayRemoteVideoWhenNotWifi == YES) {
-                    [strongSelf play];
-                    return;
-                }
-            }
-            
-            if (strongSelf.isPreparedForPlay) {
-                // because user tapped play button, video plays anyway, no matter whether user is in wifi.
-                strongSelf.isPreparedForPlay = NO;
-                [strongSelf play];
-                return;
-            }
+            [strongSelf checkAndPlayAfterPrepareFinished];
         });
     }];
+}
+
+- (void)checkAndPlayAfterPrepareFinished
+{
+    if (self.shouldPlayAfterPrepareFinished) {
+        
+        // always play native video
+        if (self.actualVideoUrlType == CTVideoViewVideoUrlTypeNative) {
+            [self play];
+            return;
+        }
+        
+        // always play video under wifi
+        if ([CTVideoManager sharedInstance].isWifi) {
+            [self play];
+            return;
+        }
+        
+        // even user is not in wifi, we still play video if user allows us to play remote video when not wifi
+        if (self.shouldAutoPlayRemoteVideoWhenNotWifi == YES) {
+            [self play];
+            return;
+        }
+    }
+    
+    if (self.isPreparedForPlay) {
+        // because user tapped play button, video plays anyway, no matter whether user is in wifi.
+        self.isPreparedForPlay = NO;
+        [self play];
+        return;
+    }
 }
 
 #pragma mark - KVO
