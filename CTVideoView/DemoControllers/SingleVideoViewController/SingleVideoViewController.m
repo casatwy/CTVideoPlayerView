@@ -131,8 +131,8 @@
         UILabel *coverView = [[UILabel alloc] init];
         coverView.text = @"Cover View";
         coverView.textAlignment = NSTextAlignmentCenter;
+        coverView.backgroundColor = [UIColor blueColor];
         _videoView.coverView = coverView;
-        _videoView.coverView.backgroundColor = [UIColor blueColor];
     }
     return _videoView;
 }

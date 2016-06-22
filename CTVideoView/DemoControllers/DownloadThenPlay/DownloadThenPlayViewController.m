@@ -9,6 +9,7 @@
 #import "DownloadThenPlayViewController.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 #import "CTVideoViewCommonHeader.h"
+#import "VideoDownloadingView.h"
 
 @interface DownloadThenPlayViewController () <CTVideoViewDownloadDelegate>
 
@@ -65,15 +66,14 @@
     if (progress > 0.5) {
         if (self.hasBeenPaused == NO) {
             self.hasBeenPaused = YES;
-            [[CTVideoManager sharedInstance] pauseAllDownloadTask];
+            [[CTVideoManager sharedInstance] pauseDownloadTaskWithUrl:self.videoView.videoUrl completion:nil];
         }
     }
 }
 
 - (void)videoViewDidFinishDownload:(CTVideoView *)videoView
 {
-    [self.videoView refreshUrl];
-    [self.videoView play];
+//    [self.videoView play];
 }
 
 - (void)videoViewDidFailDownload:(CTVideoView *)videoView
@@ -83,8 +83,9 @@
 
 - (void)videoViewDidPausedDownload:(CTVideoView *)videoView
 {
-    DLog(@"pause");
-    [[CTVideoManager sharedInstance] startAllDownloadTask];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoView.videoUrl];
+    });
 }
 
 #pragma mark - getters and setter
@@ -94,6 +95,17 @@
         _videoView = [[CTVideoView alloc] init];
         _videoView.downloadDelegate = self;
         _videoView.shouldReplayWhenFinish = YES;
+        
+        _videoView.downloadingView = [[VideoDownloadingView alloc] init];
+        
+        _videoView.shouldShowOperationButton = YES;
+        
+        _videoView.shouldShowCoverViewBeforePlay = YES;
+        UILabel *coverView = [[UILabel alloc] init];
+        coverView.text = @"Cover View";
+        coverView.textAlignment = NSTextAlignmentCenter;
+        coverView.backgroundColor = [UIColor blueColor];
+        _videoView.coverView = coverView;
     }
     return _videoView;
 }

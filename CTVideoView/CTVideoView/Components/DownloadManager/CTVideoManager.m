@@ -364,7 +364,8 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
             _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         }
         if (self.downloadStrategy == CTVideoViewDownloadStrategyDownloadForegroundAndBackground) {
-            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"CTVideoDownloadTask"];
+            NSString *identifier = [NSString stringWithFormat:@"CTVideoDownloadTask - %@", [NSUUID UUID].UUIDString];
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
             configuration.sessionSendsLaunchEvents = YES;
             configuration.discretionary = YES;
             _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];

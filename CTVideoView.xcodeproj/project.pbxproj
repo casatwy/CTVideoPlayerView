@@ -18,6 +18,7 @@
 		4A19F8131CF5E4B80026B9BC /* CTVideoRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F80E1CF5E4B80026B9BC /* CTVideoRecord.m */; };
 		4A19F8141CF5E4B80026B9BC /* CTVideoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8111CF5E4B80026B9BC /* CTVideoTable.m */; };
 		4A19F8181CF5EA7D0026B9BC /* DownloadThenPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */; };
+		4A2001C51D1A7EFC00B8BA95 /* VideoDownloadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */; };
 		4AAE2A871CF21FB900139C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A861CF21FB900139C9C /* main.m */; };
 		4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A891CF21FB900139C9C /* AppDelegate.m */; };
 		4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8E1CF21FB900139C9C /* Main.storyboard */; };
@@ -52,6 +53,8 @@
 		4A19F8111CF5E4B80026B9BC /* CTVideoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTVideoTable.m; sourceTree = "<group>"; };
 		4A19F8161CF5EA7D0026B9BC /* DownloadThenPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadThenPlayViewController.h; sourceTree = "<group>"; };
 		4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadThenPlayViewController.m; sourceTree = "<group>"; };
+		4A2001C31D1A7EFC00B8BA95 /* VideoDownloadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDownloadingView.h; sourceTree = "<group>"; };
+		4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDownloadingView.m; sourceTree = "<group>"; };
 		4AAE2A821CF21FB900139C9C /* CTVideoView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTVideoView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AAE2A861CF21FB900139C9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AAE2A881CF21FB900139C9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -175,10 +178,20 @@
 		4A19F8151CF5EA670026B9BC /* DownloadThenPlay */ = {
 			isa = PBXGroup;
 			children = (
+				4A2001C21D1A7EE800B8BA95 /* DownloadingView */,
 				4A19F8161CF5EA7D0026B9BC /* DownloadThenPlayViewController.h */,
 				4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */,
 			);
 			path = DownloadThenPlay;
+			sourceTree = "<group>";
+		};
+		4A2001C21D1A7EE800B8BA95 /* DownloadingView */ = {
+			isa = PBXGroup;
+			children = (
+				4A2001C31D1A7EFC00B8BA95 /* VideoDownloadingView.h */,
+				4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */,
+			);
+			path = DownloadingView;
 			sourceTree = "<group>";
 		};
 		4AAE2A791CF21FB900139C9C = {
@@ -490,6 +503,7 @@
 				4AD2031D1CF260C9004E3A97 /* CTVideoView+Download.m in Sources */,
 				4AD203271CF264D9004E3A97 /* CTVideoView.m in Sources */,
 				4A19F8131CF5E4B80026B9BC /* CTVideoRecord.m in Sources */,
+				4A2001C51D1A7EFC00B8BA95 /* VideoDownloadingView.m in Sources */,
 				4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */,
 				4AAE2A871CF21FB900139C9C /* main.m in Sources */,
 				4A19F8141CF5E4B80026B9BC /* CTVideoTable.m in Sources */,
