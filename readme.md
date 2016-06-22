@@ -10,6 +10,7 @@
 - simple API
 - playback time observe, video duration
 - download & native file management
+- support customized cover view when downloading video, check `DownloadThenPlayViewController` for more detail.
 
 todo:
 - cache played video which comes from a remote url
