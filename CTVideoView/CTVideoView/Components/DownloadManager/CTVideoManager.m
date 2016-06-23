@@ -95,6 +95,10 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     if (videoStatus == CTVideoRecordStatusNotFound) {
         [self resumeDownloadWithUrl:url];
     }
+
+    if (videoStatus == CTVideoRecordStatusPaused) {
+        [self resumeDownloadWithUrl:url];
+    }
 }
 
 - (void)startAllDownloadTask
