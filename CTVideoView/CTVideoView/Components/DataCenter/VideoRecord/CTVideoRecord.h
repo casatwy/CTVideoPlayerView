@@ -9,10 +9,13 @@
 #import <CTPersistance/CTPersistance.h>
 
 typedef NS_ENUM(NSUInteger, CTVideoRecordStatus) {
+    // record status when downloading
     CTVideoRecordStatusDownloading = 0,
     CTVideoRecordStatusDownloadFinished = 1,
     CTVideoRecordStatusDownloadFailed = 2,
     CTVideoRecordStatusWaitingForDownload = 3,
+    
+    // record status when finding
     CTVideoRecordStatusNotFound = 4,
     CTVideoRecordStatusNative = 5,
     CTVideoRecordStatusPaused = 6,

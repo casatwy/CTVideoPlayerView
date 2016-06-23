@@ -42,6 +42,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         videoManager = [[CTVideoManager alloc] init];
+        videoManager.totalDownloadedFileCountLimit = 50;
         videoManager.maxConcurrentDownloadCount = 3;
     });
     return videoManager;
@@ -244,7 +245,9 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
                                                                                    [strongSelf.dataCenter updateStatus:CTVideoRecordStatusDownloadFinished toRemoteUrl:url];
 
                                                                                }
+                                                                               
                                                                                if (filePath) {
+                                                                                   [strongSelf.dataCenter deleteAllOldEntitiesAboveCount:strongSelf.totalDownloadedFileCountLimit];
                                                                                    [[NSNotificationCenter defaultCenter] postNotificationName:notificationNameToPost
                                                                                                                                        object:nil
                                                                                                                                      userInfo:@{
@@ -312,6 +315,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
                                                                             }
 
                                                                             if (filePath) {
+                                                                                [strongSelf.dataCenter deleteAllOldEntitiesAboveCount:strongSelf.totalDownloadedFileCountLimit];
                                                                                 [[NSNotificationCenter defaultCenter] postNotificationName:notificationNameToPost
                                                                                                                                     object:nil
                                                                                                                                   userInfo:@{
