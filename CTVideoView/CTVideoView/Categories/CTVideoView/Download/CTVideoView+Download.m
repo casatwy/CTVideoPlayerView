@@ -107,11 +107,11 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
             
             [strongSelf hidePlayButton];
             [strongSelf hideRetryButton];
+            
+            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewWillStartDownload:)]) {
+                [strongSelf.downloadDelegate videoViewWillStartDownload:strongSelf];
+            }
         });
-        
-        if ([self.downloadDelegate respondsToSelector:@selector(videoViewWillStartDownload:)]) {
-            [self.downloadDelegate videoViewWillStartDownload:self];
-        }
     }
 }
 
@@ -129,11 +129,11 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
             }
             
             [strongSelf showPlayButton];
+            
+            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewDidFinishDownload:)]) {
+                [strongSelf.downloadDelegate videoViewDidFinishDownload:strongSelf];
+            }
         });
-        
-        if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidFinishDownload:)]) {
-            [self.downloadDelegate videoViewDidFinishDownload:self];
-        }
     }
 }
 
@@ -148,12 +148,14 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
             if ([strongSelf.downloadingView respondsToSelector:@selector(videoView:progress:)]) {
                 [strongSelf.downloadingView videoView:strongSelf progress:progress];
             }
+            
+            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoView:downloadProgress:)]) {
+                [strongSelf.downloadDelegate videoView:strongSelf
+                                      downloadProgress:progress];
+            }
         });
         
-        if ([self.downloadDelegate respondsToSelector:@selector(videoView:downloadProgress:)]) {
-            [self.downloadDelegate videoView:self
-                            downloadProgress:progress];
-        }
+        
     }
 }
 
@@ -169,11 +171,12 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
             }
             
             [strongSelf showRetryButton];
+            
+            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewDidFailDownload:)]) {
+                [strongSelf.downloadDelegate videoViewDidFailDownload:strongSelf];
+            }
         });
         
-        if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidFailDownload:)]) {
-            [self.downloadDelegate videoViewDidFailDownload:self];
-        }
     }
 }
 
@@ -187,11 +190,11 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
             if ([strongSelf.downloadingView respondsToSelector:@selector(videoViewPauseDownload:)]) {
                 [strongSelf.downloadingView videoViewPauseDownload:strongSelf];
             }
+            
+            if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewDidPausedDownload:)]) {
+                [strongSelf.downloadDelegate videoViewDidPausedDownload:strongSelf];
+            }
         });
-        
-        if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidPausedDownload:)]) {
-            [self.downloadDelegate videoViewDidPausedDownload:self];
-        }
     }
 }
 
