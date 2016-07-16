@@ -93,7 +93,7 @@
 
 - (void)videoViewDidFinishDownload:(CTVideoView *)videoView
 {
-//    [self.videoView play];
+    [self.videoView play];
 }
 
 - (void)videoViewDidFailDownload:(CTVideoView *)videoView
