@@ -152,6 +152,7 @@ static void * CTVideoViewTimePropertyTimeGapToObserve;
 {
     [self removeTimeObserver];
     [self removeVideoStartTimeObserver];
+    self.timeDelegate = nil;
 }
 
 - (void)willStartPlay

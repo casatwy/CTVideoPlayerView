@@ -55,6 +55,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
 - (void)deallocDownload
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.downloadDelegate = nil;
 }
 
 #pragma mark - public methods

@@ -30,7 +30,7 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
 
 - (void)deallocOperationButtons
 {
-    // do nothing
+    self.buttonDelegate = nil;
 }
 
 #pragma mark - public methods
