@@ -12,6 +12,7 @@
 #import "VideoTableViewController.h"
 #import "DownloadThenPlayViewController.h"
 #import "PlayAssetViewController.h"
+#import "DownloadAndPlayViewController.h"
 
 #import <HandyFrame/UIView+LayoutMethods.h>
 #import <AVFoundation/AVFoundation.h>
@@ -57,6 +58,9 @@
     }
     if (indexPath.row == 6) {
         viewControllerToPush = [[PlayAssetViewController alloc] initWithAsset:info[@"asset"]];
+    }
+    if (indexPath.row == 7) {
+        viewControllerToPush = [[DownloadAndPlayViewController alloc] initWithUrl:[NSURL URLWithString:info[@"url"]]];
     }
 
     if (viewControllerToPush) {
@@ -133,6 +137,10 @@
                         @{
                             @"title":@"play asset",
                             @"asset":[AVURLAsset assetWithURL:[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"]]
+                            },
+                        @{
+                            @"title":@"mp4 download and play",
+                            @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_e05f72400bae4e0b8ae6825c5891af64"
                             },
                         ];
     }
