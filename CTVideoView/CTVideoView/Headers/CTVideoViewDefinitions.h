@@ -158,4 +158,17 @@ typedef NS_ENUM(NSUInteger, CTVideoViewPrepareStatus) {
 
 @end
 
+/**********************************************************************/
+
+@protocol CTVideoPlayerDownloadingViewProtocol <NSObject>
+
+@optional
+- (void)videoViewStartDownload:(CTVideoView *)videoView;
+- (void)videoViewFinishDownload:(CTVideoView *)videoView;
+- (void)videoViewFailedDownload:(CTVideoView *)videoView;
+- (void)videoViewPauseDownload:(CTVideoView *)videoView;
+- (void)videoView:(CTVideoView *)videoView progress:(CGFloat)progress;
+
+@end
+
 #endif /* CTVideoViewDefinitions_h */

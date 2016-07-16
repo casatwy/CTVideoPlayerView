@@ -9,6 +9,7 @@
 #import "DownloadAndPlayViewController.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 #import "CTVideoView.h"
+#import "CTVideoView+Cache.h"
 
 @interface DownloadAndPlayViewController ()
 
@@ -23,6 +24,7 @@
 {
     self = [super init];
     if (self) {
+        self.videoView.videoUrl = assetUrl;
     }
     return self;
 }
@@ -42,7 +44,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.videoView play];
+    [self.videoView cacheAndPlay];
 }
 
 #pragma mark - getters and setters
