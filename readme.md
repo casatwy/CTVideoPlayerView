@@ -1,5 +1,7 @@
 # CTVideoPlayerView
 
+[![Join the chat at https://gitter.im/casatwy/CTVideoPlayerView](https://badges.gitter.im/casatwy/CTVideoPlayerView.svg)](https://gitter.im/casatwy/CTVideoPlayerView?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Features
 
 - it's an UIView
