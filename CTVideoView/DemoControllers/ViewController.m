@@ -139,7 +139,7 @@
                             @"asset":[AVURLAsset assetWithURL:[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"]]
                             },
                         @{
-                            @"title":@"single video, change orientation",
+                            @"title":@"Full Screen Demo",
                             @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74"
                             },
                         ];

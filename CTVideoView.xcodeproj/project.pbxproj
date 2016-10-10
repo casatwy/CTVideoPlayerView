@@ -19,8 +19,8 @@
 		4A19F8141CF5E4B80026B9BC /* CTVideoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8111CF5E4B80026B9BC /* CTVideoTable.m */; };
 		4A19F8181CF5EA7D0026B9BC /* DownloadThenPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */; };
 		4A2001C51D1A7EFC00B8BA95 /* VideoDownloadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */; };
-		4AA3E5791DAC0906002F5352 /* ChangeToFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E5781DAC0906002F5352 /* ChangeToFullScreenViewController.m */; };
 		4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */; };
+		4AA3E5811DAC24F8002F5352 /* ChangeToFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E5801DAC24F8002F5352 /* ChangeToFullScreenViewController.m */; };
 		4AAE2A871CF21FB900139C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A861CF21FB900139C9C /* main.m */; };
 		4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A891CF21FB900139C9C /* AppDelegate.m */; };
 		4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8E1CF21FB900139C9C /* Main.storyboard */; };
@@ -57,10 +57,10 @@
 		4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadThenPlayViewController.m; sourceTree = "<group>"; };
 		4A2001C31D1A7EFC00B8BA95 /* VideoDownloadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDownloadingView.h; sourceTree = "<group>"; };
 		4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDownloadingView.m; sourceTree = "<group>"; };
-		4AA3E5771DAC0906002F5352 /* ChangeToFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeToFullScreenViewController.h; sourceTree = "<group>"; };
-		4AA3E5781DAC0906002F5352 /* ChangeToFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeToFullScreenViewController.m; sourceTree = "<group>"; };
 		4AA3E57B1DAC0D52002F5352 /* CTVideoView+FullScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+FullScreen.h"; sourceTree = "<group>"; };
 		4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+FullScreen.m"; sourceTree = "<group>"; };
+		4AA3E57F1DAC24F8002F5352 /* ChangeToFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeToFullScreenViewController.h; sourceTree = "<group>"; };
+		4AA3E5801DAC24F8002F5352 /* ChangeToFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeToFullScreenViewController.m; sourceTree = "<group>"; };
 		4AAE2A821CF21FB900139C9C /* CTVideoView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTVideoView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AAE2A861CF21FB900139C9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AAE2A881CF21FB900139C9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			children = (
 				4A0944081CF2287F00BC21AA /* ViewController.h */,
 				4A0944091CF2287F00BC21AA /* ViewController.m */,
-				4AA3E5761DAC08CC002F5352 /* ChangeOrientationViewController */,
+				4AA3E57E1DAC24F8002F5352 /* ChangeToFullScreenViewController */,
 				4AC4DAF51D10864B009BE1C2 /* PlayAsset */,
 				4A19F8151CF5EA670026B9BC /* DownloadThenPlay */,
 				4A0943FC1CF223A700BC21AA /* SingleVideoViewController */,
@@ -201,15 +201,6 @@
 			path = DownloadingView;
 			sourceTree = "<group>";
 		};
-		4AA3E5761DAC08CC002F5352 /* ChangeOrientationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				4AA3E5771DAC0906002F5352 /* ChangeToFullScreenViewController.h */,
-				4AA3E5781DAC0906002F5352 /* ChangeToFullScreenViewController.m */,
-			);
-			path = ChangeOrientationViewController;
-			sourceTree = "<group>";
-		};
 		4AA3E57A1DAC0D3F002F5352 /* FullScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +208,15 @@
 				4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */,
 			);
 			path = FullScreen;
+			sourceTree = "<group>";
+		};
+		4AA3E57E1DAC24F8002F5352 /* ChangeToFullScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4AA3E57F1DAC24F8002F5352 /* ChangeToFullScreenViewController.h */,
+				4AA3E5801DAC24F8002F5352 /* ChangeToFullScreenViewController.m */,
+			);
+			path = ChangeToFullScreenViewController;
 			sourceTree = "<group>";
 		};
 		4AAE2A791CF21FB900139C9C = {
@@ -570,10 +570,10 @@
 				4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */,
 				4AD203201CF260C9004E3A97 /* CTVideoView+VideoCoverView.m in Sources */,
 				4AF6EFA01CF5787600A1E1C9 /* AVAsset+CTVideoView.m in Sources */,
-				4AA3E5791DAC0906002F5352 /* ChangeToFullScreenViewController.m in Sources */,
 				4A0944011CF2250A00BC21AA /* SingleVideoViewController.m in Sources */,
 				4A19F8181CF5EA7D0026B9BC /* DownloadThenPlayViewController.m in Sources */,
 				4AD2031E1CF260C9004E3A97 /* CTVideoView+OperationButtons.m in Sources */,
+				4AA3E5811DAC24F8002F5352 /* ChangeToFullScreenViewController.m in Sources */,
 				4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */,
 				4AD2031F1CF260C9004E3A97 /* CTVideoView+Time.m in Sources */,
 				4AD2031D1CF260C9004E3A97 /* CTVideoView+Download.m in Sources */,

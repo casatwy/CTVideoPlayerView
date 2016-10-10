@@ -277,6 +277,17 @@ layout with [HandyFrame](https://github.com/casatwy/HandyAutoLayout)
 }
 ```
 
+### play with full screen and exit full screen
+```
+    if (self.videoView.isFullScreen) {
+        [self.videoView exitFullScreen];
+    } else {
+        [self.videoView enterFullScreen];
+    }
+```
+
+see the demo [ChangeToFullScreenViewController](controller://github.com/casatwy/CTVideoPlayerView/blob/master/CTVideoView/DemoControllers/ChangeOrientationViewController/ChangeToFullScreenViewController.m)
+
 ## Manual
 
 ### properties
