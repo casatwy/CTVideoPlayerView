@@ -7,23 +7,62 @@
 //
 
 #import "CTVideoView+FullScreen.h"
+#import "AVAsset+CTVideoView.h"
 #import <objc/runtime.h>
 
 static void * CTVideoViewFullScreenPropertyIsFullScreen;
+static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
 
 @implementation CTVideoView (FullScreen)
 
 #pragma mark - public methods
 - (void)enterFullScreen
 {
-//    if (self.) {
-//        <#statements#>
-//    }
+    self.isFullScreen = YES;
+    
+    AVAsset *asset = self.asset;
+    CGFloat videoWidth = [[[asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].width;
+    CGFloat videoHeight = [[[asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].height;
+    
+    if ([asset CTVideoView_isVideoPortraint]) {
+        if (videoWidth < videoHeight) {
+            if (self.transform.b != 1 || self.transform.c != -1) {
+                [self animateToFullScreen];
+            }
+        }
+    } else {
+        if (videoWidth > videoHeight) {
+            if (self.transform.b != 1 || self.transform.c != -1) {
+                [self animateToFullScreen];
+            }
+        }
+    }
 }
 
 - (void)exitFullScreen
 {
+    self.isFullScreen = NO;
+    [self animateExitFullScreen];
+}
+
+#pragma mark - private methods
+- (void)animateToFullScreen
+{
+    NSValue *originFrameValue = [NSValue valueWithCGRect:self.frame];
+    objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginVideoViewFrame, originFrameValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
+    [UIView animateWithDuration:0.3f animations:^{
+        self.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+        self.frame = CGRectMake(0, 0, self.superview.frame.size.width, self.superview.frame.size.height);
+    }];
+}
+
+- (void)animateExitFullScreen
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        self.playerLayer.transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+        self.frame = [self originVideoViewFrame];
+    }];
 }
 
 #pragma mark - getters and setters
@@ -34,7 +73,13 @@ static void * CTVideoViewFullScreenPropertyIsFullScreen;
 
 - (void)setIsFullScreen:(BOOL)isFullScreen
 {
-    objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyIsFullScreen, @(isFullScreen), OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyIsFullScreen, @(isFullScreen), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGRect)originVideoViewFrame
+{
+    CGRect frame = [objc_getAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginVideoViewFrame) CGRectValue];
+    return frame;
 }
 
 @end

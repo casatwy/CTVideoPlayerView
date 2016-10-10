@@ -39,7 +39,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.videoView.size = CGSizeMake(100, 100);
+    self.videoView.size = CGSizeMake(100, 200);
     [self.videoView centerEqualToView:self.view];
     
     self.fullScreenButton.size = CGSizeMake(100, 100);
@@ -67,7 +67,11 @@
 #pragma mark - Event Response
 - (void)didTappedFullScreenButton:(UIButton *)fullScreenButton
 {
-    
+    if (self.videoView.isFullScreen) {
+        [self.videoView exitFullScreen];
+    } else {
+        [self.videoView enterFullScreen];
+    }
 }
 
 #pragma mark - getters and setters
@@ -76,7 +80,6 @@
     if (_videoView == nil) {
         _videoView = [[CTVideoView alloc] init];
         _videoView.operationDelegate = self;
-        _videoView.backgroundColor = [UIColor blueColor];
     }
     return _videoView;
 }
