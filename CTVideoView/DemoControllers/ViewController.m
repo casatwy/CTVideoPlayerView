@@ -12,6 +12,7 @@
 #import "VideoTableViewController.h"
 #import "DownloadThenPlayViewController.h"
 #import "PlayAssetViewController.h"
+#import "ChangeOrientationViewController.h"
 
 #import <HandyFrame/UIView+LayoutMethods.h>
 #import <AVFoundation/AVFoundation.h>
@@ -57,6 +58,9 @@
     }
     if (indexPath.row == 6) {
         viewControllerToPush = [[PlayAssetViewController alloc] initWithAsset:info[@"asset"]];
+    }
+    if (indexPath.row == 7) {
+        viewControllerToPush = [[ChangeOrientationViewController alloc] initWithVideoUrlString:info[@"url"]];
     }
 
     if (viewControllerToPush) {
@@ -133,6 +137,10 @@
                         @{
                             @"title":@"play asset",
                             @"asset":[AVURLAsset assetWithURL:[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"]]
+                            },
+                        @{
+                            @"title":@"single video, change orientation",
+                            @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74"
                             },
                         ];
     }

@@ -26,6 +26,7 @@
 @property (nonatomic, assign, readonly) CTVideoViewVideoUrlType actualVideoUrlType;
 
 @property (nonatomic, assign, readonly) BOOL isPlaying;
+@property (nonatomic, assign, readonly) CTVideoViewPrepareStatus prepareStatus;
 
 @property (nonatomic, assign) BOOL isMuted; // set YES to mute the video playing
 @property (nonatomic, assign) BOOL shouldPlayAfterPrepareFinished; // default is YES

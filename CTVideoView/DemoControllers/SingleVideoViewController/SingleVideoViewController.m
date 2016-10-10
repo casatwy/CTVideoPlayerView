@@ -33,10 +33,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -70,7 +66,7 @@
 #pragma mark - event response
 - (void)didTappedCleanCacheButton:(UIButton *)button
 {
-    
+    // do nothing
 }
 
 - (void)didTappedPlayOrPauseButton:(UIButton *)button

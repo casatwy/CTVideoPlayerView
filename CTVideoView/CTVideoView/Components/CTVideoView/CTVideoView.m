@@ -27,9 +27,8 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @interface CTVideoView ()
 
 @property (nonatomic, assign) BOOL isVideoUrlChanged;
-@property (nonatomic, assign) BOOL isPreparedForPlay;
-@property (nonatomic, assign) CTVideoViewPrepareStatus prepareStatus;
 
+@property (nonatomic, assign, readwrite) CTVideoViewPrepareStatus prepareStatus;
 @property (nonatomic, assign, readwrite) CTVideoViewVideoUrlType videoUrlType;
 @property (nonatomic, strong, readwrite) NSURL *actualVideoPlayingUrl;
 @property (nonatomic, assign, readwrite) CTVideoViewVideoUrlType actualVideoUrlType;
@@ -66,7 +65,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         _shouldPlayAfterPrepareFinished = YES;
         _shouldReplayWhenFinish = NO;
         _shouldChangeOrientationToFitVideo = NO;
-        _isPreparedForPlay = NO;
+        _prepareStatus = CTVideoViewPrepareStatusNotPrepared;
 
         if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
             self.playerLayer.player = self.player;
@@ -157,7 +156,6 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         }
 
     } else {
-        self.isPreparedForPlay = YES;
         [self prepare];
     }
 }
@@ -312,13 +310,6 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             return;
         }
     }
-    
-    if (self.isPreparedForPlay) {
-        // because user tapped play button, video plays anyway, no matter whether user is in wifi.
-        self.isPreparedForPlay = NO;
-        [self play];
-        return;
-    }
 }
 
 #pragma mark - KVO
@@ -380,7 +371,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     _assetToPlay = assetToPlay;
     if (assetToPlay) {
         self.isVideoUrlChanged = YES;
-        self.isPreparedForPlay = NO;
+        self.prepareStatus = CTVideoViewPrepareStatusNotPrepared;
         self.videoUrlType = CTVideoViewVideoUrlTypeAsset;
         self.actualVideoUrlType = CTVideoViewVideoUrlTypeAsset;
     }
