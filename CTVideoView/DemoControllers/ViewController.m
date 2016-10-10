@@ -59,7 +59,7 @@
     if (indexPath.row == 6) {
         viewControllerToPush = [[PlayAssetViewController alloc] initWithAsset:info[@"asset"]];
     }
-    if (indexPath.row == 7) {
+    if (indexPath.row == 7 || indexPath.row == 8) {
         viewControllerToPush = [[ChangeToFullScreenViewController alloc] initWithVideoUrlString:info[@"url"]];
     }
 
@@ -139,8 +139,12 @@
                             @"asset":[AVURLAsset assetWithURL:[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"]]
                             },
                         @{
-                            @"title":@"Full Screen Demo",
+                            @"title":@"Horizontal Full Screen Demo",
                             @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74"
+                            },
+                        @{
+                            @"title":@"Vertical Full Screen Demo",
+                            @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
                             },
                         ];
     }

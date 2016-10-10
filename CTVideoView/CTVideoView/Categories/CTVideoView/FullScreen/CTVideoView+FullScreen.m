@@ -24,19 +24,21 @@ static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
     CGFloat videoWidth = [[[asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].width;
     CGFloat videoHeight = [[[asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].height;
     
+    CATransform3D transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
     if ([asset CTVideoView_isVideoPortraint]) {
         if (videoWidth < videoHeight) {
             if (self.transform.b != 1 || self.transform.c != -1) {
-                [self animateToFullScreen];
+                transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
             }
         }
     } else {
         if (videoWidth > videoHeight) {
             if (self.transform.b != 1 || self.transform.c != -1) {
-                [self animateToFullScreen];
+                transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
             }
         }
     }
+    [self animateToFullScreenWithTransform:transform];
 }
 
 - (void)exitFullScreen
@@ -46,13 +48,13 @@ static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
 }
 
 #pragma mark - private methods
-- (void)animateToFullScreen
+- (void)animateToFullScreenWithTransform:(CATransform3D)transform
 {
     NSValue *originFrameValue = [NSValue valueWithCGRect:self.frame];
     objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginVideoViewFrame, originFrameValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     [UIView animateWithDuration:0.3f animations:^{
-        self.playerLayer.transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+        self.playerLayer.transform = transform;
         self.frame = CGRectMake(0, 0, self.superview.frame.size.width, self.superview.frame.size.height);
     }];
 }
