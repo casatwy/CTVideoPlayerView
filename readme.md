@@ -13,6 +13,7 @@
 - playback time observe, video duration
 - download & native file management
 - support customized cover view when downloading video, All you need to do is create a `UIView<CTVideoPlayerDownloadingViewProtocol>` and assign it to `CTVideoView.downloadingView`. check `DownloadThenPlayViewController` for more detail.
+- support change to full screen
 
 todo:
 - cache played video which comes from a remote url
