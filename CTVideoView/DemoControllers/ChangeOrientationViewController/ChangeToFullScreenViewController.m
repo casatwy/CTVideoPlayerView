@@ -6,18 +6,18 @@
 //  Copyright © 2016年 casa. All rights reserved.
 //
 
-#import "ChangeOrientationViewController.h"
+#import "ChangeToFullScreenViewController.h"
 #import "CTVideoViewCommonHeader.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
-@interface ChangeOrientationViewController () <CTVideoViewOperationDelegate>
+@interface ChangeToFullScreenViewController () <CTVideoViewOperationDelegate>
 
 @property (nonatomic, strong) CTVideoView *videoView;
 @property (nonatomic, strong) UIButton *fullScreenButton;
 
 @end
 
-@implementation ChangeOrientationViewController
+@implementation ChangeToFullScreenViewController
 
 #pragma mark - life cycle
 - (instancetype)initWithVideoUrlString:(NSString *)urlString

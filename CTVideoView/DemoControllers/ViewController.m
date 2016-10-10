@@ -12,7 +12,7 @@
 #import "VideoTableViewController.h"
 #import "DownloadThenPlayViewController.h"
 #import "PlayAssetViewController.h"
-#import "ChangeOrientationViewController.h"
+#import "ChangeToFullScreenViewController.h"
 
 #import <HandyFrame/UIView+LayoutMethods.h>
 #import <AVFoundation/AVFoundation.h>
@@ -60,7 +60,7 @@
         viewControllerToPush = [[PlayAssetViewController alloc] initWithAsset:info[@"asset"]];
     }
     if (indexPath.row == 7) {
-        viewControllerToPush = [[ChangeOrientationViewController alloc] initWithVideoUrlString:info[@"url"]];
+        viewControllerToPush = [[ChangeToFullScreenViewController alloc] initWithVideoUrlString:info[@"url"]];
     }
 
     if (viewControllerToPush) {

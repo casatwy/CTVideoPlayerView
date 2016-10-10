@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChangeOrientationViewController : UIViewController
+@interface ChangeToFullScreenViewController : UIViewController
 
 - (instancetype)initWithVideoUrlString:(NSString *)urlString;
 
