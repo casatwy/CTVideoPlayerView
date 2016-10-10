@@ -20,12 +20,11 @@ static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
 {
     self.isFullScreen = YES;
     
-    AVAsset *asset = self.asset;
-    CGFloat videoWidth = [[[asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].width;
-    CGFloat videoHeight = [[[asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].height;
+    CGFloat videoWidth = [[[self.asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].width;
+    CGFloat videoHeight = [[[self.asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].height;
     
     CATransform3D transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
-    if ([asset CTVideoView_isVideoPortraint]) {
+    if ([self.asset CTVideoView_isVideoPortraint]) {
         if (videoWidth < videoHeight) {
             if (self.transform.b != 1 || self.transform.c != -1) {
                 transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
