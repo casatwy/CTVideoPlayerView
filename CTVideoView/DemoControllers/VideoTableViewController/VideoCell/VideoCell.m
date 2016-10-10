@@ -9,7 +9,7 @@
 #import "VideoCell.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
-@interface VideoCell ()
+@interface VideoCell () <CTVideoViewOperationDelegate>
 
 @property (nonatomic, strong) CTVideoView *videoView;
 
@@ -37,6 +37,12 @@
     [self.videoView topInContainer:5 shouldResize:NO];
 }
 
+#pragma mark - CTVideoViewOperationDelegate
+- (void)videoViewDidFinishPrepare:(CTVideoView *)videoView
+{
+    [videoView play];
+}
+
 #pragma mark - getters and setters
 - (CTVideoView *)videoView
 {
@@ -48,6 +54,7 @@
         _videoView.videoContentMode = CTVideoViewContentModeResizeAspectFill;
         _videoView.shouldShowOperationButton = NO;
         _videoView.stalledStrategy = CTVideoViewStalledStrategyPlay;
+        _videoView.operationDelegate = self;
 
         UILabel *coverView = [[UILabel alloc] init];
         coverView.text = @"VIDEO";
