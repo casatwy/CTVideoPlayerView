@@ -13,7 +13,7 @@
 - playback time observe, video duration
 - download & native file management
 - support customized cover view when downloading video, All you need to do is create a `UIView<CTVideoPlayerDownloadingViewProtocol>` and assign it to `CTVideoView.downloadingView`. check `DownloadThenPlayViewController` for more detail.
-- support change to full screen
+- support changing to full screen, and exit from full screen
 
 todo:
 - cache played video which comes from a remote url
@@ -286,7 +286,7 @@ layout with [HandyFrame](https://github.com/casatwy/HandyAutoLayout)
     }
 ```
 
-see the demo [ChangeToFullScreenViewController](controller://github.com/casatwy/CTVideoPlayerView/blob/master/CTVideoView/DemoControllers/ChangeOrientationViewController/ChangeToFullScreenViewController.m)
+see the demo ![ChangeToFullScreenViewController](controller://github.com/casatwy/CTVideoPlayerView/blob/master/CTVideoView/DemoControllers/ChangeOrientationViewController/ChangeToFullScreenViewController.m)
 
 ## Manual
 
