@@ -412,7 +412,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AAE2A991CF21FB900139C9C /* Build configuration list for PBXNativeTarget "CTVideoView" */;
 			buildPhases = (
-				B259EEB8A150976C751E55BE /* 📦 Check Pods Manifest.lock */,
+				B259EEB8A150976C751E55BE /* [CP] Check Pods Manifest.lock */,
 				C7F799C8385037A3FAE95CAE /* [CP] Check Pods Manifest.lock */,
 				4AAE2A7E1CF21FB900139C9C /* Sources */,
 				4AAE2A7F1CF21FB900139C9C /* Frameworks */,
@@ -538,14 +538,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B259EEB8A150976C751E55BE /* 📦 Check Pods Manifest.lock */ = {
+		B259EEB8A150976C751E55BE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
