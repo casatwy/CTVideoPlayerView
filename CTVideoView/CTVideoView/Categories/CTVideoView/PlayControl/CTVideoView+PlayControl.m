@@ -44,15 +44,15 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
                 // horizontal
                 playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionHorizontal;
                 [self.player pause]; // 这里用[self pause]会使得play button展示出来
-                [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlPlay];
-                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlVolume];
+                [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlTypePlay];
+                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypeVolume];
             }
 
             if (absoluteX < absoluteY) {
                 // vertical
                 playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionVertical;
-                [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlVolume];
-                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlPlay];
+                [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlTypeVolume];
+                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypePlay];
             }
             break;
         }
@@ -61,7 +61,6 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
             if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionHorizontal) {
             }
             if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionVertical) {
-                <#statements#>
             }
             break;
         }

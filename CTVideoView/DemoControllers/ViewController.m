@@ -13,6 +13,7 @@
 #import "DownloadThenPlayViewController.h"
 #import "PlayAssetViewController.h"
 #import "ChangeToFullScreenViewController.h"
+#import "PlayControlViewController.h"
 
 #import <HandyFrame/UIView+LayoutMethods.h>
 #import <AVFoundation/AVFoundation.h>
@@ -62,6 +63,9 @@
     if (indexPath.row == 7 || indexPath.row == 8) {
         viewControllerToPush = [[ChangeToFullScreenViewController alloc] initWithVideoUrlString:info[@"url"]];
     }
+    if (indexPath.row == 9) {
+        viewControllerToPush = [[PlayControlViewController alloc] initWithVideoUrlString:info[@"url"]];
+    }
 
     if (viewControllerToPush) {
         viewControllerToPush.title = info[@"title"];
@@ -101,23 +105,23 @@
     if (_dataSource == nil) {
         _dataSource = @[
                         @{
-                            @"title":@"single remote video",
+                            @"title":@"Single Remote Video",
                             @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74"
                             },
                         @{
-                            @"title":@"single native video",
+                            @"title":@"Single Native Video",
                             @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
                             },
                         @{
-                            @"title":@"short single live stream video",
+                            @"title":@"Short Single Live Stream Video",
                             @"url":@"https://devimages.apple.com.edgekey.net/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8"
                             },
                         @{
-                            @"title":@"long single live stream video",
+                            @"title":@"Long Single Live Stream Video",
                             @"url":@"http://devstreaming.apple.com/videos/wwdc/2015/502sufwcpog/502/hls_vod_mvp.m3u8"
                             },
                         @{
-                            @"title":@"videos in tableview",
+                            @"title":@"Videos in Tableview",
                             @"urlList":@[
                                     @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_856a6738eefc495bbd7b0ed59beaa9fe",
                                     @"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_e05f72400bae4e0b8ae6825c5891af64",
@@ -131,11 +135,11 @@
                                     ]
                             },
                         @{
-                            @"title":@"mp4 download then play",
+                            @"title":@"MP4 Download Then Play",
                             @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_e05f72400bae4e0b8ae6825c5891af64"
                             },
                         @{
-                            @"title":@"play asset",
+                            @"title":@"Play Native Asset",
                             @"asset":[AVURLAsset assetWithURL:[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"]]
                             },
                         @{
@@ -144,6 +148,10 @@
                             },
                         @{
                             @"title":@"Vertical Full Screen Demo",
+                            @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
+                            },
+                        @{
+                            @"title":@"Slide Play Control",
                             @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
                             },
                         ];

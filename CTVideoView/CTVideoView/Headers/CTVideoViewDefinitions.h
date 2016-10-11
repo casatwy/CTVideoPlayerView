@@ -98,8 +98,8 @@ typedef NS_ENUM(NSUInteger, CTVideoViewPrepareStatus) {
 };
 
 typedef NS_ENUM(NSUInteger, CTVideoViewPlayControlType) {
-    CTVideoViewPlayControlPlay,
-    CTVideoViewPlayControlVolume,
+    CTVideoViewPlayControlTypePlay,
+    CTVideoViewPlayControlTypeVolume,
 };
 
 typedef NS_ENUM(NSUInteger, CTVideoViewPlayControlPlayDirection) {

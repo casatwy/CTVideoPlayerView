@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45FA8DE096536B43B254A27B /* libPods-CTVideoView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD750E53C8E15AE66512441 /* libPods-CTVideoView.a */; };
+		4A030D701DAD26670079D1D4 /* PlayControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A030D6F1DAD26670079D1D4 /* PlayControlViewController.m */; };
 		4A0944011CF2250A00BC21AA /* SingleVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944001CF2250A00BC21AA /* SingleVideoViewController.m */; };
 		4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944031CF2251800BC21AA /* VideoTableViewController.m */; };
 		4A0944071CF2262600BC21AA /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0944061CF2262600BC21AA /* VideoCell.m */; };
@@ -38,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A030D6E1DAD26670079D1D4 /* PlayControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayControlViewController.h; sourceTree = "<group>"; };
+		4A030D6F1DAD26670079D1D4 /* PlayControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayControlViewController.m; sourceTree = "<group>"; };
 		4A0943FF1CF2250A00BC21AA /* SingleVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleVideoViewController.h; sourceTree = "<group>"; };
 		4A0944001CF2250A00BC21AA /* SingleVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleVideoViewController.m; sourceTree = "<group>"; };
 		4A0944021CF2251800BC21AA /* VideoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewController.h; sourceTree = "<group>"; };
@@ -108,11 +111,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A030D6D1DAD26590079D1D4 /* PlayControlViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A030D6E1DAD26670079D1D4 /* PlayControlViewController.h */,
+				4A030D6F1DAD26670079D1D4 /* PlayControlViewController.m */,
+			);
+			path = PlayControlViewController;
+			sourceTree = "<group>";
+		};
 		4A0943FB1CF223A700BC21AA /* DemoControllers */ = {
 			isa = PBXGroup;
 			children = (
 				4A0944081CF2287F00BC21AA /* ViewController.h */,
 				4A0944091CF2287F00BC21AA /* ViewController.m */,
+				4A030D6D1DAD26590079D1D4 /* PlayControlViewController */,
 				4AA3E57E1DAC24F8002F5352 /* ChangeToFullScreenViewController */,
 				4AC4DAF51D10864B009BE1C2 /* PlayAsset */,
 				4A19F8151CF5EA670026B9BC /* DownloadThenPlay */,
@@ -455,6 +468,7 @@
 				TargetAttributes = {
 					4AAE2A811CF21FB900139C9C = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = A538N96H5F;
 					};
 				};
 			};
@@ -592,6 +606,7 @@
 				4AAD9AED1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m in Sources */,
 				4AC4DAF81D10865D009BE1C2 /* PlayAssetViewController.m in Sources */,
 				4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */,
+				4A030D701DAD26670079D1D4 /* PlayControlViewController.m in Sources */,
 				4A19F8121CF5E4B80026B9BC /* CTVideoDataCenter.m in Sources */,
 				4A19F8091CF5E49B0026B9BC /* CTVideoManager.m in Sources */,
 				4A09440A1CF2287F00BC21AA /* ViewController.m in Sources */,
@@ -727,10 +742,11 @@
 			baseConfigurationReference = EC3D762809CDA866E9091D8A /* Pods-CTVideoView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A538N96H5F;
 				INFOPLIST_FILE = CTVideoView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = casa.CTVideoView;
+				PRODUCT_BUNDLE_IDENTIFIER = casa.CTVideoViewPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -740,10 +756,11 @@
 			baseConfigurationReference = F7B564C59E114BF34AB7C922 /* Pods-CTVideoView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = A538N96H5F;
 				INFOPLIST_FILE = CTVideoView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = casa.CTVideoView;
+				PRODUCT_BUNDLE_IDENTIFIER = casa.CTVideoViewPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
