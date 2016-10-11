@@ -15,6 +15,7 @@
 #import "CTVideoView+VideoCoverView.h"
 #import "CTVideoView+OperationButtons.h"
 #import "CTVideoView+FullScreen.h"
+#import "CTVideoView+PlayControl.h"
 
 #import "CTVideoViewDefinitions.h"
 

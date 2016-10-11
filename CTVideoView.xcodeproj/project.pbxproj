@@ -19,6 +19,7 @@
 		4A19F8141CF5E4B80026B9BC /* CTVideoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8111CF5E4B80026B9BC /* CTVideoTable.m */; };
 		4A19F8181CF5EA7D0026B9BC /* DownloadThenPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */; };
 		4A2001C51D1A7EFC00B8BA95 /* VideoDownloadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */; };
+		4A97D62E1DAC8EE000BD7D30 /* CTVideoView+PlayControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A97D62D1DAC8EE000BD7D30 /* CTVideoView+PlayControl.m */; };
 		4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */; };
 		4AA3E5811DAC24F8002F5352 /* ChangeToFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E5801DAC24F8002F5352 /* ChangeToFullScreenViewController.m */; };
 		4AAE2A871CF21FB900139C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A861CF21FB900139C9C /* main.m */; };
@@ -57,6 +58,8 @@
 		4A19F8171CF5EA7D0026B9BC /* DownloadThenPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadThenPlayViewController.m; sourceTree = "<group>"; };
 		4A2001C31D1A7EFC00B8BA95 /* VideoDownloadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDownloadingView.h; sourceTree = "<group>"; };
 		4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDownloadingView.m; sourceTree = "<group>"; };
+		4A97D62C1DAC8EE000BD7D30 /* CTVideoView+PlayControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+PlayControl.h"; sourceTree = "<group>"; };
+		4A97D62D1DAC8EE000BD7D30 /* CTVideoView+PlayControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+PlayControl.m"; sourceTree = "<group>"; };
 		4AA3E57B1DAC0D52002F5352 /* CTVideoView+FullScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+FullScreen.h"; sourceTree = "<group>"; };
 		4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+FullScreen.m"; sourceTree = "<group>"; };
 		4AA3E57F1DAC24F8002F5352 /* ChangeToFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeToFullScreenViewController.h; sourceTree = "<group>"; };
@@ -201,6 +204,15 @@
 			path = DownloadingView;
 			sourceTree = "<group>";
 		};
+		4A97D62B1DAC8ED000BD7D30 /* PlayControl */ = {
+			isa = PBXGroup;
+			children = (
+				4A97D62C1DAC8EE000BD7D30 /* CTVideoView+PlayControl.h */,
+				4A97D62D1DAC8EE000BD7D30 /* CTVideoView+PlayControl.m */,
+			);
+			path = PlayControl;
+			sourceTree = "<group>";
+		};
 		4AA3E57A1DAC0D3F002F5352 /* FullScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +314,7 @@
 		4AD2030D1CF260C9004E3A97 /* CTVideoView */ = {
 			isa = PBXGroup;
 			children = (
+				4A97D62B1DAC8ED000BD7D30 /* PlayControl */,
 				4AA3E57A1DAC0D3F002F5352 /* FullScreen */,
 				4AD2030E1CF260C9004E3A97 /* Download */,
 				4AD203111CF260C9004E3A97 /* OperationButtons */,
@@ -577,6 +590,7 @@
 				4A0944041CF2251800BC21AA /* VideoTableViewController.m in Sources */,
 				4AD2031F1CF260C9004E3A97 /* CTVideoView+Time.m in Sources */,
 				4AD2031D1CF260C9004E3A97 /* CTVideoView+Download.m in Sources */,
+				4A97D62E1DAC8EE000BD7D30 /* CTVideoView+PlayControl.m in Sources */,
 				4AD203271CF264D9004E3A97 /* CTVideoView.m in Sources */,
 				4A19F8131CF5E4B80026B9BC /* CTVideoRecord.m in Sources */,
 				4A2001C51D1A7EFC00B8BA95 /* VideoDownloadingView.m in Sources */,

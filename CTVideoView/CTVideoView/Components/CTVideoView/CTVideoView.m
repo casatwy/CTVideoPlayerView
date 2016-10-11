@@ -12,6 +12,7 @@
 #import "CTVideoView+Download.h"
 #import "CTVideoView+VideoCoverView.h"
 #import "CTVideoView+OperationButtons.h"
+#import "CTVideoView+PlayControl.h"
 
 #import "AVAsset+CTVideoView.h"
 
@@ -62,19 +63,20 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemPlaybackStalledNotification:) name:AVPlayerItemPlaybackStalledNotification object:nil];
 
+        if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
+            self.playerLayer.player = self.player;
+        }
+
         _shouldPlayAfterPrepareFinished = YES;
         _shouldReplayWhenFinish = NO;
         _shouldChangeOrientationToFitVideo = NO;
         _prepareStatus = CTVideoViewPrepareStatusNotPrepared;
-
-        if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
-            self.playerLayer.player = self.player;
-        }
         
         [self initTime];
         [self initDownload];
         [self initVideoCoverView];
         [self initOperationButtons];
+        [self initPlayControlGestures];
     }
     return self;
 }

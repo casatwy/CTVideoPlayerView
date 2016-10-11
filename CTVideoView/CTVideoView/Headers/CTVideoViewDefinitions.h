@@ -158,4 +158,14 @@ typedef NS_ENUM(NSUInteger, CTVideoViewPrepareStatus) {
 
 @end
 
+/**********************************************************************/
+@protocol CTVideoViewPlayControlDelegate <NSObject>
+
+@optional
+- (void)videoView:(CTVideoView *)videoView showFastForwardIndicator:(BOOL)isForward;
+- (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second;
+- (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView;
+
+@end
+
 #endif /* CTVideoViewDefinitions_h */
