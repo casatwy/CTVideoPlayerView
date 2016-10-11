@@ -22,6 +22,7 @@
 		4A97D62E1DAC8EE000BD7D30 /* CTVideoView+PlayControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A97D62D1DAC8EE000BD7D30 /* CTVideoView+PlayControl.m */; };
 		4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */; };
 		4AA3E5811DAC24F8002F5352 /* ChangeToFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E5801DAC24F8002F5352 /* ChangeToFullScreenViewController.m */; };
+		4AAD9AED1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAD9AEC1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m */; };
 		4AAE2A871CF21FB900139C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A861CF21FB900139C9C /* main.m */; };
 		4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2A891CF21FB900139C9C /* AppDelegate.m */; };
 		4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE2A8E1CF21FB900139C9C /* Main.storyboard */; };
@@ -64,6 +65,8 @@
 		4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+FullScreen.m"; sourceTree = "<group>"; };
 		4AA3E57F1DAC24F8002F5352 /* ChangeToFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeToFullScreenViewController.h; sourceTree = "<group>"; };
 		4AA3E5801DAC24F8002F5352 /* ChangeToFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeToFullScreenViewController.m; sourceTree = "<group>"; };
+		4AAD9AEB1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPanGestureRecognizer+ExtraMethods.h"; sourceTree = "<group>"; };
+		4AAD9AEC1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPanGestureRecognizer+ExtraMethods.m"; sourceTree = "<group>"; };
 		4AAE2A821CF21FB900139C9C /* CTVideoView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTVideoView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AAE2A861CF21FB900139C9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AAE2A881CF21FB900139C9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -231,6 +234,15 @@
 			path = ChangeToFullScreenViewController;
 			sourceTree = "<group>";
 		};
+		4AAD9AE71DACD0F700875DFC /* UIPanGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				4AAD9AEB1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.h */,
+				4AAD9AEC1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m */,
+			);
+			path = UIPanGestureRecognizer;
+			sourceTree = "<group>";
+		};
 		4AAE2A791CF21FB900139C9C = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +309,7 @@
 		4AD202F21CF25E48004E3A97 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4AAD9AE71DACD0F700875DFC /* UIPanGestureRecognizer */,
 				4AF6EF9D1CF5785D00A1E1C9 /* AVAsset */,
 				4AD2030D1CF260C9004E3A97 /* CTVideoView */,
 			);
@@ -576,6 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A0944071CF2262600BC21AA /* VideoCell.m in Sources */,
+				4AAD9AED1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m in Sources */,
 				4AC4DAF81D10865D009BE1C2 /* PlayAssetViewController.m in Sources */,
 				4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */,
 				4A19F8121CF5E4B80026B9BC /* CTVideoDataCenter.m in Sources */,

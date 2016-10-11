@@ -8,6 +8,7 @@
 
 #import "CTVideoView+PlayControl.h"
 #import <objc/runtime.h>
+#import "UIPanGestureRecognizer+ExtraMethods.h"
 
 static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
 
@@ -35,14 +36,39 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
     CGPoint velocityPoint = [playControlGestureRecognizer velocityInView:self];
     
     switch (playControlGestureRecognizer.state) {
-        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateBegan:{
+            CGFloat absoluteX = fabs(velocityPoint.x);
+            CGFloat absoluteY = fabs(velocityPoint.y);
+
+            if (absoluteX > absoluteY) {
+                // horizontal
+                playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionHorizontal;
+                [self.player pause]; // 这里用[self pause]会使得play button展示出来
+                [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlPlay];
+                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlVolume];
+            }
+
+            if (absoluteX < absoluteY) {
+                // vertical
+                playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionVertical;
+                [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlVolume];
+                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlPlay];
+            }
             break;
+        }
             
-        case UIGestureRecognizerStateChanged:
+        case UIGestureRecognizerStateChanged:{
+            if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionHorizontal) {
+            }
+            if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionVertical) {
+                <#statements#>
+            }
             break;
+        }
             
-        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateEnded:{
             break;
+        }
             
         default:
             break;
@@ -69,6 +95,7 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
 
 static void * CTVideoViewPlayControlPropertyIsSlideFastForwardDisabled;
 static void * CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled;
+static void * CTVideoViewPlayControlPropertyDelegate;
 
 @implementation CTVideoView (PlayControl)
 
@@ -91,6 +118,20 @@ static void * CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled;
 - (void)setIsSlideToChangeVolumeDisabled:(BOOL)isSlideToChangeVolumeDisabled
 {
     objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled, @(isSlideToChangeVolumeDisabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (id<CTVideoViewPlayControlDelegate>)playControlDelegate
+{
+    id<CTVideoViewPlayControlDelegate> delegate = objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertyDelegate);
+    if ([delegate respondsToSelector:@selector(description)] == NO) {
+        delegate = nil;
+    }
+    return delegate;
+}
+
+- (void)setPlayControlDelegate:(id<CTVideoViewPlayControlDelegate>)playControlDelegate
+{
+    objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyDelegate, playControlDelegate, OBJC_ASSOCIATION_ASSIGN);
 }
 
 @end
