@@ -63,8 +63,10 @@ static void * CTVideoViewPlayControlPropertySecondToMove;
 
         case UIGestureRecognizerStateChanged:{
             if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionHorizontal) {
+                [self moveToSecondWithVelocityX:velocityPoint.x];
             }
             if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionVertical) {
+                [self changeVolumeWithVelocityY:velocityPoint.y];
             }
             break;
         }
@@ -88,7 +90,22 @@ static void * CTVideoViewPlayControlPropertySecondToMove;
 #pragma mark - private methods
 - (void)moveToSecondWithVelocityX:(CGFloat)velocityX
 {
+    CTVideoViewPlayControlDirection direction = CTVideoViewPlayControlDirectionMoveForward;
+    if (velocityX < 0) {
+        direction = CTVideoViewPlayControlDirectionMoveBackward;
+    }
 
+    self.secondToMove += velocityX / self.speedOfSecondToMove;
+    if (self.secondToMove > self.totalDurationSeconds) {
+        self.secondToMove = self.totalDurationSeconds;
+    }
+    if (self.secondToMove < 0) {
+        self.secondToMove = 0;
+    }
+    [self moveToSecond:self.secondToMove shouldPlay:NO];
+    if ([self.playControlDelegate respondsToSelector:@selector(videoView:playControlDidMoveToSecond:direction:)]) {
+        [self.playControlDelegate videoView:self playControlDidMoveToSecond:self.secondToMove direction:direction];
+    }
 }
 
 - (void)changeVolumeWithVelocityY:(CGFloat)velocityY

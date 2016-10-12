@@ -72,15 +72,11 @@
     NSLog(@"volume did change to %f", volume);
 }
 
-- (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second
+- (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second direction:(CTVideoViewPlayControlDirection)direction
 {
-    NSLog(@"movie did move to %f", second);
+    NSLog(@"movie did move to %f, %lu", second, (unsigned long)direction);
 }
 
-- (void)videView:(CTVideoView *)videoView playDirection:(CTVideoViewPlayControlPlayDirection)playDirection
-{
-    NSLog(@"%lu", (unsigned long)playDirection);
-}
 
 #pragma mark - getters and setters
 - (CTVideoView *)videoView
@@ -90,6 +86,7 @@
         _videoView.operationDelegate = self;
         _videoView.playControlDelegate = self;
         _videoView.backgroundColor = [UIColor whiteColor];
+        _videoView.shouldReplayWhenFinish = YES;
     }
     return _videoView;
 }

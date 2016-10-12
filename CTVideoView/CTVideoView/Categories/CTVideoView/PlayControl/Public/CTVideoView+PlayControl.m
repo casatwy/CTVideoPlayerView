@@ -10,9 +10,10 @@
 #import <objc/runtime.h>
 #import "UIPanGestureRecognizer+ExtraMethods.h"
 
+static void * CTVideoViewPlayControlPropertyDelegate;
+static void * CTVideoViewPlayControlPropertySpeedOfSecondToMove;
 static void * CTVideoViewPlayControlPropertyIsSlideFastForwardDisabled;
 static void * CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled;
-static void * CTVideoViewPlayControlPropertyDelegate;
 
 @implementation CTVideoView (PlayControl)
 
@@ -49,6 +50,20 @@ static void * CTVideoViewPlayControlPropertyDelegate;
 - (void)setPlayControlDelegate:(id<CTVideoViewPlayControlDelegate>)playControlDelegate
 {
     objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyDelegate, playControlDelegate, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (CGFloat)speedOfSecondToMove
+{
+    CGFloat speedOfSecondToMove = [objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertySpeedOfSecondToMove) floatValue];
+    if (speedOfSecondToMove == 0) {
+        speedOfSecondToMove = 300;
+    }
+    return speedOfSecondToMove;
+}
+
+- (void)setSpeedOfSecondToMove:(CGFloat)speedOfSecondToMove
+{
+    objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertySpeedOfSecondToMove, @(speedOfSecondToMove), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

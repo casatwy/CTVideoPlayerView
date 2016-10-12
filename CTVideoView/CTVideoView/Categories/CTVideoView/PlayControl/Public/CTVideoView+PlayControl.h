@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) BOOL isSlideFastForwardDisabled;
 @property (nonatomic, assign) BOOL isSlideToChangeVolumeDisabled;
+@property (nonatomic, assign) CGFloat speedOfSecondToMove;
 
 @property (nonatomic, weak) id<CTVideoViewPlayControlDelegate> playControlDelegate;
 
