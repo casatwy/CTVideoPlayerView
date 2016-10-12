@@ -26,20 +26,26 @@ static void * CTVideoViewPlayControlPropertyVolumeSlider;
 }
 
 #pragma mark - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    BOOL result = YES;
-    if (self.isSlideToChangeVolumeDisabled && self.isSlideFastForwardDisabled) {
-        result = NO;
-    }
-    return result;
+    return YES;
 }
 
 #pragma mark - event response
 - (void)didRecognizedPlayControlRecognizer:(UIPanGestureRecognizer *)playControlGestureRecognizer
 {
+    if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionHorizontal && self.isSlideFastForwardDisabled) {
+        playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionNotDefined;
+        return;
+    }
+    
+    if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionVertical && self.isSlideToChangeVolumeDisabled) {
+        playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionNotDefined;
+        return;
+    }
+    
     CGPoint velocityPoint = [playControlGestureRecognizer velocityInView:self];
-
+    
     switch (playControlGestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:{
             CGFloat absoluteX = fabs(velocityPoint.x);

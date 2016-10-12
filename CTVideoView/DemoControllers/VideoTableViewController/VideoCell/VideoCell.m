@@ -55,6 +55,8 @@
         _videoView.shouldShowOperationButton = NO;
         _videoView.stalledStrategy = CTVideoViewStalledStrategyPlay;
         _videoView.operationDelegate = self;
+        _videoView.isSlideFastForwardDisabled = YES;
+        _videoView.isSlideToChangeVolumeDisabled = YES;
 
         UILabel *coverView = [[UILabel alloc] init];
         coverView.text = @"VIDEO";
