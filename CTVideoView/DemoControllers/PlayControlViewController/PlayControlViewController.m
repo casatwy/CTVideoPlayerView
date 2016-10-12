@@ -47,24 +47,14 @@
 }
 
 #pragma mark - CTVideoViewPlayControlDelegate
-- (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView playControlType:(CTVideoViewPlayControlType)playControlType
+- (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView
 {
-    if (playControlType == CTVideoViewPlayControlTypePlay) {
-        NSLog(@"show play");
-    }
-    if (playControlType == CTVideoViewPlayControlTypeVolume) {
-        NSLog(@"show volum");
-    }
+    NSLog(@"show play");
 }
 
-- (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView playControlType:(CTVideoViewPlayControlType)playControlType
+- (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView
 {
-    if (playControlType == CTVideoViewPlayControlTypePlay) {
-        NSLog(@"hide play");
-    }
-    if (playControlType == CTVideoViewPlayControlTypeVolume) {
-        NSLog(@"hide volume");
-    }
+    NSLog(@"hide play");
 }
 
 - (void)videoView:(CTVideoView *)videoView playControlDidChangeToVolume:(CGFloat)volume

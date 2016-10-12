@@ -7,12 +7,17 @@
 //
 
 #import "CTVideoView.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface CTVideoView (PlayControl)
 
 @property (nonatomic, assign) BOOL isSlideFastForwardDisabled;
-@property (nonatomic, assign) BOOL isSlideToChangeVolumeDisabled;
 @property (nonatomic, assign) CGFloat speedOfSecondToMove;
+
+@property (nonatomic, assign) BOOL isSlideToChangeVolumeDisabled;
+@property (nonatomic, assign) CGFloat speedOfVolumeChange;
+
+@property (nonatomic, strong, readonly) MPVolumeView *volumeView;
 
 @property (nonatomic, weak) id<CTVideoViewPlayControlDelegate> playControlDelegate;
 

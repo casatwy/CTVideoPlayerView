@@ -11,9 +11,11 @@
 #import "CTVideoView+Time.h"
 #import "UIPanGestureRecognizer+ExtraMethods.h"
 #import <objc/runtime.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
 static void * CTVideoViewPlayControlPropertySecondToMove;
+static void * CTVideoViewPlayControlPropertyVolumeSlider;
 
 @implementation CTVideoView (PlayControlPrivate)
 
@@ -48,15 +50,13 @@ static void * CTVideoViewPlayControlPropertySecondToMove;
                 playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionHorizontal;
                 [self.player pause]; // 这里用[self pause]会使得play button展示出来
                 self.secondToMove = self.currentPlaySecond;
-                [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlTypePlay];
-                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypeVolume];
+                [self.playControlDelegate videoViewShowPlayControlIndicator:self];
             }
 
             if (absoluteX < absoluteY) {
                 // vertical
                 playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionVertical;
-                [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlTypeVolume];
-                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypePlay];
+                [self.playControlDelegate videoViewHidePlayControlIndicator:self];
             }
             break;
         }
@@ -74,10 +74,10 @@ static void * CTVideoViewPlayControlPropertySecondToMove;
         case UIGestureRecognizerStateEnded:{
             if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionHorizontal) {
                 [self.player play];
-                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypePlay];
+                [self.playControlDelegate videoViewHidePlayControlIndicator:self];
             }
             if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionVertical) {
-                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypeVolume];
+                // do nothing
             }
             break;
         }
@@ -110,7 +110,7 @@ static void * CTVideoViewPlayControlPropertySecondToMove;
 
 - (void)changeVolumeWithVelocityY:(CGFloat)velocityY
 {
-
+    self.volumeSlider.value -= velocityY / self.speedOfVolumeChange;
 }
 
 #pragma mark - getters and setters
@@ -134,6 +134,21 @@ static void * CTVideoViewPlayControlPropertySecondToMove;
 - (void)setSecondToMove:(CGFloat)secondToMove
 {
     objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertySecondToMove, @(secondToMove), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UISlider *)volumeSlider
+{
+    UISlider *volumeSlider = objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertyVolumeSlider);
+    if (volumeSlider == nil) {
+        for (UIView *view in [self.volumeView subviews]){
+            if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+                volumeSlider = (UISlider *)view;
+                objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyVolumeSlider, volumeSlider, OBJC_ASSOCIATION_ASSIGN);
+                break;
+            }
+        }
+    }
+    return volumeSlider;
 }
 
 @end

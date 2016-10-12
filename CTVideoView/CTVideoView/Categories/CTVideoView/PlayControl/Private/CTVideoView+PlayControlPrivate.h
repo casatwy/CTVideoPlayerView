@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) CGFloat secondToMove;
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *playControlGestureRecognizer;
+@property (nonatomic, strong, readonly) UISlider *volumeSlider;
 
 - (void)initPlayControlGestures;
 

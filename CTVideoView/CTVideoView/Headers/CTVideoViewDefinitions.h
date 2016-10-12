@@ -97,11 +97,6 @@ typedef NS_ENUM(NSUInteger, CTVideoViewPrepareStatus) {
     CTVideoViewPrepareStatusPrepareFailed,
 };
 
-typedef NS_ENUM(NSUInteger, CTVideoViewPlayControlType) {
-    CTVideoViewPlayControlTypePlay,
-    CTVideoViewPlayControlTypeVolume,
-};
-
 typedef NS_ENUM(NSUInteger, CTVideoViewPlayControlDirection) {
     CTVideoViewPlayControlDirectionMoveForward,
     CTVideoViewPlayControlDirectionMoveBackward,
@@ -173,10 +168,8 @@ typedef NS_ENUM(NSUInteger, CTVideoViewPlayControlDirection) {
 
 @optional
 
-- (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView playControlType:(CTVideoViewPlayControlType)playControlType;
-- (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView playControlType:(CTVideoViewPlayControlType)playControlType;
-
-- (void)videoView:(CTVideoView *)videoView playControlDidChangeToVolume:(CGFloat)volume;
+- (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView;
+- (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView;
 - (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second direction:(CTVideoViewPlayControlDirection)direction;
 
 @end

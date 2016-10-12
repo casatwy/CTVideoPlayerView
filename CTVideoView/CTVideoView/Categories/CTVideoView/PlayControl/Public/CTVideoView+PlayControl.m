@@ -7,13 +7,15 @@
 //
 
 #import "CTVideoView+PlayControl.h"
+#import "CTVideoView+PlayControlPrivate.h"
 #import <objc/runtime.h>
-#import "UIPanGestureRecognizer+ExtraMethods.h"
 
 static void * CTVideoViewPlayControlPropertyDelegate;
 static void * CTVideoViewPlayControlPropertySpeedOfSecondToMove;
+static void * CTVideoViewPlayControlPropertySpeedOfVolumeChange;
 static void * CTVideoViewPlayControlPropertyIsSlideFastForwardDisabled;
 static void * CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled;
+static void * CTVideoViewPlayControlPropertyVolumeView;
 
 @implementation CTVideoView (PlayControl)
 
@@ -64,6 +66,30 @@ static void * CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled;
 - (void)setSpeedOfSecondToMove:(CGFloat)speedOfSecondToMove
 {
     objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertySpeedOfSecondToMove, @(speedOfSecondToMove), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGFloat)speedOfVolumeChange
+{
+    CGFloat speedOfVolumeChange = [objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertySpeedOfVolumeChange) floatValue];
+    if (speedOfVolumeChange == 0) {
+        speedOfVolumeChange = 10000.0f;
+    }
+    return speedOfVolumeChange;
+}
+
+- (void)setSpeedOfVolumeChange:(CGFloat)speedOfVolumeChange
+{
+    objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertySpeedOfVolumeChange, @(speedOfVolumeChange), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (MPVolumeView *)volumeView
+{
+    MPVolumeView *volumeView = objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertyVolumeView);
+    if (volumeView == nil) {
+        volumeView = [[MPVolumeView alloc] init];
+        objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyVolumeView, volumeView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return volumeView;
 }
 
 @end
