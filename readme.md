@@ -14,6 +14,7 @@
 - download & native file management
 - support customized cover view when downloading video, All you need to do is create a `UIView<CTVideoPlayerDownloadingViewProtocol>` and assign it to `CTVideoView.downloadingView`. check `DownloadThenPlayViewController` for more detail.
 - support changing to full screen, and exit from full screen
+- support horizontal slide to move to the playing second forward or backward, and vertical slide to change the volume
 
 todo:
 - cache played video which comes from a remote url

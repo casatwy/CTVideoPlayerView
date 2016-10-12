@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CTVideoPlayerView"
-  s.version      = "1.2.5"
+  s.version      = "1.2.6"
   s.summary      = "A video view for iOS which can play multy video at the same time, and can download and manage video file."
 
   # This description is used to generate tags and improve search results.
