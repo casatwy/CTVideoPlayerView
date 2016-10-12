@@ -66,12 +66,29 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
         }
             
         case UIGestureRecognizerStateEnded:{
+            if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionHorizontal) {
+                [self.player play];
+                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypePlay];
+            }
+            if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionVertical) {
+                [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypeVolume];
+            }
             break;
         }
             
         default:
             break;
     }
+}
+
+#pragma mark - private methods
+- (void)moveToSecondWithVelocityX:(CGFloat)velocityX
+{
+    
+}
+
+- (void)changeVolumeWithVelocityY:(CGFloat)velocityY
+{
     
 }
 

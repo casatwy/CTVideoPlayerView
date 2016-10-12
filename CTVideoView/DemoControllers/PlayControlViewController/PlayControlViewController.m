@@ -67,12 +67,12 @@
     }
 }
 
-- (void)videoView:(CTVideoView *)videoView VolumeDidChange:(CGFloat)volume
+- (void)videoView:(CTVideoView *)videoView playControlDidChangeToVolume:(CGFloat)volume
 {
     NSLog(@"volume did change to %f", volume);
 }
 
-- (void)videoView:(CTVideoView *)videoView playDidMoveToSecond:(CGFloat)second
+- (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second
 {
     NSLog(@"movie did move to %f", second);
 }
