@@ -13,6 +13,7 @@
 @interface PlayControlViewController () <CTVideoViewOperationDelegate, CTVideoViewPlayControlDelegate>
 
 @property (nonatomic, strong) CTVideoView *videoView;
+@property (nonatomic, strong) UILabel *simplePlayControlIndicator;
 
 @end
 
@@ -49,22 +50,34 @@
 #pragma mark - CTVideoViewPlayControlDelegate
 - (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView
 {
-    NSLog(@"show play");
+    self.simplePlayControlIndicator.text = [NSString stringWithFormat:@"current:%.2f total:%.2f", videoView.currentPlaySecond, videoView.totalDurationSeconds];
+    [self.simplePlayControlIndicator sizeToFit];
+    self.simplePlayControlIndicator.alpha = 0.0f;
+    [videoView addSubview:self.simplePlayControlIndicator];
+    [self.simplePlayControlIndicator centerEqualToView:videoView];
+    [UIView animateWithDuration:0.3f animations:^{
+        self.simplePlayControlIndicator.alpha = 1.0f;
+    }];
 }
 
 - (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView
 {
-    NSLog(@"hide play");
-}
-
-- (void)videoView:(CTVideoView *)videoView playControlDidChangeToVolume:(CGFloat)volume
-{
-    NSLog(@"volume did change to %f", volume);
+    [UIView animateWithDuration:0.3f animations:^{
+        self.simplePlayControlIndicator.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.simplePlayControlIndicator removeFromSuperview];
+    }];
 }
 
 - (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second direction:(CTVideoViewPlayControlDirection)direction
 {
-    NSLog(@"movie did move to %f, %lu", second, (unsigned long)direction);
+    if (direction == CTVideoViewPlayControlDirectionMoveForward) {
+        self.simplePlayControlIndicator.text = [NSString stringWithFormat:@"current:%.2f total:%.2f >> ", second, videoView.totalDurationSeconds];
+    }
+    if (direction == CTVideoViewPlayControlDirectionMoveBackward) {
+        self.simplePlayControlIndicator.text = [NSString stringWithFormat:@"current:%.2f total:%.2f << ", second, videoView.totalDurationSeconds];
+    }
+    [self.simplePlayControlIndicator sizeToFit];
 }
 
 #pragma mark - getters and setters
@@ -78,6 +91,16 @@
         _videoView.shouldReplayWhenFinish = YES;
     }
     return _videoView;
+}
+
+- (UILabel *)simplePlayControlIndicator
+{
+    if (_simplePlayControlIndicator == nil) {
+        _simplePlayControlIndicator = [[UILabel alloc] init];
+        _simplePlayControlIndicator.textColor = [UIColor blackColor];
+        _simplePlayControlIndicator.backgroundColor = [UIColor whiteColor];
+    }
+    return _simplePlayControlIndicator;
 }
 
 @end
