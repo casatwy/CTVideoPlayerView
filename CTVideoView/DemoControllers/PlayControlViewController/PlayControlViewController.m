@@ -77,7 +77,6 @@
     NSLog(@"movie did move to %f, %lu", second, (unsigned long)direction);
 }
 
-
 #pragma mark - getters and setters
 - (CTVideoView *)videoView
 {
