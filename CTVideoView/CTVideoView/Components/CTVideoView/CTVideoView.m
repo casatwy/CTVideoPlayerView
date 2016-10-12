@@ -12,7 +12,7 @@
 #import "CTVideoView+Download.h"
 #import "CTVideoView+VideoCoverView.h"
 #import "CTVideoView+OperationButtons.h"
-#import "CTVideoView+PlayControl.h"
+#import "CTVideoView+PlayControlPrivate.h"
 
 #import "AVAsset+CTVideoView.h"
 

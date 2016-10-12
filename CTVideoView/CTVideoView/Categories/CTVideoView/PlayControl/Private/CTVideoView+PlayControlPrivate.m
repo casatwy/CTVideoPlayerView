@@ -1,16 +1,19 @@
 //
-//  CTVideoView+PlayControl.m
+//  CTVideoView+PlayControlPrivate.m
 //  CTVideoView
 //
-//  Created by casa on 2016/10/11.
+//  Created by casa on 2016/10/12.
 //  Copyright © 2016年 casa. All rights reserved.
 //
 
+#import "CTVideoView+PlayControlPrivate.h"
 #import "CTVideoView+PlayControl.h"
-#import <objc/runtime.h>
+#import "CTVideoView+Time.h"
 #import "UIPanGestureRecognizer+ExtraMethods.h"
+#import <objc/runtime.h>
 
 static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
+static void * CTVideoViewPlayControlPropertySecondToMove;
 
 @implementation CTVideoView (PlayControlPrivate)
 
@@ -34,7 +37,7 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
 - (void)didRecognizedPlayControlRecognizer:(UIPanGestureRecognizer *)playControlGestureRecognizer
 {
     CGPoint velocityPoint = [playControlGestureRecognizer velocityInView:self];
-    
+
     switch (playControlGestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:{
             CGFloat absoluteX = fabs(velocityPoint.x);
@@ -44,6 +47,7 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
                 // horizontal
                 playControlGestureRecognizer.slideDirection = CTUIPanGestureSlideDirectionHorizontal;
                 [self.player pause]; // 这里用[self pause]会使得play button展示出来
+                self.secondToMove = self.currentPlaySecond;
                 [self.playControlDelegate videoViewShowPlayControlIndicator:self playControlType:CTVideoViewPlayControlTypePlay];
                 [self.playControlDelegate videoViewHidePlayControlIndicator:self playControlType:CTVideoViewPlayControlTypeVolume];
             }
@@ -56,7 +60,7 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
             }
             break;
         }
-            
+
         case UIGestureRecognizerStateChanged:{
             if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionHorizontal) {
             }
@@ -64,7 +68,7 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
             }
             break;
         }
-            
+
         case UIGestureRecognizerStateEnded:{
             if (playControlGestureRecognizer.slideDirection == CTUIPanGestureSlideDirectionHorizontal) {
                 [self.player play];
@@ -75,7 +79,7 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
             }
             break;
         }
-            
+
         default:
             break;
     }
@@ -84,12 +88,12 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
 #pragma mark - private methods
 - (void)moveToSecondWithVelocityX:(CGFloat)velocityX
 {
-    
+
 }
 
 - (void)changeVolumeWithVelocityY:(CGFloat)velocityY
 {
-    
+
 }
 
 #pragma mark - getters and setters
@@ -105,49 +109,14 @@ static void * CTVideoViewPlayControlPropertyPlayControlGestureRecognizer;
     return gestureRecognizer;
 }
 
-@end
-
-/* ----------------- Public methods ----------------- */
-
-static void * CTVideoViewPlayControlPropertyIsSlideFastForwardDisabled;
-static void * CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled;
-static void * CTVideoViewPlayControlPropertyDelegate;
-
-@implementation CTVideoView (PlayControl)
-
-#pragma mark - getters and setters
-- (BOOL)isSlideFastForwardDisabled
+- (CGFloat)secondToMove
 {
-    return [objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertyIsSlideFastForwardDisabled) boolValue];
+    return [objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertySecondToMove) floatValue];
 }
 
-- (void)setIsSlideFastForwardDisabled:(BOOL)isSlideFastForwardDisabled
+- (void)setSecondToMove:(CGFloat)secondToMove
 {
-    objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyIsSlideFastForwardDisabled, @(isSlideFastForwardDisabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)isSlideToChangeVolumeDisabled
-{
-    return [objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled) boolValue];
-}
-
-- (void)setIsSlideToChangeVolumeDisabled:(BOOL)isSlideToChangeVolumeDisabled
-{
-    objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled, @(isSlideToChangeVolumeDisabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (id<CTVideoViewPlayControlDelegate>)playControlDelegate
-{
-    id<CTVideoViewPlayControlDelegate> delegate = objc_getAssociatedObject(self, &CTVideoViewPlayControlPropertyDelegate);
-    if ([delegate respondsToSelector:@selector(description)] == NO) {
-        delegate = nil;
-    }
-    return delegate;
-}
-
-- (void)setPlayControlDelegate:(id<CTVideoViewPlayControlDelegate>)playControlDelegate
-{
-    objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyDelegate, playControlDelegate, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertySecondToMove, @(secondToMove), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
