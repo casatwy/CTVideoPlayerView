@@ -43,12 +43,52 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @implementation CTVideoView
 
 #pragma mark - life cycle
+    
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupInitializer];
+    }
+    return self;
+}
+    
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        
-        // KVO
+        [self setupInitializer];
+    }
+    return self;
+}
+
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus context:kCTVideoViewKVOContext];
+    [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration context:kCTVideoViewKVOContext];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self deallocTime];
+    [self deallocDownload];
+    [self deallocVideoCoverView];
+    [self deallocOperationButtons];
+}
+
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self layoutButtons];
+    [self layoutCoverView];
+}
+
+#pragma mark - utilities
+- (void)setupInitializer 
+{
+      // KVO
         [self addObserver:self
                forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
@@ -77,28 +117,6 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         [self initVideoCoverView];
         [self initOperationButtons];
         [self initPlayControlGestures];
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus context:kCTVideoViewKVOContext];
-    [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration context:kCTVideoViewKVOContext];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [self deallocTime];
-    [self deallocDownload];
-    [self deallocVideoCoverView];
-    [self deallocOperationButtons];
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    [self layoutButtons];
-    [self layoutCoverView];
 }
 
 #pragma mark - methods override
