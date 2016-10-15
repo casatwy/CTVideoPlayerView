@@ -43,12 +43,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @implementation CTVideoView
 
 #pragma mark - life cycle
-    
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setupInitializer];
+        [self performInitProcess];
     }
     return self;
 }
@@ -58,11 +57,43 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 {
     self = [super init];
     if (self) {
-        [self setupInitializer];
+        [self performInitProcess];
     }
     return self;
 }
 
+- (void)performInitProcess
+{
+    // KVO
+    [self addObserver:self
+           forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus
+              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+              context:&kCTVideoViewKVOContext];
+    
+    [self addObserver:self
+           forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration
+              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+              context:&kCTVideoViewKVOContext];
+    
+    // Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemPlaybackStalledNotification:) name:AVPlayerItemPlaybackStalledNotification object:nil];
+    
+    if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
+        self.playerLayer.player = self.player;
+    }
+    
+    _shouldPlayAfterPrepareFinished = YES;
+    _shouldReplayWhenFinish = NO;
+    _shouldChangeOrientationToFitVideo = NO;
+    _prepareStatus = CTVideoViewPrepareStatusNotPrepared;
+    
+    [self initTime];
+    [self initDownload];
+    [self initVideoCoverView];
+    [self initOperationButtons];
+    [self initPlayControlGestures];
+}
 
 - (void)dealloc
 {
@@ -77,46 +108,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self deallocOperationButtons];
 }
 
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     [self layoutButtons];
     [self layoutCoverView];
-}
-
-#pragma mark - utilities
-- (void)setupInitializer 
-{
-      // KVO
-        [self addObserver:self
-               forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus
-                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                  context:&kCTVideoViewKVOContext];
-        
-        [self addObserver:self
-               forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration
-                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                  context:&kCTVideoViewKVOContext];
-        
-        // Notifications
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemPlaybackStalledNotification:) name:AVPlayerItemPlaybackStalledNotification object:nil];
-
-        if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
-            self.playerLayer.player = self.player;
-        }
-
-        _shouldPlayAfterPrepareFinished = YES;
-        _shouldReplayWhenFinish = NO;
-        _shouldChangeOrientationToFitVideo = NO;
-        _prepareStatus = CTVideoViewPrepareStatusNotPrepared;
-        
-        [self initTime];
-        [self initDownload];
-        [self initVideoCoverView];
-        [self initOperationButtons];
-        [self initPlayControlGestures];
 }
 
 #pragma mark - methods override
