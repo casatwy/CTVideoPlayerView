@@ -67,7 +67,7 @@
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoCell *videoCell = (VideoCell *)cell;
-    if ([videoCell isKindOfClass:[videoCell class]]) {
+    if ([videoCell isKindOfClass:[VideoCell class]]) {
         [videoCell.videoView stopWithReleaseVideo:NO];
     }
 }
