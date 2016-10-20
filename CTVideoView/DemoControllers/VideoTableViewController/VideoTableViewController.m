@@ -73,6 +73,15 @@
 }
 
 #pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//    [[self.tableView visibleCells] enumerateObjectsUsingBlock:^(VideoCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if ([cell isKindOfClass:[VideoCell class]]) {
+//            [cell.videoView showCoverView];
+//        }
+//    }];
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [[self.tableView visibleCells] enumerateObjectsUsingBlock:^(VideoCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -119,7 +128,7 @@
 #pragma mark - VideoCellDelegate
 - (void)scrollToInvisibleCell
 {
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 #pragma mark - event response
