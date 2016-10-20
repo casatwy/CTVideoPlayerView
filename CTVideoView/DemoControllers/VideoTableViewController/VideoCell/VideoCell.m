@@ -43,6 +43,13 @@
     [videoView play];
 }
 
+- (void)videoViewDidStartPlaying:(CTVideoView *)videoView
+{
+    if ([self.delegate respondsToSelector:@selector(scrollToInvisibleCell)]) {
+        [self.delegate scrollToInvisibleCell];
+    }
+}
+
 #pragma mark - getters and setters
 - (CTVideoView *)videoView
 {

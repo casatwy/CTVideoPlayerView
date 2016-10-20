@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "CTVideoViewCommonHeader.h"
 
+@protocol VideoCellDelegate <NSObject>
+
+@optional
+- (void)scrollToInvisibleCell;
+
+@end
+
+
 @interface VideoCell : UITableViewCell
 
 @property (nonatomic, strong, readonly) CTVideoView *videoView;
+@property (nonatomic, weak) id<VideoCellDelegate> delegate;
 
 @end

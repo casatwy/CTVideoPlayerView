@@ -10,7 +10,7 @@
 #import "VideoCell.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
-@interface VideoTableViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface VideoTableViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, VideoCellDelegate>
 
 @property (nonatomic, copy) NSArray *dataSource;
 @property (nonatomic, strong) UITableView *tableView;
@@ -112,7 +112,14 @@
 {
     VideoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.videoView.videoUrl = self.dataSource[indexPath.row];
+    cell.delegate = self;
     return cell;
+}
+
+#pragma mark - VideoCellDelegate
+- (void)scrollToInvisibleCell
+{
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 #pragma mark - event response
