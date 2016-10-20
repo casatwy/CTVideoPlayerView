@@ -177,7 +177,6 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
                 [strongSelf.downloadDelegate videoViewDidFailDownload:strongSelf];
             }
         });
-        
     }
 }
 

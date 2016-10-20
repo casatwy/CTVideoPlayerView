@@ -12,6 +12,7 @@
 #import "CTVideoView+Download.h"
 #import "CTVideoView+VideoCoverView.h"
 #import "CTVideoView+OperationButtons.h"
+#import "CTVideoView+PlayControlPrivate.h"
 
 #import "AVAsset+CTVideoView.h"
 
@@ -42,41 +43,56 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @implementation CTVideoView
 
 #pragma mark - life cycle
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self performInitProcess];
+    }
+    return self;
+}
+    
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        
-        // KVO
-        [self addObserver:self
-               forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus
-                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                  context:&kCTVideoViewKVOContext];
-        
-        [self addObserver:self
-               forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration
-                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                  context:&kCTVideoViewKVOContext];
-        
-        // Notifications
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemPlaybackStalledNotification:) name:AVPlayerItemPlaybackStalledNotification object:nil];
-
-        _shouldPlayAfterPrepareFinished = YES;
-        _shouldReplayWhenFinish = NO;
-        _shouldChangeOrientationToFitVideo = NO;
-        _prepareStatus = CTVideoViewPrepareStatusNotPrepared;
-
-        if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
-            self.playerLayer.player = self.player;
-        }
-        
-        [self initTime];
-        [self initDownload];
-        [self initVideoCoverView];
-        [self initOperationButtons];
+        [self performInitProcess];
     }
     return self;
+}
+
+- (void)performInitProcess
+{
+    // KVO
+    [self addObserver:self
+           forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus
+              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+              context:&kCTVideoViewKVOContext];
+    
+    [self addObserver:self
+           forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration
+              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+              context:&kCTVideoViewKVOContext];
+    
+    // Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemPlaybackStalledNotification:) name:AVPlayerItemPlaybackStalledNotification object:nil];
+    
+    if ([self.playerLayer isKindOfClass:[AVPlayerLayer class]]) {
+        self.playerLayer.player = self.player;
+    }
+    
+    _shouldPlayAfterPrepareFinished = YES;
+    _shouldReplayWhenFinish = NO;
+    _shouldChangeOrientationToFitVideo = NO;
+    _prepareStatus = CTVideoViewPrepareStatusNotPrepared;
+    
+    [self initTime];
+    [self initDownload];
+    [self initVideoCoverView];
+    [self initOperationButtons];
+    [self initPlayControlGestures];
 }
 
 - (void)dealloc

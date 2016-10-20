@@ -14,6 +14,7 @@
 - download & native file management
 - support customized cover view when downloading video, All you need to do is create a `UIView<CTVideoPlayerDownloadingViewProtocol>` and assign it to `CTVideoView.downloadingView`. check `DownloadThenPlayViewController` for more detail.
 - support changing to full screen, and exit from full screen
+- support horizontal slide to move to the playing second forward or backward, and vertical slide to change the volume
 
 todo:
 - cache played video which comes from a remote url
@@ -287,6 +288,34 @@ layout with [HandyFrame](https://github.com/casatwy/HandyAutoLayout)
 ```
 
 see the demo ![ChangeToFullScreenViewController](controller://github.com/casatwy/CTVideoPlayerView/blob/master/CTVideoView/DemoControllers/ChangeOrientationViewController/ChangeToFullScreenViewController.m)
+
+### slide to move forward or backward
+
+This function is enabled by default, if you do not want it, just set `isSlideFastForwardDisabled` to `YES`
+
+```
+videoView.isSlideFastForwardDisabled = YES;
+```
+
+To show the move indicator, you should set `playControlDelegate`, and use method below
+
+```
+@protocol CTVideoViewPlayControlDelegate <NSObject>
+
+@optional
+
+- (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView;
+- (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView;
+- (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second direction:(CTVideoViewPlayControlDirection)direction;
+
+@end
+```
+
+the delegate method `- (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView;` tells you that you can show your own customized indicator view.
+
+the delegate method `- (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView;` tells you that you can hide your own customized indicator view.
+
+the delegate method `- (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second direction:(CTVideoViewPlayControlDirection)direction;` tells you the data that you can use to update the content of your own customized indicator view.
 
 ## Manual
 

@@ -97,6 +97,11 @@ typedef NS_ENUM(NSUInteger, CTVideoViewPrepareStatus) {
     CTVideoViewPrepareStatusPrepareFailed,
 };
 
+typedef NS_ENUM(NSUInteger, CTVideoViewPlayControlDirection) {
+    CTVideoViewPlayControlDirectionMoveForward,
+    CTVideoViewPlayControlDirectionMoveBackward,
+};
+
 /**********************************************************************/
 
 @protocol CTVideoViewOperationDelegate <NSObject>
@@ -155,6 +160,17 @@ typedef NS_ENUM(NSUInteger, CTVideoViewPrepareStatus) {
 - (void)videoViewDidPausedDownload:(CTVideoView *)videoView;
 - (void)videoViewDidDeletedDownloadTask:(CTVideoView *)videoView;
 - (void)videoViewIsWaitingForDownload:(CTVideoView *)videoView;
+
+@end
+
+/**********************************************************************/
+@protocol CTVideoViewPlayControlDelegate <NSObject>
+
+@optional
+
+- (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView;
+- (void)videoViewHidePlayControlIndicator:(CTVideoView *)videoView;
+- (void)videoView:(CTVideoView *)videoView playControlDidMoveToSecond:(CGFloat)second direction:(CTVideoViewPlayControlDirection)direction;
 
 @end
 
