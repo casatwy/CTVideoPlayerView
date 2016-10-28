@@ -260,7 +260,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         [self.operationDelegate videoViewWillStartPrepare:self];
     }
     WeakSelf;
-    [asset loadValuesAsynchronouslyForKeys:@[@"tracks"] completionHandler:^{
+    [asset loadValuesAsynchronouslyForKeys:@[@"tracks", @"duration", @"playable"] completionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             StrongSelf;
 
