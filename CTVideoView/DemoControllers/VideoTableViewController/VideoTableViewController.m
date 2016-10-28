@@ -64,6 +64,14 @@
 }
 
 #pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    VideoCell *videoCell = (VideoCell *)cell;
+    if ([videoCell isKindOfClass:[VideoCell class]]) {
+        [videoCell.videoView prepare];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoCell *videoCell = (VideoCell *)cell;
@@ -73,15 +81,6 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-//    [[self.tableView visibleCells] enumerateObjectsUsingBlock:^(VideoCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if ([cell isKindOfClass:[VideoCell class]]) {
-//            [cell.videoView showCoverView];
-//        }
-//    }];
-}
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [[self.tableView visibleCells] enumerateObjectsUsingBlock:^(VideoCell * _Nonnull cell, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -128,6 +127,7 @@
 #pragma mark - VideoCellDelegate
 - (void)scrollToInvisibleCell
 {
+    // to test the issue #17 https://github.com/casatwy/CTVideoPlayerView/issues/17
 //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 

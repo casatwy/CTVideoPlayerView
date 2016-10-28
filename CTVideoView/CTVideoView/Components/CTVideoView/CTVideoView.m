@@ -22,6 +22,7 @@ NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewSh
 
 NSString * const kCTVideoViewKVOKeyPathPlayerItemStatus = @"player.currentItem.status";
 NSString * const kCTVideoViewKVOKeyPathPlayerItemDuration = @"player.currentItem.duration";
+NSString * const kCTVideoViewKVOKeyPathLayerReadyForDisplay = @"layer.readyForDisplay";
 
 static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
@@ -74,6 +75,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
            forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration
               options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
               context:&kCTVideoViewKVOContext];
+
+    [self addObserver:self
+           forKeyPath:kCTVideoViewKVOKeyPathLayerReadyForDisplay
+              options:NSKeyValueObservingOptionNew
+              context:&kCTVideoViewKVOContext];
     
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
@@ -87,7 +93,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     _shouldReplayWhenFinish = NO;
     _shouldChangeOrientationToFitVideo = NO;
     _prepareStatus = CTVideoViewPrepareStatusNotPrepared;
-    
+
     [self initTime];
     [self initDownload];
     [self initVideoCoverView];
@@ -99,6 +105,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 {
     [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus context:kCTVideoViewKVOContext];
     [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration context:kCTVideoViewKVOContext];
+    [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathLayerReadyForDisplay context:kCTVideoViewKVOContext];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -141,7 +148,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     }
     
     if (self.prepareStatus == CTVideoViewPrepareStatusPrepareFinished) {
-        [self checkAndPlayAfterPrepareFinished];
+        if ([self.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
+            [self.operationDelegate videoViewDidFinishPrepare:self];
+        }
         return;
     }
 }
@@ -295,37 +304,14 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             strongSelf.playerItem = [AVPlayerItem playerItemWithAsset:asset];
             strongSelf.prepareStatus = CTVideoViewPrepareStatusPrepareFinished;
 
-            if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
-                [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
+            AVPlayerLayer *layer = (AVPlayerLayer *)self.layer;
+            if (layer.readyForDisplay) {
+                if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
+                    [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
+                }
             }
-            
-            [strongSelf checkAndPlayAfterPrepareFinished];
         });
     }];
-}
-
-- (void)checkAndPlayAfterPrepareFinished
-{
-    if (self.shouldPlayAfterPrepareFinished) {
-        
-        // always play native video
-        if (self.actualVideoUrlType == CTVideoViewVideoUrlTypeNative) {
-            [self play];
-            return;
-        }
-        
-        // always play video under wifi
-        if ([CTVideoManager sharedInstance].isWifi) {
-            [self play];
-            return;
-        }
-        
-        // even user is not in wifi, we still play video if user allows us to play remote video when not wifi
-        if (self.shouldAutoPlayRemoteVideoWhenNotWifi == YES) {
-            [self play];
-            return;
-        }
-    }
 }
 
 #pragma mark - KVO
@@ -347,6 +333,17 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     
     if ([keyPath isEqualToString:kCTVideoViewKVOKeyPathPlayerItemDuration]) {
         [self durationDidLoadedWithChange:change];
+    }
+
+    if ([keyPath isEqualToString:kCTVideoViewKVOKeyPathLayerReadyForDisplay]) {
+        if ([change[@"new"] boolValue] == YES) {
+            [self setNeedsDisplay];
+            if (self.prepareStatus == CTVideoViewPrepareStatusPrepareFinished) {
+                if ([self.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
+                    [self.operationDelegate videoViewDidFinishPrepare:self];
+                }
+            }
+        }
     }
 }
 

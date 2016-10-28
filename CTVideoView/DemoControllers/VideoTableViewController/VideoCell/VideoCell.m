@@ -37,6 +37,12 @@
     [self.videoView topInContainer:5 shouldResize:NO];
 }
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    [self.videoView stopWithReleaseVideo:YES];
+}
+
 #pragma mark - CTVideoViewOperationDelegate
 - (void)videoViewDidFinishPrepare:(CTVideoView *)videoView
 {
