@@ -128,7 +128,12 @@
 - (void)scrollToInvisibleCell
 {
     // to test the issue #17 https://github.com/casatwy/CTVideoPlayerView/issues/17
-//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    static int i = 0;
+    if (i++ % 2 == 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    } else {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 #pragma mark - event response
