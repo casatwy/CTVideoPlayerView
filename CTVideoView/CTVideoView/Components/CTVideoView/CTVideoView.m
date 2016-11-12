@@ -39,6 +39,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 @property (nonatomic, strong, readwrite) AVURLAsset *asset;
 @property (nonatomic, strong, readwrite) AVPlayerItem *playerItem;
 
+
 @end
 
 @implementation CTVideoView
@@ -52,7 +53,15 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     }
     return self;
 }
-    
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self performInitProcess];
+    }
+    return self;
+}
 
 - (instancetype)init
 {
@@ -90,7 +99,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     }
     
     _shouldPlayAfterPrepareFinished = YES;
-    _shouldReplayWhenFinish = NO;
+    _shouldReplayWhenFinish = YES;
     _shouldChangeOrientationToFitVideo = NO;
     _prepareStatus = CTVideoViewPrepareStatusNotPrepared;
 
@@ -99,6 +108,8 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self initVideoCoverView];
     [self initOperationButtons];
     [self initPlayControlGestures];
+
+    [self stopWithReleaseVideo:YES];
 }
 
 - (void)dealloc
@@ -181,6 +192,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         }
 
     } else {
+        self.shouldPlayAfterPrepareFinished = YES;
         [self prepare];
     }
 }
@@ -304,11 +316,12 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             strongSelf.playerItem = [AVPlayerItem playerItemWithAsset:asset];
             strongSelf.prepareStatus = CTVideoViewPrepareStatusPrepareFinished;
 
-            AVPlayerLayer *layer = (AVPlayerLayer *)self.layer;
-            if (layer.readyForDisplay) {
-                if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
-                    [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
-                }
+            if (strongSelf.shouldPlayAfterPrepareFinished) {
+                [strongSelf play];
+            }
+
+            if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFinishPrepare:)]) {
+                [strongSelf.operationDelegate videoViewDidFinishPrepare:strongSelf];
             }
         });
     }];

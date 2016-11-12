@@ -22,6 +22,7 @@
 		4A1FF6081DADE3D2007AB563 /* CTVideoView+PlayControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FF6071DADE3D2007AB563 /* CTVideoView+PlayControl.m */; };
 		4A1FF60B1DADE3F3007AB563 /* CTVideoView+PlayControlPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FF60A1DADE3F3007AB563 /* CTVideoView+PlayControlPrivate.m */; };
 		4A2001C51D1A7EFC00B8BA95 /* VideoDownloadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */; };
+		4A55BBC31DD6DBA40096C961 /* VideoPlayIssue22ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A55BBC21DD6DBA40096C961 /* VideoPlayIssue22ViewController.m */; };
 		4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */; };
 		4AA3E5811DAC24F8002F5352 /* ChangeToFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E5801DAC24F8002F5352 /* ChangeToFullScreenViewController.m */; };
 		4AAD9AED1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAD9AEC1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m */; };
@@ -67,6 +68,8 @@
 		4A1FF60A1DADE3F3007AB563 /* CTVideoView+PlayControlPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+PlayControlPrivate.m"; sourceTree = "<group>"; };
 		4A2001C31D1A7EFC00B8BA95 /* VideoDownloadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDownloadingView.h; sourceTree = "<group>"; };
 		4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDownloadingView.m; sourceTree = "<group>"; };
+		4A55BBC11DD6DBA40096C961 /* VideoPlayIssue22ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayIssue22ViewController.h; sourceTree = "<group>"; };
+		4A55BBC21DD6DBA40096C961 /* VideoPlayIssue22ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayIssue22ViewController.m; sourceTree = "<group>"; };
 		4AA3E57B1DAC0D52002F5352 /* CTVideoView+FullScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+FullScreen.h"; sourceTree = "<group>"; };
 		4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+FullScreen.m"; sourceTree = "<group>"; };
 		4AA3E57F1DAC24F8002F5352 /* ChangeToFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeToFullScreenViewController.h; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 			children = (
 				4A0944081CF2287F00BC21AA /* ViewController.h */,
 				4A0944091CF2287F00BC21AA /* ViewController.m */,
+				4A55BBC01DD6DB960096C961 /* Issue22 */,
 				4A030D6D1DAD26590079D1D4 /* PlayControlViewController */,
 				4AA3E57E1DAC24F8002F5352 /* ChangeToFullScreenViewController */,
 				4AC4DAF51D10864B009BE1C2 /* PlayAsset */,
@@ -248,6 +252,15 @@
 				4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */,
 			);
 			path = DownloadingView;
+			sourceTree = "<group>";
+		};
+		4A55BBC01DD6DB960096C961 /* Issue22 */ = {
+			isa = PBXGroup;
+			children = (
+				4A55BBC11DD6DBA40096C961 /* VideoPlayIssue22ViewController.h */,
+				4A55BBC21DD6DBA40096C961 /* VideoPlayIssue22ViewController.m */,
+			);
+			path = Issue22;
 			sourceTree = "<group>";
 		};
 		4AA3E57A1DAC0D3F002F5352 /* FullScreen */ = {
@@ -627,6 +640,7 @@
 				4AAD9AED1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m in Sources */,
 				4AC4DAF81D10865D009BE1C2 /* PlayAssetViewController.m in Sources */,
 				4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */,
+				4A55BBC31DD6DBA40096C961 /* VideoPlayIssue22ViewController.m in Sources */,
 				4A030D701DAD26670079D1D4 /* PlayControlViewController.m in Sources */,
 				4A1FF6081DADE3D2007AB563 /* CTVideoView+PlayControl.m in Sources */,
 				4A19F8121CF5E4B80026B9BC /* CTVideoDataCenter.m in Sources */,

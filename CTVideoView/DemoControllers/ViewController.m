@@ -14,6 +14,7 @@
 #import "PlayAssetViewController.h"
 #import "ChangeToFullScreenViewController.h"
 #import "PlayControlViewController.h"
+#import "VideoPlayIssue22ViewController.h"
 
 #import <HandyFrame/UIView+LayoutMethods.h>
 #import <AVFoundation/AVFoundation.h>
@@ -65,6 +66,9 @@
     }
     if (indexPath.row == 9) {
         viewControllerToPush = [[PlayControlViewController alloc] initWithVideoUrlString:info[@"url"]];
+    }
+    if (indexPath.row == 10) {
+        viewControllerToPush = [[VideoPlayIssue22ViewController alloc] initWithVideoUrlString:info[@"url"]];
     }
 
     if (viewControllerToPush) {
@@ -152,6 +156,10 @@
                             },
                         @{
                             @"title":@"Slide Play Control",
+                            @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
+                            },
+                        @{
+                            @"title":@"Issue #22",
                             @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
                             },
                         ];
