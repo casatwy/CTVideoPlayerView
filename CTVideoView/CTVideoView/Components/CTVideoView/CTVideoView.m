@@ -74,6 +74,9 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
 
 - (void)performInitProcess
 {
+    if (_prepareStatus != CTVideoViewPrepareStatusNotInitiated) {
+        return;
+    }
     // KVO
     [self addObserver:self
            forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus

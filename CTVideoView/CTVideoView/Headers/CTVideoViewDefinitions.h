@@ -91,6 +91,7 @@ typedef NS_ENUM(NSUInteger, CTVideoViewStalledStrategy) {
 };
 
 typedef NS_ENUM(NSUInteger, CTVideoViewPrepareStatus) {
+    CTVideoViewPrepareStatusNotInitiated,
     CTVideoViewPrepareStatusNotPrepared,
     CTVideoViewPrepareStatusPreparing,
     CTVideoViewPrepareStatusPrepareFinished,
