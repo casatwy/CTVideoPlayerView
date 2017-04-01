@@ -128,6 +128,9 @@ static void * CTVideoViewPlayControlPropertyVolumeSlider;
         gestureRecognizer.maximumNumberOfTouches = 1;
         gestureRecognizer.minimumNumberOfTouches = 1;
         gestureRecognizer.delegate = self;
+    
+        //
+        objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyPlayControlGestureRecognizer, gestureRecognizer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return gestureRecognizer;
 }
