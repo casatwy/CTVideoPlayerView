@@ -32,7 +32,7 @@
 {
     [super layoutSubviews];
 
-    self.videoView.size = CGSizeMake(self.contentView.width-10, self.contentView.height-5);
+    self.videoView.ct_size = CGSizeMake(self.contentView.ct_width - 10, self.contentView.ct_height - 5);
     [self.videoView centerXEqualToView:self.contentView];
     [self.videoView topInContainer:5 shouldResize:NO];
 }

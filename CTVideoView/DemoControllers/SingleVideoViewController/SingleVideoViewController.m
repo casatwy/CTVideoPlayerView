@@ -50,7 +50,7 @@
 
     [self.videoView fill];
 
-    self.playOrPauseButton.size = CGSizeMake(SCREEN_WIDTH/3.0f, 50);
+    self.playOrPauseButton.ct_size = CGSizeMake(SCREEN_WIDTH/3.0f, 50);
     [self.playOrPauseButton bottomInContainer:50 shouldResize:NO];
     [self.playOrPauseButton leftInContainer:0 shouldResize:NO];
 

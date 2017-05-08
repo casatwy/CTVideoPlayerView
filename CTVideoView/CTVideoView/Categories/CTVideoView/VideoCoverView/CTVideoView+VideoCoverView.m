@@ -53,7 +53,7 @@ static void * CTVideoViewCoverPropertyCoverView;
 {
     CGAffineTransform transform = self.transform;
     if (transform.b == 1 && transform.c == -1) {
-        self.coverView.frame = CGRectMake(0, 0, self.height, self.width);
+        self.coverView.frame = CGRectMake(0, 0, self.ct_height, self.ct_width);
     } else {
         [self.coverView fill];
     }

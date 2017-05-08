@@ -39,10 +39,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.videoView.size = CGSizeMake(100, 200);
+    self.videoView.ct_size = CGSizeMake(100, 200);
     [self.videoView centerEqualToView:self.view];
     
-    self.fullScreenButton.size = CGSizeMake(100, 100);
+    self.fullScreenButton.ct_size = CGSizeMake(100, 100);
     [self.fullScreenButton centerXEqualToView:self.view];
     [self.fullScreenButton bottomInContainer:20 shouldResize:NO];
 }

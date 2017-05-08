@@ -39,32 +39,32 @@ static void * CTVideoViewOperationButtonsPropertyButtonDelegate;
     CGAffineTransform transform = self.transform;
 
     if (self.playButton.superview) {
-        self.playButton.size = CGSizeMake(100, 60);
+        self.playButton.ct_size = CGSizeMake(100, 60);
         [self.playButton centerEqualToView:self];
         if ([self.buttonDelegate respondsToSelector:@selector(videoView:layoutPlayButton:)]) {
             [self.buttonDelegate videoView:self layoutPlayButton:self.playButton];
         }
         if (transform.b == 1 && transform.c == -1) {
-            CGFloat centerX = self.playButton.centerX;
-            CGFloat centerY = self.playButton.centerY;
-            self.playButton.frame = CGRectMake(self.playButton.x, self.playButton.y, self.playButton.height, self.playButton.width);
-            self.playButton.centerX = centerX;
-            self.playButton.centerY = centerY;
+            CGFloat centerX = self.playButton.ct_centerX;
+            CGFloat centerY = self.playButton.ct_centerY;
+            self.playButton.frame = CGRectMake(self.playButton.ct_x, self.playButton.ct_y, self.playButton.ct_height, self.playButton.ct_width);
+            self.playButton.ct_centerX = centerX;
+            self.playButton.ct_centerY = centerY;
         }
     }
 
     if (self.retryButton.superview) {
-        self.retryButton.size = CGSizeMake(100, 60);
+        self.retryButton.ct_size = CGSizeMake(100, 60);
         [self.retryButton centerEqualToView:self];
         if ([self.buttonDelegate respondsToSelector:@selector(videoView:layoutRetryButton:)]) {
             [self.buttonDelegate videoView:self layoutRetryButton:self.retryButton];
         }
         if (transform.b == 1 && transform.c == -1) {
-            CGFloat centerX = self.retryButton.centerX;
-            CGFloat centerY = self.retryButton.centerY;
-            self.retryButton.frame = CGRectMake(self.retryButton.x, self.retryButton.y, self.retryButton.height, self.retryButton.width);
-            self.retryButton.centerX = centerX;
-            self.retryButton.centerY = centerY;
+            CGFloat centerX = self.retryButton.ct_centerX;
+            CGFloat centerY = self.retryButton.ct_centerY;
+            self.retryButton.frame = CGRectMake(self.retryButton.ct_x, self.retryButton.ct_y, self.retryButton.ct_height, self.retryButton.ct_width);
+            self.retryButton.ct_centerX = centerX;
+            self.retryButton.ct_centerY = centerY;
         }
     }
 }

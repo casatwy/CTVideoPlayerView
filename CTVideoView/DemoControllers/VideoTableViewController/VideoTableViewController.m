@@ -48,7 +48,7 @@
 
     [self.tableView fill];
 
-    self.cleanCacheButton.size = CGSizeMake(100, 50);
+    self.cleanCacheButton.ct_size = CGSizeMake(100, 50);
     [self.cleanCacheButton rightInContainer:10 shouldResize:NO];
     [self.cleanCacheButton bottomInContainer:10 shouldResize:NO];
 }

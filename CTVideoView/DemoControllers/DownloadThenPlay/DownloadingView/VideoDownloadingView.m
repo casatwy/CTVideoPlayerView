@@ -33,7 +33,7 @@
 {
     [super layoutSubviews];
     
-    self.activityIndicatorView.size = CGSizeMake(40, 40);
+    self.activityIndicatorView.ct_size = CGSizeMake(40, 40);
     [self.activityIndicatorView centerEqualToView:self];
     
     [self.progressLabel sizeToFit];

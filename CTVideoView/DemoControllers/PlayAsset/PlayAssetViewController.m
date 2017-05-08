@@ -45,7 +45,7 @@
 
     [self.videoView fill];
     
-    self.airplayButton.size = CGSizeMake(100, 50);
+    self.airplayButton.ct_size = CGSizeMake(100, 50);
     [self.airplayButton bottomInContainer:50 shouldResize:NO];
     [self.airplayButton centerXEqualToView:self.view];
 }
