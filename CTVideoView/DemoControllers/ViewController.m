@@ -148,7 +148,7 @@
                             },
                         @{
                             @"title":@"Horizontal Full Screen Demo",
-                            @"url":@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+                            @"url":@"https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"
                             },
                         @{
                             @"title":@"Vertical Full Screen Demo",
