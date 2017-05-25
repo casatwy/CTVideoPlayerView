@@ -148,7 +148,7 @@
                             },
                         @{
                             @"title":@"Horizontal Full Screen Demo",
-                            @"url":@"http://7xs8ft.com2.z0.glb.qiniucdn.com/rcd_vid_865e1fff817746d29ecc4996f93b7f74"
+                            @"url":@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
                             },
                         @{
                             @"title":@"Vertical Full Screen Demo",
