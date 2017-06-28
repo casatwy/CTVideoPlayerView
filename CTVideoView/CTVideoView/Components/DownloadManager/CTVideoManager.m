@@ -240,6 +240,12 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
                                                                            completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
                                                                                StrongSelf;
                                                                                [strongSelf.downloadTaskPool removeObjectForKey:url];
+
+                                                                               if (filePath == nil) {
+                                                                                   // task canceled, do nothing
+                                                                                   return;
+                                                                               }
+
                                                                                NSString *notificationNameToPost = nil;
                                                                                if (error) {
                                                                                    notificationNameToPost = kCTVideoManagerDidFailedDownloadVideoNotification;
@@ -247,20 +253,15 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
                                                                                } else {
                                                                                    notificationNameToPost = kCTVideoManagerDidFinishDownloadVideoNotification;
                                                                                    [strongSelf.dataCenter updateStatus:CTVideoRecordStatusDownloadFinished toRemoteUrl:url];
+                                                                               }
 
-                                                                               }
-                                                                               
-                                                                               if (filePath) {
-                                                                                   [strongSelf.dataCenter deleteAllOldEntitiesAboveCount:strongSelf.totalDownloadedFileCountLimit];
-                                                                                   [[NSNotificationCenter defaultCenter] postNotificationName:notificationNameToPost
-                                                                                                                                       object:nil
-                                                                                                                                     userInfo:@{
-                                                                                                                                                kCTVideoManagerNotificationUserInfoKeyNativeUrl:filePath,
-                                                                                                                                                kCTVideoManagerNotificationUserInfoKeyRemoteUrl:url
+                                                                               [strongSelf.dataCenter deleteAllOldEntitiesAboveCount:strongSelf.totalDownloadedFileCountLimit];
+                                                                               [[NSNotificationCenter defaultCenter] postNotificationName:notificationNameToPost
+                                                                                                                                   object:nil
+                                                                                                                                 userInfo:@{
+                                                                                                                                            kCTVideoManagerNotificationUserInfoKeyNativeUrl:filePath,
+                                                                                                                                            kCTVideoManagerNotificationUserInfoKeyRemoteUrl:url
                                                                                                                                                 }];
-                                                                               } else {
-                                                                                   // task canceled, do nothing
-                                                                               }
                                                                            }];
     [downloadTask resume];
     self.downloadTaskPool[url] = downloadTask;
