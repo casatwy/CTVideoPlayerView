@@ -23,7 +23,7 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrl;
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyNativeUrl;
 extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 
-@interface CTVideoManager : NSObject
+@interface CTVideoDownloadManager : NSObject
 
 @property (nonatomic, assign, readonly) BOOL isWifi;
 @property (nonatomic, assign) NSInteger maxConcurrentDownloadCount;

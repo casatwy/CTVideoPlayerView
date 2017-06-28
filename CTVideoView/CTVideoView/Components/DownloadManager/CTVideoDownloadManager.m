@@ -6,7 +6,7 @@
 //  Copyright © 2016年 casa. All rights reserved.
 //
 
-#import "CTVideoManager.h"
+#import "CTVideoDownloadManager.h"
 #import "CTVideoDataCenter.h"
 #import <AFNetworking/AFNetworking.h>
 #import "CTVideoViewDefinitions.h"
@@ -25,7 +25,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyRemoteUrlList = @"kCTVide
 NSString * const kCTVideoManagerNotificationUserInfoKeyNativeUrl = @"kCTVideoManagerNotificationUserInfoKeyNativeUrl";
 NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoManagerNotificationUserInfoKeyProgress";
 
-@interface CTVideoManager ()
+@interface CTVideoDownloadManager ()
 
 @property (nonatomic, strong) CTVideoDataCenter *dataCenter;
 @property (nonatomic, strong) AFURLSessionManager *sessionManager;
@@ -33,15 +33,15 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
 
 @end
 
-@implementation CTVideoManager
+@implementation CTVideoDownloadManager
 
 #pragma mark - life cycle
 + (instancetype)sharedInstance
 {
-    static CTVideoManager *videoManager;
+    static CTVideoDownloadManager *videoManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        videoManager = [[CTVideoManager alloc] init];
+        videoManager = [[CTVideoDownloadManager alloc] init];
         videoManager.totalDownloadedFileCountLimit = 50;
         videoManager.maxConcurrentDownloadCount = 3;
     });
@@ -285,12 +285,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     NSString *notificationNameToPost = nil;
     [self.downloadTaskPool removeObjectForKey:url];
 
-    if (filePath == nil) {
-        // task canceled, do nothing
-        return;
-    }
-
-    if (error) {
+    if (error || filePath == nil) {
         notificationNameToPost = kCTVideoManagerDidFailedDownloadVideoNotification;
         [self.dataCenter updateStatus:CTVideoRecordStatusDownloadFailed toRemoteUrl:url];
     } else {
@@ -299,12 +294,13 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     }
 
     [self.dataCenter deleteAllOldEntitiesAboveCount:self.totalDownloadedFileCountLimit];
+    
+    NSMutableDictionary *userinfo = [[NSMutableDictionary alloc] init];
+    userinfo[kCTVideoManagerNotificationUserInfoKeyNativeUrl] = filePath;
+    userinfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] = url;
     [[NSNotificationCenter defaultCenter] postNotificationName:notificationNameToPost
                                                         object:nil
-                                                      userInfo:@{
-                                                                 kCTVideoManagerNotificationUserInfoKeyNativeUrl:filePath,
-                                                                 kCTVideoManagerNotificationUserInfoKeyRemoteUrl:url
-                                                                 }];
+                                                      userInfo:userinfo];
 }
 
 - (void)handleProgress:(NSProgress *)downloadProgress url:(NSURL *)url nativeUrl:(NSURL *)nativeUrl

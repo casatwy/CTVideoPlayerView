@@ -20,6 +20,6 @@
 #import "CTVideoViewDefinitions.h"
 
 #import "CTVideoDataCenter.h"
-#import "CTVideoManager.h"
+#import "CTVideoDownloadManager.h"
 
 #endif /* CTOtherObjectsHeader_h */

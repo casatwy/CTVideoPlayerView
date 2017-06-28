@@ -16,7 +16,7 @@
 
 #import "AVAsset+CTVideoView.h"
 
-#import "CTVideoManager.h"
+#import "CTVideoDownloadManager.h"
 
 NSString * const kCTVideoViewShouldPlayRemoteVideoWhenNotWifi = @"kCTVideoViewShouldPlayRemoteVideoWhenNotWifi";
 
@@ -255,7 +255,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     
     self.actualVideoPlayingUrl = self.videoUrl;
     if (self.actualVideoUrlType != CTVideoViewVideoUrlTypeNative) {
-        NSURL *nativeUrl = [[CTVideoManager sharedInstance] nativeUrlForRemoteUrl:self.videoUrl];
+        NSURL *nativeUrl = [[CTVideoDownloadManager sharedInstance] nativeUrlForRemoteUrl:self.videoUrl];
         if (nativeUrl && [[NSFileManager defaultManager] fileExistsAtPath:[nativeUrl path]]) {
             self.actualVideoPlayingUrl = nativeUrl;
             self.actualVideoUrlType = CTVideoViewVideoUrlTypeNative;

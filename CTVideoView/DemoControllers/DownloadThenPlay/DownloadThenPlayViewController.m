@@ -25,9 +25,9 @@
 {
     self = [super init];
     if (self) {
-        [CTVideoManager sharedInstance].downloadStrategy = CTVideoViewDownloadStrategyDownloadForegroundAndBackground;
+        [CTVideoDownloadManager sharedInstance].downloadStrategy = CTVideoViewDownloadStrategyDownloadForegroundAndBackground;
         NSURL *videoUrl = [NSURL URLWithString:urlString];
-        [[CTVideoManager sharedInstance] deleteVideoWithUrl:videoUrl];
+        [[CTVideoDownloadManager sharedInstance] deleteVideoWithUrl:videoUrl];
         self.videoView.videoUrl = videoUrl;
         _hasBeenPaused = NO;
     }
@@ -86,7 +86,7 @@
     if (progress > 0.5) {
         if (self.hasBeenPaused == NO) {
             self.hasBeenPaused = YES;
-            [[CTVideoManager sharedInstance] pauseDownloadTaskWithUrl:self.videoView.videoUrl completion:nil];
+            [[CTVideoDownloadManager sharedInstance] pauseDownloadTaskWithUrl:self.videoView.videoUrl completion:nil];
         }
     }
 }
@@ -104,7 +104,7 @@
 - (void)videoViewDidPausedDownload:(CTVideoView *)videoView
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoView.videoUrl];
+        [[CTVideoDownloadManager sharedInstance] startDownloadTaskWithUrl:self.videoView.videoUrl];
     });
 }
 

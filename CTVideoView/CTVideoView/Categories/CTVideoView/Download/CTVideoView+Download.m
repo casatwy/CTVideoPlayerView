@@ -9,7 +9,7 @@
 #import "CTVideoView+Download.h"
 #import "CTVideoView+OperationButtons.h"
 #import <objc/runtime.h>
-#import "CTVideoManager.h"
+#import "CTVideoDownloadManager.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
 /* ----------------- Public methods ----------------- */
@@ -62,7 +62,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
 - (void)startDownloadTask
 {
     if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
-        [[CTVideoManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl];
+        [[CTVideoDownloadManager sharedInstance] startDownloadTaskWithUrl:self.videoUrl];
         if ([self.downloadDelegate respondsToSelector:@selector(videoViewIsWaitingForDownload:)]) {
             [self.downloadDelegate videoViewIsWaitingForDownload:self];
         }
@@ -72,7 +72,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
 - (void)DeleteAndCancelDownloadTask
 {
     if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
-        [[CTVideoManager sharedInstance] deleteVideoWithUrl:self.videoUrl];
+        [[CTVideoDownloadManager sharedInstance] deleteVideoWithUrl:self.videoUrl];
         if ([self.downloadDelegate respondsToSelector:@selector(videoViewDidDeletedDownloadTask:)]) {
             [self.downloadDelegate videoViewDidDeletedDownloadTask:self];
         }
@@ -83,7 +83,7 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
 {
     if (self.videoUrl && self.videoUrlType != CTVideoViewVideoUrlTypeNative) {
         WeakSelf;
-        [[CTVideoManager sharedInstance] pauseDownloadTaskWithUrl:self.videoUrl completion:^{
+        [[CTVideoDownloadManager sharedInstance] pauseDownloadTaskWithUrl:self.videoUrl completion:^{
             StrongSelf;
             if ([strongSelf.downloadDelegate respondsToSelector:@selector(videoViewDidPausedDownload:)]) {
                 [strongSelf.downloadDelegate videoViewDidPausedDownload:strongSelf];
