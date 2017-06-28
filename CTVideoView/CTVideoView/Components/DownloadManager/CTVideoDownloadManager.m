@@ -42,6 +42,8 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         videoManager = [[CTVideoDownloadManager alloc] init];
+        videoManager.timeoutIntervalForRequest = 10.0f;
+        videoManager.timeoutIntervalForResource = 10.0f;
         videoManager.totalDownloadedFileCountLimit = 50;
         videoManager.maxConcurrentDownloadCount = 3;
     });
@@ -346,6 +348,8 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
         }
         if (self.downloadStrategy == CTVideoViewDownloadStrategyDownloadOnlyForeground) {
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            configuration.timeoutIntervalForRequest = self.timeoutIntervalForRequest;
+            configuration.timeoutIntervalForResource = self.timeoutIntervalForResource;
             _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         }
         if (self.downloadStrategy == CTVideoViewDownloadStrategyDownloadForegroundAndBackground) {
@@ -353,10 +357,24 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
             configuration.sessionSendsLaunchEvents = YES;
             configuration.discretionary = YES;
+            configuration.timeoutIntervalForRequest = self.timeoutIntervalForRequest;
+            configuration.timeoutIntervalForResource = self.timeoutIntervalForResource;
             _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         }
     }
     return _sessionManager;
+}
+
+- (void)setTimeoutIntervalForResource:(NSTimeInterval)timeoutIntervalForResource
+{
+    _timeoutIntervalForResource = timeoutIntervalForResource;
+    self.sessionManager = nil;
+}
+
+- (void)setTimeoutIntervalForRequest:(NSTimeInterval)timeoutIntervalForRequest
+{
+    _timeoutIntervalForRequest = timeoutIntervalForRequest;
+    self.sessionManager = nil;
 }
 
 - (void)setMaxConcurrentDownloadCount:(NSInteger)maxConcurrentDownloadCount

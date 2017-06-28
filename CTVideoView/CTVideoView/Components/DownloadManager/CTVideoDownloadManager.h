@@ -30,6 +30,11 @@ extern NSString * const kCTVideoManagerNotificationUserInfoKeyProgress;
 @property (nonatomic, assign) CTVideoViewDownloadStrategy downloadStrategy;
 @property (nonatomic, assign) NSUInteger totalDownloadedFileCountLimit;
 
+/* default timeout for requests.  This will cause a timeout if no data is transmitted for the given timeout value, and is reset whenever data is transmitted. */
+@property (nonatomic, assign) NSTimeInterval timeoutIntervalForRequest;
+/* default timeout for requests.  This will cause a timeout if a resource is not able to be retrieved within a given timeout. */
+@property (nonatomic, assign) NSTimeInterval timeoutIntervalForResource;
+
 + (instancetype)sharedInstance;
 
 - (void)startDownloadTaskWithUrl:(NSURL *)url;

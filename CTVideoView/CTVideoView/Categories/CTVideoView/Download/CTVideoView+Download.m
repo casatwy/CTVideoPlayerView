@@ -224,4 +224,14 @@ static void * CTVideoViewDownloadPrivatePropertyDownloadView;
     objc_setAssociatedObject(self, &CTVideoViewDownloadPrivatePropertyDownloadView, downloadingView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (void)setTimeoutIntervalForRequest:(NSTimeInterval)timeoutIntervalForRequest
+{
+    [CTVideoDownloadManager sharedInstance].timeoutIntervalForRequest = timeoutIntervalForRequest;
+}
+
+- (void)setTimeoutIntervalForResource:(NSTimeInterval)timeoutIntervalForResource
+{
+    [CTVideoDownloadManager sharedInstance].timeoutIntervalForResource = timeoutIntervalForResource;
+}
+
 @end
