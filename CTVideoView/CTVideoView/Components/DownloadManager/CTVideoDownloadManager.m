@@ -105,8 +105,6 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
 
 - (void)startAllDownloadTask
 {
-    [self.dataCenter updateAllStatus:CTVideoRecordStatusWaitingForDownload];
-
     NSMutableArray *recordList = [[self.dataCenter recordListWithStatus:CTVideoRecordStatusPaused] mutableCopy];
     [recordList addObjectsFromArray:[self.dataCenter recordListWithStatus:CTVideoRecordStatusWaitingForDownload]];
     [recordList addObjectsFromArray:[self.dataCenter recordListWithStatus:CTVideoRecordStatusDownloadFailed]];
@@ -154,7 +152,14 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
 
 - (void)pauseAllDownloadTask
 {
-    [self.dataCenter updateAllStatus:CTVideoRecordStatusPaused];
+    NSMutableArray *recordList = [[self.dataCenter recordListWithStatus:CTVideoRecordStatusPaused] mutableCopy];
+    [recordList addObjectsFromArray:[self.dataCenter recordListWithStatus:CTVideoRecordStatusWaitingForDownload]];
+    [recordList addObjectsFromArray:[self.dataCenter recordListWithStatus:CTVideoRecordStatusDownloadFailed]];
+    [recordList addObjectsFromArray:[self.dataCenter recordListWithStatus:CTVideoRecordStatusDownloading]];
+    [recordList enumerateObjectsUsingBlock:^(CTVideoRecord * _Nonnull record, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self.dataCenter updateStatus:CTVideoRecordStatusPaused toRemoteUrl:[NSURL URLWithString:record.remoteUrl]];
+    }];
+
     [self.downloadTaskPool enumerateKeysAndObjectsUsingBlock:^(NSURL * _Nonnull remoteUrl, NSURLSessionDownloadTask * _Nonnull downloadTask, BOOL * _Nonnull stop) {
         [downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
             if (resumeData) {
@@ -296,7 +301,7 @@ NSString * const kCTVideoManagerNotificationUserInfoKeyProgress = @"kCTVideoMana
     }
 
     [self.dataCenter deleteAllOldEntitiesAboveCount:self.totalDownloadedFileCountLimit];
-    
+
     NSMutableDictionary *userinfo = [[NSMutableDictionary alloc] init];
     userinfo[kCTVideoManagerNotificationUserInfoKeyNativeUrl] = filePath;
     userinfo[kCTVideoManagerNotificationUserInfoKeyRemoteUrl] = url;
