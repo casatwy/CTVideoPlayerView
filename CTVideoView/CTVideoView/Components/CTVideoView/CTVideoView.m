@@ -92,6 +92,11 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
            forKeyPath:kCTVideoViewKVOKeyPathLayerReadyForDisplay
               options:NSKeyValueObservingOptionNew
               context:&kCTVideoViewKVOContext];
+
+    [self addObserver:self
+           forKeyPath:@"player.timeControlStatus"
+              options:NSKeyValueObservingOptionNew
+              context:&kCTVideoViewKVOContext];
     
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveAVPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
@@ -120,6 +125,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
     [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemStatus context:kCTVideoViewKVOContext];
     [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathPlayerItemDuration context:kCTVideoViewKVOContext];
     [self removeObserver:self forKeyPath:kCTVideoViewKVOKeyPathLayerReadyForDisplay context:kCTVideoViewKVOContext];
+    [self removeObserver:self forKeyPath:@"player.timeControlStatus" context:kCTVideoViewKVOContext];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -359,6 +365,18 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
                     [self.operationDelegate videoViewDidFinishPrepare:self];
                 }
             }
+        }
+    }
+
+    if ([keyPath isEqualToString:@"player.timeControlStatus"]) {
+        if (self.player.timeControlStatus == AVPlayerTimeControlStatusPaused) {
+            NSLog(@"paused");
+        }
+        if (self.player.timeControlStatus == AVPlayerTimeControlStatusPlaying) {
+            NSLog(@"playing");
+        }
+        if (self.player.timeControlStatus == AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate) {
+            NSLog(@"waiting : %@", self.player.reasonForWaitingToPlay);
         }
     }
 }

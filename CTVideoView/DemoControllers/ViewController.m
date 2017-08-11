@@ -110,7 +110,7 @@
         _dataSource = @[
                         @{
                             @"title":@"Single Remote Video",
-                            @"url":@"https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"
+                            @"url":@"http://videocdn.yesoulchina.com/original/HD/yesoul_HD_2017-07-14_1699.mp4"
                             },
                         @{
                             @"title":@"Single Native Video",
