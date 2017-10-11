@@ -47,6 +47,11 @@
     [videoView play];
 }
 
+- (void)videoViewDidFinishPlaying:(CTVideoView *)videoView
+{
+    NSLog(@"video did finish playing");
+}
+
 #pragma mark - CTVideoViewPlayControlDelegate
 - (void)videoViewShowPlayControlIndicator:(CTVideoView *)videoView
 {
