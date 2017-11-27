@@ -10,7 +10,7 @@
 #import "CTVideoViewCommonHeader.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
-@interface ChangeToFullScreenViewController () <CTVideoViewOperationDelegate>
+@interface ChangeToFullScreenViewController () <CTVideoViewOperationDelegate, CTVideoViewFullScreenDelegate>
 
 @property (nonatomic, strong) CTVideoView *videoView;
 @property (nonatomic, strong) UIButton *fullScreenButton;
@@ -43,8 +43,7 @@
     [self.videoView centerEqualToView:self.view];
     
     self.fullScreenButton.ct_size = CGSizeMake(100, 100);
-    [self.fullScreenButton centerXEqualToView:self.videoView];
-    [self.fullScreenButton bottomInContainer:20 shouldResize:NO];
+    [self.fullScreenButton centerEqualToView:self.videoView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,6 +63,19 @@
     [videoView replay];
 }
 
+#pragma mark - CTVideoViewFullScreenDelegate
+- (void)videoViewLayoutSubviewsWhenExitFullScreen:(CTVideoView *)videoView
+{
+    self.fullScreenButton.ct_size = CGSizeMake(100, 100);
+    [self.fullScreenButton centerEqualToView:self.videoView];
+}
+
+- (void)videoViewLayoutSubviewsWhenEnterFullScreen:(CTVideoView *)videoView
+{
+    self.fullScreenButton.ct_size = CGSizeMake(100, 100);
+    [self.fullScreenButton centerEqualToView:self.videoView];
+}
+
 #pragma mark - Event Response
 - (void)didTappedFullScreenButton:(UIButton *)fullScreenButton
 {
@@ -80,6 +92,7 @@
     if (_videoView == nil) {
         _videoView = [[CTVideoView alloc] init];
         _videoView.operationDelegate = self;
+        _videoView.fullScreenDelegate = self;
     }
     return _videoView;
 }

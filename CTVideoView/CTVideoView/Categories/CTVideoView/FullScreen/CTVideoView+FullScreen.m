@@ -66,10 +66,10 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3f animations:^{
         weakSelf.playerLayer.transform = transform;
+        weakSelf.frame = CGRectMake(0, 0, weakSelf.superview.frame.size.width, weakSelf.superview.frame.size.height);
         if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoViewLayoutSubviewsWhenEnterFullScreen:)]) {
             [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenEnterFullScreen:weakSelf];
         }
-        weakSelf.frame = CGRectMake(0, 0, weakSelf.superview.frame.size.width, weakSelf.superview.frame.size.height);
     }];
 }
 
@@ -81,10 +81,10 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3f animations:^{
         weakSelf.playerLayer.transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+        weakSelf.frame = [self originVideoViewFrame];
         if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoViewLayoutSubviewsWhenExitFullScreen:)]) {
             [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenEnterFullScreen:weakSelf];
         }
-        weakSelf.frame = [self originVideoViewFrame];
     }];
 }
 
