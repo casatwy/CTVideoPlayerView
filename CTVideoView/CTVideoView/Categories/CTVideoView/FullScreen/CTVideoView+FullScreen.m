@@ -12,6 +12,13 @@
 
 static void * CTVideoViewFullScreenPropertyIsFullScreen;
 static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
+static void * CTVideoViewFullScreenPropertyOriginSuperView;
+
+@interface CTVideoView (FillScreen_Private)
+
+@property (nonatomic, weak) UIView *originSuperView;
+
+@end
 
 @implementation CTVideoView (FullScreen)
 
@@ -52,6 +59,9 @@ static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
     NSValue *originFrameValue = [NSValue valueWithCGRect:self.frame];
     objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginVideoViewFrame, originFrameValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
+    self.originSuperView = self.superview;
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    
     [UIView animateWithDuration:0.3f animations:^{
         self.playerLayer.transform = transform;
         self.frame = CGRectMake(0, 0, self.superview.frame.size.width, self.superview.frame.size.height);
@@ -60,6 +70,8 @@ static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
 
 - (void)animateExitFullScreen
 {
+    [self.originSuperView addSubview:self];
+    self.originSuperView = nil;
     [UIView animateWithDuration:0.3f animations:^{
         self.playerLayer.transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
         self.frame = [self originVideoViewFrame];
@@ -81,6 +93,16 @@ static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
 {
     CGRect frame = [objc_getAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginVideoViewFrame) CGRectValue];
     return frame;
+}
+
+- (void)setOriginSuperView:(UIView *)originSuperView
+{
+    objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginSuperView, originSuperView, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (UIView *)originSuperView
+{
+    return objc_getAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginSuperView);
 }
 
 @end

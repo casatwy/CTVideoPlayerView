@@ -33,7 +33,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.videoView];
-    [self.view addSubview:self.fullScreenButton];
+    [self.videoView addSubview:self.fullScreenButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -43,7 +43,7 @@
     [self.videoView centerEqualToView:self.view];
     
     self.fullScreenButton.ct_size = CGSizeMake(100, 100);
-    [self.fullScreenButton centerXEqualToView:self.view];
+    [self.fullScreenButton centerXEqualToView:self.videoView];
     [self.fullScreenButton bottomInContainer:20 shouldResize:NO];
 }
 
