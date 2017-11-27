@@ -13,6 +13,7 @@
 static void * CTVideoViewFullScreenPropertyIsFullScreen;
 static void * CTVideoViewFullScreenPropertyOriginVideoViewFrame;
 static void * CTVideoViewFullScreenPropertyOriginSuperView;
+static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
 
 @interface CTVideoView (FillScreen_Private)
 
@@ -62,9 +63,13 @@ static void * CTVideoViewFullScreenPropertyOriginSuperView;
     self.originSuperView = self.superview;
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3f animations:^{
-        self.playerLayer.transform = transform;
-        self.frame = CGRectMake(0, 0, self.superview.frame.size.width, self.superview.frame.size.height);
+        weakSelf.playerLayer.transform = transform;
+        if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoViewLayoutSubviewsWhenEnterFullScreen:)]) {
+            [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenEnterFullScreen:weakSelf];
+        }
+        weakSelf.frame = CGRectMake(0, 0, weakSelf.superview.frame.size.width, weakSelf.superview.frame.size.height);
     }];
 }
 
@@ -72,9 +77,14 @@ static void * CTVideoViewFullScreenPropertyOriginSuperView;
 {
     [self.originSuperView addSubview:self];
     self.originSuperView = nil;
+    
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3f animations:^{
-        self.playerLayer.transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
-        self.frame = [self originVideoViewFrame];
+        weakSelf.playerLayer.transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+        if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoViewLayoutSubviewsWhenExitFullScreen:)]) {
+            [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenEnterFullScreen:weakSelf];
+        }
+        weakSelf.frame = [self originVideoViewFrame];
     }];
 }
 
@@ -103,6 +113,16 @@ static void * CTVideoViewFullScreenPropertyOriginSuperView;
 - (UIView *)originSuperView
 {
     return objc_getAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginSuperView);
+}
+
+- (void)setFullScreenDelegate:(id<CTVideoViewFullScreenDelegate>)fullScreenDelegate
+{
+    objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyFullScreenDelegate, fullScreenDelegate, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (NSObject<CTVideoViewFullScreenDelegate> *)fullScreenDelegate
+{
+    return objc_getAssociatedObject(self, &CTVideoViewFullScreenPropertyFullScreenDelegate);
 }
 
 @end
