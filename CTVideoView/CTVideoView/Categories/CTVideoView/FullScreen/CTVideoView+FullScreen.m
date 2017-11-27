@@ -83,7 +83,7 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
         weakSelf.playerLayer.transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
         weakSelf.frame = [self originVideoViewFrame];
         if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoViewLayoutSubviewsWhenExitFullScreen:)]) {
-            [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenEnterFullScreen:weakSelf];
+            [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenExitFullScreen:weakSelf];
         }
     }];
 }
