@@ -70,6 +70,12 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
         if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoViewLayoutSubviewsWhenEnterFullScreen:)]) {
             [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenEnterFullScreen:weakSelf];
         }
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoVidewDidFinishEnterFullScreen:)]) {
+                [weakSelf.fullScreenDelegate videoVidewDidFinishEnterFullScreen:weakSelf];
+            }
+        }
     }];
 }
 
@@ -84,6 +90,12 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
         weakSelf.frame = [self originVideoViewFrame];
         if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoViewLayoutSubviewsWhenExitFullScreen:)]) {
             [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenExitFullScreen:weakSelf];
+        }
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoVidewDidFinishExitFullScreen:)]) {
+                [weakSelf.fullScreenDelegate videoVidewDidFinishExitFullScreen:weakSelf];
+            }
         }
     }];
 }

@@ -27,6 +27,9 @@ static void * CTVideoViewPlayControlPropertyVolumeView;
 
 - (void)setIsSlideFastForwardDisabled:(BOOL)isSlideFastForwardDisabled
 {
+    if (isSlideFastForwardDisabled == YES && self.isSlideToChangeVolumeDisabled == YES) {
+        [self removeGestureRecognizer:self.playControlGestureRecognizer];
+    }
     objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyIsSlideFastForwardDisabled, @(isSlideFastForwardDisabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -37,6 +40,9 @@ static void * CTVideoViewPlayControlPropertyVolumeView;
 
 - (void)setIsSlideToChangeVolumeDisabled:(BOOL)isSlideToChangeVolumeDisabled
 {
+    if (isSlideToChangeVolumeDisabled == YES && self.isSlideFastForwardDisabled == YES) {
+        [self removeGestureRecognizer:self.playControlGestureRecognizer];
+    }
     objc_setAssociatedObject(self, &CTVideoViewPlayControlPropertyIsSlideToChangeVolumeDisabled, @(isSlideToChangeVolumeDisabled), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 

@@ -22,7 +22,11 @@
 
 @protocol CTVideoViewFullScreenDelegate
 
+@optional
 - (void)videoViewLayoutSubviewsWhenEnterFullScreen:(CTVideoView *)videoView;
+- (void)videoVidewDidFinishEnterFullScreen:(CTVideoView *)videoView;
+
 - (void)videoViewLayoutSubviewsWhenExitFullScreen:(CTVideoView *)videoView;
+- (void)videoVidewDidFinishExitFullScreen:(CTVideoView *)videoView;
 
 @end
