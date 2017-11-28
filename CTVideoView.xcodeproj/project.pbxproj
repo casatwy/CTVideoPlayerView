@@ -473,8 +473,6 @@
 			buildConfigurationList = 4AAE2A991CF21FB900139C9C /* Build configuration list for PBXNativeTarget "CTVideoView" */;
 			buildPhases = (
 				97494AAC14FB0F6D6765233A /* [CP] Check Pods Manifest.lock */,
-				B259EEB8A150976C751E55BE /* [CP] Check Pods Manifest.lock */,
-				C7F799C8385037A3FAE95CAE /* [CP] Check Pods Manifest.lock */,
 				4AAE2A7E1CF21FB900139C9C /* Sources */,
 				4AAE2A7F1CF21FB900139C9C /* Frameworks */,
 				4AAE2A801CF21FB900139C9C /* Resources */,
@@ -616,36 +614,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CTVideoView/Pods-CTVideoView-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B259EEB8A150976C751E55BE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C7F799C8385037A3FAE95CAE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
