@@ -110,11 +110,11 @@
         _dataSource = @[
                         @{
                             @"title":@"Single Remote Video",
-                            @"url":@"https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"
+                            @"url":@"https://backend.flicklink.com:1337/parse/files/flicklinkAppId/a2d8aec7a78231c8c73eb2a8002283a7_PF-VID-2017-11-23T22-06-10AEDT.mov"
                             },
                         @{
                             @"title":@"Single Native Video",
-                            @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
+                            @"url":[[[NSBundle mainBundle] URLForResource:@"b" withExtension:@"mov"] absoluteString]
                             },
                         @{
                             @"title":@"Short Single Live Stream Video",
