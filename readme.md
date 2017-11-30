@@ -33,6 +33,8 @@ todo:
 
 ### 2. Play
 
+after git clone repo, run `pod update` and then open the `CTVideoPlayerView.xcworkspace` to play with the demo.
+
 #### 2.1 play with asset
 
 ```objective-c
