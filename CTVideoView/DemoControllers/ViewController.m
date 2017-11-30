@@ -15,6 +15,7 @@
 #import "ChangeToFullScreenViewController.h"
 #import "PlayControlViewController.h"
 #import "VideoPlayIssue22ViewController.h"
+#import "VideoRecordViewController.h"
 
 #import <HandyFrame/UIView+LayoutMethods.h>
 #import <AVFoundation/AVFoundation.h>
@@ -69,6 +70,9 @@
     }
     if (indexPath.row == 10) {
         viewControllerToPush = [[VideoPlayIssue22ViewController alloc] initWithVideoUrlString:info[@"url"]];
+    }
+    if (indexPath.row == 11) {
+        viewControllerToPush = [[VideoRecordViewController alloc] init];
     }
 
     if (viewControllerToPush) {
@@ -160,6 +164,9 @@
                         @{
                             @"title":@"Issue #22",
                             @"url":[[[NSBundle mainBundle] URLForResource:@"a" withExtension:@"mp4"] absoluteString]
+                            },
+                        @{
+                            @"title":@"Record Video"
                             },
                         ];
     }

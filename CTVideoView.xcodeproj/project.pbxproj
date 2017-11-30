@@ -23,6 +23,10 @@
 		4A1FF60B1DADE3F3007AB563 /* CTVideoView+PlayControlPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A1FF60A1DADE3F3007AB563 /* CTVideoView+PlayControlPrivate.m */; };
 		4A2001C51D1A7EFC00B8BA95 /* VideoDownloadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */; };
 		4A55BBC31DD6DBA40096C961 /* VideoPlayIssue22ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A55BBC21DD6DBA40096C961 /* VideoPlayIssue22ViewController.m */; };
+		4A7FCEA91FCFC9D70016337C /* CTVideoCompressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7FCEA81FCFC9D70016337C /* CTVideoCompressManager.m */; };
+		4A7FCEAB1FCFCD8F0016337C /* origin.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4A7FCEAA1FCFCD8F0016337C /* origin.mov */; };
+		4A7FCEAF1FCFCEA10016337C /* VideoRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7FCEAE1FCFCEA10016337C /* VideoRecordViewController.m */; };
+		4A7FCEB11FCFD1F70016337C /* ImagePickerOrigin.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 4A7FCEB01FCFD1F70016337C /* ImagePickerOrigin.MOV */; };
 		4A8A493B1FCE589400E6AE95 /* b.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4A8A493A1FCE589400E6AE95 /* b.mov */; };
 		4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */; };
 		4AA3E5811DAC24F8002F5352 /* ChangeToFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3E5801DAC24F8002F5352 /* ChangeToFullScreenViewController.m */; };
@@ -71,6 +75,12 @@
 		4A2001C41D1A7EFC00B8BA95 /* VideoDownloadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDownloadingView.m; sourceTree = "<group>"; };
 		4A55BBC11DD6DBA40096C961 /* VideoPlayIssue22ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayIssue22ViewController.h; sourceTree = "<group>"; };
 		4A55BBC21DD6DBA40096C961 /* VideoPlayIssue22ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayIssue22ViewController.m; sourceTree = "<group>"; };
+		4A7FCEA71FCFC9D70016337C /* CTVideoCompressManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTVideoCompressManager.h; sourceTree = "<group>"; };
+		4A7FCEA81FCFC9D70016337C /* CTVideoCompressManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTVideoCompressManager.m; sourceTree = "<group>"; };
+		4A7FCEAA1FCFCD8F0016337C /* origin.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = origin.mov; sourceTree = "<group>"; };
+		4A7FCEAD1FCFCEA10016337C /* VideoRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoRecordViewController.h; sourceTree = "<group>"; };
+		4A7FCEAE1FCFCEA10016337C /* VideoRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoRecordViewController.m; sourceTree = "<group>"; };
+		4A7FCEB01FCFD1F70016337C /* ImagePickerOrigin.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ImagePickerOrigin.MOV; sourceTree = "<group>"; };
 		4A8A493A1FCE589400E6AE95 /* b.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = b.mov; sourceTree = "<group>"; };
 		4AA3E57B1DAC0D52002F5352 /* CTVideoView+FullScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTVideoView+FullScreen.h"; sourceTree = "<group>"; };
 		4AA3E57C1DAC0D52002F5352 /* CTVideoView+FullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CTVideoView+FullScreen.m"; sourceTree = "<group>"; };
@@ -133,6 +143,7 @@
 			children = (
 				4A0944081CF2287F00BC21AA /* ViewController.h */,
 				4A0944091CF2287F00BC21AA /* ViewController.m */,
+				4A7FCEAC1FCFCE960016337C /* VideoRecordViewController */,
 				4A55BBC01DD6DB960096C961 /* Issue22 */,
 				4A030D6D1DAD26590079D1D4 /* PlayControlViewController */,
 				4AA3E57E1DAC24F8002F5352 /* ChangeToFullScreenViewController */,
@@ -147,6 +158,7 @@
 		4A0943FC1CF223A700BC21AA /* SingleVideoViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4A7FCEA61FCFC9C60016337C /* Compress */,
 				4A0943FF1CF2250A00BC21AA /* SingleVideoViewController.h */,
 				4A0944001CF2250A00BC21AA /* SingleVideoViewController.m */,
 			);
@@ -265,6 +277,24 @@
 			path = Issue22;
 			sourceTree = "<group>";
 		};
+		4A7FCEA61FCFC9C60016337C /* Compress */ = {
+			isa = PBXGroup;
+			children = (
+				4A7FCEA71FCFC9D70016337C /* CTVideoCompressManager.h */,
+				4A7FCEA81FCFC9D70016337C /* CTVideoCompressManager.m */,
+			);
+			path = Compress;
+			sourceTree = "<group>";
+		};
+		4A7FCEAC1FCFCE960016337C /* VideoRecordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A7FCEAD1FCFCEA10016337C /* VideoRecordViewController.h */,
+				4A7FCEAE1FCFCEA10016337C /* VideoRecordViewController.m */,
+			);
+			path = VideoRecordViewController;
+			sourceTree = "<group>";
+		};
 		4AA3E57A1DAC0D3F002F5352 /* FullScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +355,8 @@
 		4AAE2A851CF21FB900139C9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4A7FCEB01FCFD1F70016337C /* ImagePickerOrigin.MOV */,
+				4A7FCEAA1FCFCD8F0016337C /* origin.mov */,
 				4A8A493A1FCE589400E6AE95 /* b.mov */,
 				4A09440B1CF2317200BC21AA /* a.mp4 */,
 				4AAE2A8E1CF21FB900139C9C /* Main.storyboard */,
@@ -504,7 +536,7 @@
 				TargetAttributes = {
 					4AAE2A811CF21FB900139C9C = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = A538N96H5F;
+						DevelopmentTeam = 6C6JHMW46K;
 					};
 				};
 			};
@@ -531,10 +563,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A7FCEB11FCFD1F70016337C /* ImagePickerOrigin.MOV in Resources */,
 				4AAE2A951CF21FB900139C9C /* LaunchScreen.storyboard in Resources */,
 				4A8A493B1FCE589400E6AE95 /* b.mov in Resources */,
 				4A09440C1CF233EC00BC21AA /* a.mp4 in Resources */,
 				4AAE2A921CF21FB900139C9C /* Assets.xcassets in Resources */,
+				4A7FCEAB1FCFCD8F0016337C /* origin.mov in Resources */,
 				4AAE2A901CF21FB900139C9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -629,6 +663,7 @@
 			files = (
 				4A0944071CF2262600BC21AA /* VideoCell.m in Sources */,
 				4AAD9AED1DACD12D00875DFC /* UIPanGestureRecognizer+ExtraMethods.m in Sources */,
+				4A7FCEA91FCFC9D70016337C /* CTVideoCompressManager.m in Sources */,
 				4AC4DAF81D10865D009BE1C2 /* PlayAssetViewController.m in Sources */,
 				4AA3E57D1DAC0D52002F5352 /* CTVideoView+FullScreen.m in Sources */,
 				4A55BBC31DD6DBA40096C961 /* VideoPlayIssue22ViewController.m in Sources */,
@@ -653,6 +688,7 @@
 				4AAE2A8A1CF21FB900139C9C /* AppDelegate.m in Sources */,
 				4AAE2A871CF21FB900139C9C /* main.m in Sources */,
 				4A19F8141CF5E4B80026B9BC /* CTVideoTable.m in Sources */,
+				4A7FCEAF1FCFCEA10016337C /* VideoRecordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,7 +805,7 @@
 			baseConfigurationReference = EC3D762809CDA866E9091D8A /* Pods-CTVideoView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = A538N96H5F;
+				DEVELOPMENT_TEAM = 6C6JHMW46K;
 				INFOPLIST_FILE = CTVideoView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -783,7 +819,7 @@
 			baseConfigurationReference = F7B564C59E114BF34AB7C922 /* Pods-CTVideoView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = A538N96H5F;
+				DEVELOPMENT_TEAM = 6C6JHMW46K;
 				INFOPLIST_FILE = CTVideoView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

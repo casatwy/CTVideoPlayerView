@@ -275,7 +275,7 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
         [self.operationDelegate videoViewWillStartPrepare:self];
     }
     WeakSelf;
-    [asset loadValuesAsynchronouslyForKeys:@[@"tracks", @"duration", @"playable"] completionHandler:^{
+    [asset loadValuesAsynchronouslyForKeys:@[@"playable"] completionHandler:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             StrongSelf;
 
@@ -285,14 +285,26 @@ static void * kCTVideoViewKVOContext = &kCTVideoViewKVOContext;
             }
 
             NSError *error = nil;
+//            if ([asset statusOfValueForKey:@"tracks" error:&error] == AVKeyValueStatusFailed) {
+//                strongSelf.prepareStatus = CTVideoViewPrepareStatusPrepareFailed;
+//                [self showCoverView];
+//                [self showRetryButton];
+//                if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFailPrepare:error:)]) {
+//                    [strongSelf.operationDelegate videoViewDidFailPrepare:strongSelf error:error];
+//                }
+//                return;
+//            }
+            
             if ([asset statusOfValueForKey:@"tracks" error:&error] == AVKeyValueStatusFailed) {
-                strongSelf.prepareStatus = CTVideoViewPrepareStatusPrepareFailed;
-                [self showCoverView];
-                [self showRetryButton];
-                if ([strongSelf.operationDelegate respondsToSelector:@selector(videoViewDidFailPrepare:error:)]) {
-                    [strongSelf.operationDelegate videoViewDidFailPrepare:strongSelf error:error];
-                }
-                return;
+                NSLog(@"%@", error);
+            }
+            
+            if ([asset statusOfValueForKey:@"duration" error:&error] == AVKeyValueStatusFailed) {
+                NSLog(@"%@", error);
+            }
+            
+            if ([asset statusOfValueForKey:@"playable" error:&error] == AVKeyValueStatusFailed) {
+                NSLog(@"%@", error);
             }
             
             if (strongSelf.shouldChangeOrientationToFitVideo) {

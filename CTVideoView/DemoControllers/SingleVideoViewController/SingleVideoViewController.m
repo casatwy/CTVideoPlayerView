@@ -118,7 +118,7 @@
 {
     if (_videoView == nil) {
         _videoView = [[CTVideoView alloc] init];
-        _videoView.shouldReplayWhenFinish = YES;
+        _videoView.shouldReplayWhenFinish = NO;
         _videoView.shouldPlayAfterPrepareFinished = NO;
         _videoView.shouldChangeOrientationToFitVideo = YES;
         [_videoView setShouldObservePlayTime:YES withTimeGapToObserve:100];
