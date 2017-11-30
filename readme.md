@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/casatwy/CTVideoPlayerView](https://badges.gitter.im/casatwy/CTVideoPlayerView.svg)](https://gitter.im/casatwy/CTVideoPlayerView?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## after git clone repo, run pod update and then open the CTVideoPlayerView.xcworkspace to play with the demo.
+## after git clone repo, run `pod update` and then open the `CTVideoPlayerView.xcworkspace` to play with the demo.
 
 ## Features
 
