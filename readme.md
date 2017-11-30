@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/casatwy/CTVideoPlayerView](https://badges.gitter.im/casatwy/CTVideoPlayerView.svg)](https://gitter.im/casatwy/CTVideoPlayerView?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+> after git clone repo, run pod update and then open the CTVideoPlayerView.xcworkspace to play with the demo.
+
 ## Features
 
 - it's an UIView
@@ -32,8 +34,6 @@ todo:
 `import <CTVideoPlayerView/CTVideoViewCommonHeader.h>`
 
 ### 2. Play
-
-after git clone repo, run `pod update` and then open the `CTVideoPlayerView.xcworkspace` to play with the demo.
 
 #### 2.1 play with asset
 
