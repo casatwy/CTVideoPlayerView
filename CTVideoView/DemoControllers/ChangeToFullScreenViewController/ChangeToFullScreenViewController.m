@@ -15,6 +15,7 @@
 @property (nonatomic, strong) CTVideoView *videoView;
 @property (nonatomic, strong) UIButton *fullScreenButton;
 
+@property (nonatomic, strong) UIView *sliderView;
 @end
 
 @implementation ChangeToFullScreenViewController
@@ -34,6 +35,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.videoView];
     [self.videoView addSubview:self.fullScreenButton];
+    [self.videoView addSubview:self.sliderView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -44,6 +46,10 @@
     
     self.fullScreenButton.ct_size = CGSizeMake(100, 100);
     [self.fullScreenButton centerEqualToView:self.videoView];
+    
+    [self.sliderView fillWidth];
+    self.sliderView.ct_height = 20;
+    [self.sliderView bottomInContainer:0 shouldResize:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -68,12 +74,20 @@
 {
     self.fullScreenButton.ct_size = CGSizeMake(100, 100);
     [self.fullScreenButton centerEqualToView:self.videoView];
+    
+    [self.sliderView fillWidth];
+    self.sliderView.ct_height = 20;
+    [self.sliderView bottomInContainer:0 shouldResize:NO];
 }
 
 - (void)videoViewLayoutSubviewsWhenEnterFullScreen:(CTVideoView *)videoView
 {
     self.fullScreenButton.ct_size = CGSizeMake(100, 100);
     [self.fullScreenButton centerEqualToView:self.videoView];
+    
+    [self.sliderView fillWidth];
+    self.sliderView.ct_height = 20;
+    [self.sliderView bottomInContainer:0 shouldResize:NO];
 }
 
 #pragma mark - Event Response
@@ -108,6 +122,15 @@
         [_fullScreenButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     }
     return _fullScreenButton;
+}
+
+- (UIView *)sliderView
+{
+    if (_sliderView == nil) {
+        _sliderView = [[UIView alloc] init];
+        _sliderView.backgroundColor = [UIColor blackColor];
+    }
+    return _sliderView;
 }
 
 @end
