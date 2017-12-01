@@ -27,25 +27,29 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
 - (void)enterFullScreen
 {
     self.isFullScreen = YES;
+    self.backgroundColor = [UIColor yellowColor];
     
     CGFloat videoWidth = [[[self.asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].width;
     CGFloat videoHeight = [[[self.asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].height;
     
     CATransform3D transform = CATransform3DMakeRotation(0.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+    CGRect scaleFrame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
     if ([self.asset CTVideoView_isVideoPortraint]) {
         if (videoWidth < videoHeight) {
             if (self.transform.b != 1 || self.transform.c != -1) {
                 transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+                scaleFrame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
             }
         }
     } else {
         if (videoWidth > videoHeight) {
             if (self.transform.b != 1 || self.transform.c != -1) {
                 transform = CATransform3DMakeRotation(90.0 / 180.0 * M_PI, 0.0, 0.0, 1.0);
+                scaleFrame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
             }
         }
     }
-    [self animateToFullScreenWithTransform:transform];
+    [self animateToFullScreenWithTransform:transform scaleFrame:scaleFrame];
 }
 
 - (void)exitFullScreen
@@ -55,7 +59,7 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
 }
 
 #pragma mark - private methods
-- (void)animateToFullScreenWithTransform:(CATransform3D)transform
+- (void)animateToFullScreenWithTransform:(CATransform3D)transform scaleFrame:(CGRect)scaleFrame
 {
     NSValue *originFrameValue = [NSValue valueWithCGRect:self.frame];
     objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginVideoViewFrame, originFrameValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -65,11 +69,13 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
     
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3f animations:^{
-        weakSelf.playerLayer.transform = transform;
-        weakSelf.frame = CGRectMake(0, 0, weakSelf.superview.frame.size.width, weakSelf.superview.frame.size.height);
+        weakSelf.frame = scaleFrame;
+        weakSelf.center = [UIApplication sharedApplication].keyWindow.center;
+        
         if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoViewLayoutSubviewsWhenEnterFullScreen:)]) {
             [weakSelf.fullScreenDelegate videoViewLayoutSubviewsWhenEnterFullScreen:weakSelf];
         }
+        weakSelf.layer.transform = transform;
     } completion:^(BOOL finished) {
         if (finished) {
             if ([weakSelf.fullScreenDelegate respondsToSelector:@selector(videoVidewDidFinishEnterFullScreen:)]) {
