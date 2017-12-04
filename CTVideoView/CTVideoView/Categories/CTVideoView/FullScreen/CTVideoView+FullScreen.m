@@ -27,7 +27,6 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
 - (void)enterFullScreen
 {
     self.isFullScreen = YES;
-    self.backgroundColor = [UIColor yellowColor];
     
     CGFloat videoWidth = [[[self.asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].width;
     CGFloat videoHeight = [[[self.asset tracksWithMediaType:AVMediaTypeVideo] firstObject] naturalSize].height;
@@ -64,8 +63,11 @@ static void * CTVideoViewFullScreenPropertyFullScreenDelegate;
     NSValue *originFrameValue = [NSValue valueWithCGRect:self.frame];
     objc_setAssociatedObject(self, &CTVideoViewFullScreenPropertyOriginVideoViewFrame, originFrameValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
+    CGRect convertToWindowFrame = [self.superview convertRect:self.frame toView:[UIApplication sharedApplication].keyWindow];
+    
     self.originSuperView = self.superview;
     [[UIApplication sharedApplication].keyWindow addSubview:self];
+    self.frame = convertToWindowFrame;
     
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3f animations:^{
