@@ -4,6 +4,8 @@
 
 ## after git clone repo, run `pod update` and then open the `CTVideoPlayerView.xcworkspace` to play with the demo.
 
+accord to issue #43 , "The server needs to send byte-range headers for the library and iOS 10+ to work with streaming protocols.", so if you encounter the same issue, you can consider download the video then play, or add byte-range headers in your server response header.
+
 ## Features
 
 - it's an UIView
